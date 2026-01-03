@@ -10,7 +10,15 @@
     "lint:fix": "eslint . --ext js,jsx --fix",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "**/*.{css,scss,md,json}": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -26,6 +34,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "vite": "^7.2.4"
   }
