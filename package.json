@@ -30,6 +30,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "@vituum/vite-plugin-postcss": "1.1.0",
+    "autoprefixer": "10.4.23",
+    "cssnano": "7.1.2",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-react-hooks": "^7.0.1",

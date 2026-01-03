@@ -4,7 +4,7 @@ import postcss from '@vituum/vite-plugin-postcss';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), postcss()],
+  plugins: [react(), postcss({ configFilePath: './postcss.config.js' })],
 
   server: {
     port: 3000,
