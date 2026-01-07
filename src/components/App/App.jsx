@@ -1,5 +1,6 @@
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
+import About from '../About/About';
 import './App.css';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <main className="page">
       <NothingFound />
       <Preloader />
+      <About />
     </main>
   );
 }
