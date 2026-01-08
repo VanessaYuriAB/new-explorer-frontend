@@ -1,13 +1,15 @@
-import NothingFound from '../NothingFound/NothingFound';
+import Main from '../Main/Main';
 import Preloader from '../Preloader/Preloader';
+import NothingFound from '../NothingFound/NothingFound';
 import About from '../About/About';
 import './App.css';
 
 function App() {
   return (
     <div className="page">
-      <NothingFound />
+      <Main />
       <Preloader />
+      <NothingFound />
       <About />
     </div>
   );
