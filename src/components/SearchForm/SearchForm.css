@@ -1,0 +1,58 @@
+.search {
+  width: 608px;
+  height: 64px;
+  opacity: 1;
+  border-width: 1px;
+  display: flex;
+  position: relative;
+}
+
+.search__input {
+  width: calc(608px - 24px - 208px);
+  height: calc(64px - 21px - 21px);
+  opacity: 1;
+  border-width: 1px;
+  border-radius: 100px;
+  border: 1px solid rgba(209, 210, 214, 1);
+  padding: 21px 208px 21px 24px;
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.search__input::placeholder {
+  width: 376px;
+  height: 22px;
+  opacity: 1;
+  font-size: 16px;
+  line-height: 1.37;
+  color: rgba(182, 188, 191, 1);
+}
+
+.search__btn {
+  color: rgba(255, 255, 255, 1);
+  width: 168px;
+  height: 64px;
+  opacity: 1;
+  border-radius: 100px;
+  background-color: rgba(47, 113, 229, 1);
+  box-shadow: 0px 5px 15px 0px rgba(14, 26, 57, 0.2);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  border: none;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  z-index: 2;
+}
+
+.search__btn:hover {
+  background-color: rgba(52, 126, 255, 1);
+  cursor: url('/images/cursor-lapka.png'), pointer;
+}
+
+.search__btn:active {
+  background-color: rgba(42, 101, 204, 1);
+  cursor: url('/images/cursor-lapka.png'), pointer;
+}
