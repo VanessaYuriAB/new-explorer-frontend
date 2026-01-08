@@ -1,3 +1,4 @@
+import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
@@ -7,6 +8,7 @@ import './App.css';
 function App() {
   return (
     <div className="page">
+      <Header />
       <Main />
       <Preloader />
       <NothingFound />

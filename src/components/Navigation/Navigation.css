@@ -1,0 +1,105 @@
+.header__nav {
+  margin-right: 104px;
+  display: flex;
+}
+
+.header__links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 11px 0 13px;
+}
+
+.header__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  color: rgba(182, 188, 191, 1);
+  position: relative;
+  z-index: 2;
+}
+
+/* Para configurar o efeito do hover apenas quando o link não estiver ativo */
+.header__link:not(.header__link_active):hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.header__link_active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  color: rgba(255, 255, 255, 1);
+  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+  position: relative;
+}
+
+/* Para implementar linha de link ativo */
+.header__link_active::after {
+  content: '';
+  position: absolute; /* posicionado devido deslocamento à esquerda quando em display block ou flex */
+  top: 23px;
+  left: -13px; /* medido pela régua do DevTools */
+  width: 70px;
+  height: 3px;
+  opacity: 1;
+  background: url('../../assets/line-link-active.svg') no-repeat center;
+  background-size: contain;
+  margin: 23px auto 0;
+}
+
+.header__link_active:last-of-type::after {
+  width: 178px;
+  background-size: cover;
+  left: -30px;
+}
+
+.header__link:last-of-type {
+  margin-right: 63px;
+  margin-left: 77px;
+}
+
+.header__btn {
+  text-decoration: none;
+  width: 112px;
+  height: 48px;
+  border-width: 1px;
+  opacity: 1;
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 100px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  z-index: 2;
+}
+
+.header__btn:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.header__btn:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.header__btn-text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 1);
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.header__btn-out {
+  width: 17.41px;
+  height: 16px;
+  opacity: 1;
+  position: relative;
+  z-index: 2;
+}

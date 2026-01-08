@@ -1,0 +1,57 @@
+.header {
+  background-image: url('../../assets/georgia-de-lotz-unsplash.png');
+  max-width: 1440px;
+  min-width: 320px;
+  height: calc(80px - 19px - 13px);
+  opacity: 1;
+  padding-top: 19px;
+  padding-bottom: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__box-logo {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  width: 200px;
+  height: 24px;
+  opacity: 1;
+  text-align: start;
+  margin-left: 104px;
+  margin-top: calc(30px - 19px);
+  margin-bottom: calc(26px - 13px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.header__box-logo:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.header__box-logo:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.header__logo {
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+.header_line {
+  width: 1440px;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+}
