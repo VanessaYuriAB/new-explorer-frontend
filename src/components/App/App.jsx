@@ -5,11 +5,11 @@ import './App.css';
 
 function App() {
   return (
-    <main className="page">
+    <div className="page">
       <NothingFound />
       <Preloader />
       <About />
-    </main>
+    </div>
   );
 }
 
