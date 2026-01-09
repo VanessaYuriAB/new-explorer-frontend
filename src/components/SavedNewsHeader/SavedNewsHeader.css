@@ -1,0 +1,56 @@
+.header-news {
+  max-width: 1440px;
+  min-width: 320px;
+  height: calc(80px - 19px - 13px);
+  opacity: 1;
+  padding-top: 19px;
+  padding-bottom: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-news__box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-news__logo-link {
+  text-decoration: none;
+  color: rgba(26, 27, 34, 1);
+  width: 200px;
+  height: 24px;
+  opacity: 1;
+  text-align: start;
+  margin-left: 104px;
+  margin-top: calc(30px - 19px);
+  margin-bottom: calc(26px - 13px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.header-news__logo-link:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.header-news__logo-link:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.header-news__logo {
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+.header-news__line {
+  width: 1440px;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+}

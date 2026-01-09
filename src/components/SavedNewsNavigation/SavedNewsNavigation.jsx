@@ -1,0 +1,38 @@
+import './SavedNewsNavigation.css';
+import { NavLink, Link } from 'react-router-dom';
+import btnOutBlack from '../../assets/btn-out-black.svg';
+
+function SavedNewsNavigation() {
+  // A função getNavLinkClass é nativa do componente <NavLink>
+  // Aceita um objeto como um parâmetro, que possui uma propriedade,
+  // isActive, que é verdadeira se o link estiver ativo
+  const getNewsNavLinkClass = ({ isActive }) => {
+    return 'header-news__link' + (isActive ? ' header-news__link_active' : '');
+  };
+
+  return (
+    <nav className="header-news__nav">
+      {/* Se o link estiver ativo, a classe header__link_active será adicionada à lista de
+      classes. */}
+
+      <div className="header-news__links">
+        <NavLink className={getNewsNavLinkClass} to="/">
+          Início
+        </NavLink>
+        <NavLink className={getNewsNavLinkClass} to="/saved-news">
+          Artigos salvos
+        </NavLink>
+      </div>
+      <Link className="header-news__btn" to="/">
+        <p className="header-news__btn-text">Nome</p>
+        <img
+          className="header-news__btn-out"
+          src={btnOutBlack}
+          alt="Ícone simbolizando saída/logout."
+        />
+      </Link>
+    </nav>
+  );
+}
+
+export default SavedNewsNavigation;
