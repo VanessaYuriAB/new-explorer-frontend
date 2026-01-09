@@ -8,7 +8,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header__box">
-        <Link className="header__box-logo" to="/">
+        <Link className="header__logo-link" to="/">
           <img
             className="header__logo"
             src={newsExplorer}
@@ -18,7 +18,7 @@ function Header() {
         <Navigation />
       </div>
       <img
-        className="header_line"
+        className="header__line"
         src={lineHeader}
         alt="Linha de divisão do cabeçalho, em branco"
       />

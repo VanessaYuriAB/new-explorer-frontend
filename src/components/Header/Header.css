@@ -17,7 +17,7 @@
   justify-content: space-between;
 }
 
-.header__box-logo {
+.header__logo-link {
   text-decoration: none;
   color: rgba(255, 255, 255, 1);
   width: 200px;
@@ -33,12 +33,12 @@
   z-index: 2;
 }
 
-.header__box-logo:hover {
+.header__logo-link:hover {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.8;
 }
 
-.header__box-logo:active {
+.header__logo-link:active {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.6;
 }
@@ -49,7 +49,7 @@
   z-index: 2;
 }
 
-.header_line {
+.header__line {
   width: 1440px;
   position: absolute;
   top: 0px;
