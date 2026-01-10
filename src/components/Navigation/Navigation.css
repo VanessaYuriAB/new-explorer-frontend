@@ -43,7 +43,7 @@
   width: 70px;
   height: 3px;
   opacity: 1;
-  background: url('../../assets/line-link-active.svg') no-repeat center;
+  background: url('/images/line-link-active.svg') no-repeat center;
   background-size: contain;
   margin: 23px auto 0;
 }

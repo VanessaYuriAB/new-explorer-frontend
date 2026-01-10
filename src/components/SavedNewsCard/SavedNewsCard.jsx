@@ -1,6 +1,6 @@
 import './SavedNewsCard.css';
 
-import imagemTeste from '../../assets/georgia-de-lotz-unsplash.png';
+import imgCard from '../../assets/card-img-nature.png';
 
 function SavedNewsCard() {
   return (
@@ -11,7 +11,7 @@ function SavedNewsCard() {
 
           <img
             className="saved-news__card-img"
-            src={imagemTeste}
+            src={imgCard}
             alt="Foto da notícia do cartão"
           />
           <figcaption className="saved-news__card-tag">Tag da News</figcaption>
