@@ -49,29 +49,6 @@
   padding-top: calc((40px - 24px) / 2);
 }
 
-/*.saved-news__card-tooltip {
-  width: 159px;
-  height: calc(
-    40px - 14px - 11px
-  ); */ /* subtraídos os paddings / a altura é a mesma até em mobile */
-/* opacity: 1;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1;
-  vertical-align: middle;
-  color: rgba(0, 0, 0, 1);
-  background-color: rgba(255, 255, 255, 1);
-  position: absolute;
-  top: 24px;
-  right: 69px;
-  z-index: 1;
-  box-shadow: 0px 10px 22px 0px rgba(59, 74, 116, 0.1);
-  padding-top: 14px;
-  padding-bottom: 11px;
-  display: none;
-}*/
-
 .saved-news__card-trash {
   width: 40px; /* msms dimensões até versão mobile */
   height: 40px;

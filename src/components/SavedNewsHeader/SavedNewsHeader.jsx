@@ -1,6 +1,6 @@
 import './SavedNewsHeader.css';
 import { Link } from 'react-router-dom';
-import SavedNewsNavigation from '../SavedNewsNavigation/SavedNewsNavigation';
+import SavedNewsNavigation from './components/SavedNewsNavigation/SavedNewsNavigation';
 import newsExplorerBlack from '../../assets/news-explorer-logo-black.svg';
 import lineHeaderGray from '../../assets/line-header-gray.svg';
 

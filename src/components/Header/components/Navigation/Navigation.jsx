@@ -1,6 +1,6 @@
 import './Navigation.css';
 import { NavLink, Link } from 'react-router-dom';
-import btnOut from '../../assets/btn-out.svg';
+import btnOut from '../../../../assets/btn-out.svg';
 
 function Navigation() {
   // A função getNavLinkClass é nativa do componente <NavLink>

@@ -1,6 +1,6 @@
 import './SavedNewsNavigation.css';
 import { NavLink, Link } from 'react-router-dom';
-import btnOutBlack from '../../assets/btn-out-black.svg';
+import btnOutBlack from '../../../../assets/btn-out-black.svg';
 
 function SavedNewsNavigation() {
   // A função getNavLinkClass é nativa do componente <NavLink>

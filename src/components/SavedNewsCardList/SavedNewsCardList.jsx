@@ -1,4 +1,4 @@
-import SavedNewsCard from '../SavedNewsCard/SavedNewsCard';
+import SavedNewsCard from './components/SavedNewsCard/SavedNewsCard';
 import './SavedNewsCardList.css';
 
 function SavedNews() {

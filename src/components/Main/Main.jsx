@@ -1,5 +1,5 @@
 import './Main.css';
-import SearchForm from '../SearchForm/SearchForm';
+import SearchForm from './components/SearchForm/SearchForm';
 
 function Main() {
   return (

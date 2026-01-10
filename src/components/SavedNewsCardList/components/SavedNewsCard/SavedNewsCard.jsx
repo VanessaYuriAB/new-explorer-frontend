@@ -1,6 +1,6 @@
 import './SavedNewsCard.css';
 
-import imgCard from '../../assets/card-img-nature.png';
+import imgCard from '../../../../assets/card-img-nature.png';
 
 function SavedNewsCard() {
   return (

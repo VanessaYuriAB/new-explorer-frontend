@@ -1,7 +1,7 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
 import newsExplorer from '../../assets/news-explorer-logo.svg';
-import Navigation from '../Navigation/Navigation';
+import Navigation from './components/Navigation/Navigation';
 import lineHeader from '../../assets/line-header.svg';
 
 function Header() {
