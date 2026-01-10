@@ -1,6 +1,7 @@
 /* import Header from '../Header/Header';
 import Main from '../Main/Main'; */
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNewsCardList from '../SavedNewsCardList/SavedNewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import About from '../About/About';
@@ -12,6 +13,7 @@ function App() {
       {/* <Header />
       <Main /> */}
       <SavedNewsHeader />
+      <SavedNewsCardList />
       <Preloader />
       <NothingFound />
       <About />
