@@ -55,7 +55,7 @@ function Navigation() {
               Início
             </NavLink>
           </div>
-          <Link className="header__btn header__btn_out" to="/signin">
+          <Link className="header__btn header__btn_out" to="/">
             <p className="header__btn-text header__btn-text_out">Entrar</p>
           </Link>
         </>
