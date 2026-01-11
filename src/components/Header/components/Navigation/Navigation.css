@@ -59,6 +59,38 @@
   margin-left: 77px;
 }
 
+/* Para configurar o efeito do hover apenas quando o link não estiver ativo */
+.header__link_out:not(.header__link_active):hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.header__link_out_active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  color: rgba(255, 255, 255, 1);
+  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+  position: relative;
+}
+
+/* Para implementar linha de link ativo */
+.header__link_out_active::after {
+  content: '';
+  position: absolute; /* posicionado devido deslocamento à esquerda quando em display block ou flex */
+  top: 23px;
+  left: -13px; /* medido pela régua do DevTools */
+  width: 68px;
+  height: 3px;
+  opacity: 1;
+  background: url('/images/line-link-active.svg') no-repeat center;
+  background-size: contain;
+  margin: 23px auto 0;
+}
+
+.header__link_out:last-of-type {
+  margin-right: 44px;
+  margin-left: 0;
+}
+
 .header__btn {
   text-decoration: none;
   width: 112px;
@@ -83,6 +115,10 @@
 .header__btn:active {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.6;
+}
+
+.header__btn_out {
+  width: 176px;
 }
 
 .header__btn-text {
