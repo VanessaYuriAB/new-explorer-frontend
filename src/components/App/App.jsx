@@ -5,9 +5,10 @@ import SavedNewsCardList from '../SavedNewsCardList/SavedNewsCardList';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import About from '../About/About';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AuthContext from '../../contexts/AuthContext';
-import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -31,19 +32,33 @@ function App() {
         acesse '/saved-news' */}
 
         {loggedIn && location.pathname === '/saved-news' ? (
-          <>
-            <SavedNewsHeader />
-            <SavedNewsCardList />
-          </>
+          <SavedNewsHeader />
         ) : (
-          <>
-            <Header />
-            <Main />
-            <Preloader />
-            <NothingFound />
-            <About />
-          </>
+          <Header />
         )}
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Main />
+                <Preloader />
+                <NothingFound />
+                <About />
+              </>
+            }
+          />
+
+          <Route
+            path="/saved-news"
+            element={
+              <ProtectedRoute>
+                <SavedNewsCardList />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
       </div>
     </AuthContext.Provider>
   );
