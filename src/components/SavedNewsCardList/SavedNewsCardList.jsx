@@ -15,7 +15,7 @@ function SavedNews() {
         </p>
       </div>
       <div className="saved-news__list">
-        {/* Renderizar Cards via .map, de acordo com a lista do usuário na API*/}
+        {/* Renderizar Cards via .map, de acordo com a lista do usuário na API */}
 
         <ul className="saved-news__cards">
           <SavedNewsCard />
