@@ -1,5 +1,6 @@
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import NewsCardList from '../NewsCardList/NewsCardList';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNewsCardList from '../SavedNewsCardList/SavedNewsCardList';
 import Preloader from '../Preloader/Preloader';
@@ -43,6 +44,7 @@ function App() {
             element={
               <>
                 <Main />
+                <NewsCardList />
                 <Preloader />
                 <NothingFound />
                 <About />
