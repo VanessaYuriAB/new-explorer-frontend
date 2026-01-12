@@ -20,7 +20,7 @@ function SavedNewsCard() {
         {/* Tooltip de aviso da lixeira implementado via CSS, com :hover::before (usando
         regra 'content') */}
 
-        <div className="saved-news__card-trash"></div>
+        <button type="button" className="saved-news__card-btn"></button>
 
         <div className="saved-news__card-infos">
           {/* Atualizar 'datetime' dinâmico */}

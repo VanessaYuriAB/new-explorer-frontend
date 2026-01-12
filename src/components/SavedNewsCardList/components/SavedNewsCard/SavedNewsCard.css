@@ -49,7 +49,7 @@
   padding-top: calc((40px - 24px) / 2);
 }
 
-.saved-news__card-trash {
+.saved-news__card-btn {
   width: 40px; /* msms dimensões até versão mobile */
   height: 40px;
   opacity: 1;
@@ -62,15 +62,16 @@
   top: 24px;
   right: 24px;
   z-index: 1;
+  border: none;
 }
 
-.saved-news__card-trash:hover {
+.saved-news__card-btn:hover {
   background-image: url('/images/trash-card-hover.svg');
   cursor: url('/images/cursor-lapka.png'), pointer;
 }
 
-/* Para implementar tooltip de aviso da lixeira, quando o ícone estiver em hover */
-.saved-news__card-trash:hover::before {
+/* Para implementar tooltip de aviso da lixeira, quando o botão estiver em hover */
+.saved-news__card-btn:hover::before {
   content: 'Remover dos salvos';
   position: absolute;
   top: 0px;
