@@ -1,0 +1,50 @@
+.popup {
+  max-width: 1440px;
+  min-width: 320px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup__content {
+  max-width: calc(430px - 36px - 36px);
+  min-width: calc(320px - 36px - 36px);
+  padding-top: 34px;
+  padding-bottom: 28px;
+  padding-left: 36px;
+  padding-right: 36px;
+  display: flex;
+  justify-self: center;
+  opacity: 1;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+  height: fit-content;
+}
+
+.popup__close-btn {
+  width: 40px;
+  height: 40px;
+  background-image: url('/images/close-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0;
+  border: none;
+  background-color: rgba(50, 130, 226, 0.73);
+  position: absolute;
+  top: -46px; /* a medida do próprio elemento somada à medida do espaçamento */
+  right: -46px;
+}
+
+.popup__close-btn:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.popup__close-btn:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}

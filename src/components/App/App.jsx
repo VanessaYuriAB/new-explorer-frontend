@@ -12,6 +12,8 @@ import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
+
 function App() {
   // Variável de estado: status de login
   const [loggedIn /*, setLoggedIn*/] = useState(true);
@@ -43,6 +45,7 @@ function App() {
             path="/"
             element={
               <>
+                <PopupWithForm />
                 <Main />
                 <NewsCardList />
                 <Preloader />
