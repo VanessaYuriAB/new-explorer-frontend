@@ -1,12 +1,12 @@
 import './PopupWithForm.css';
 
-import Signin from './components/Signin/Signin';
+import Signup from './components/Signup/Signup';
 
 function PopupWithForm() {
   return (
     <div className="popup">
       <div className="popup__content">
-        <Signin />
+        <Signup />
         <button className="popup__close-btn" type="button"></button>
       </div>
     </div>
