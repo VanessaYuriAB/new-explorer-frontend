@@ -38,7 +38,10 @@ function Signin() {
         <p className="popup__signin-plink">
           ou
           {/* O espaço antes do texto do Link é proposital para o espaçamento da frase inteira */}
-          <Link className="popup__signin-link"> Inscreva-se</Link>
+          <Link className="popup__signin-link" to="/">
+            {' '}
+            Inscreva-se
+          </Link>
         </p>
       </form>
     </>
