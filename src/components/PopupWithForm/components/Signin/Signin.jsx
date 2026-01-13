@@ -6,27 +6,27 @@ function Signin() {
     <>
       <form className="popup__signin">
         <h2 className="popup__signin-title">Entrar</h2>
-        <label className="popup__signin-label" for="input-email">
+        <label className="popup__signin-label" htmlFor="email">
           E-mail
         </label>
         <input
           className="popup__signin-input"
           type="email"
           placeholder="Insira e-mail"
-          id="input-email"
+          id="email"
           required
         ></input>
         <span className="popup__signin-span">
           Span para msg de erro do input-email
         </span>
-        <label className="popup__signin-label" for="input-password">
+        <label className="popup__signin-label" htmlFor="password">
           Senha
         </label>
         <input
           className="popup__signin-input"
           type="password"
           placeholder="Insira a senha"
-          id="input-password"
+          id="password"
           required
         ></input>
         <span className="popup__signin-span">
