@@ -1,0 +1,82 @@
+.tooltip-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1440px;
+  min-width: 320px;
+  height: 100vh;
+}
+
+.tooltip-signup__content {
+  position: relative;
+  width: 430px;
+  height: 182px;
+  opacity: 1;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tooltip-signup__title {
+  width: 315px;
+  height: 56px;
+  opacity: 1;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 1);
+  text-align: start;
+  margin: 43px 0 0 36px;
+}
+
+.tooltip-signup__link {
+  width: 228px;
+  height: 18px;
+  opacity: 1;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1;
+  color: rgba(47, 113, 229, 1);
+  text-decoration: none;
+  text-align: start;
+  margin: 14px 0 0 36px;
+}
+
+.tooltip-signup__link:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.tooltip-signup__link:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.tooltip-signup__close-btn {
+  width: 40px;
+  height: 40px;
+  background-image: url('/images/close-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0;
+  border: none;
+  background-color: rgba(50, 130, 226, 0.73);
+  position: absolute;
+  top: -46px; /* a medida do próprio elemento somada à medida do espaçamento */
+  right: -46px;
+}
+
+.tooltip-signup__close-btn:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.tooltip-signup__close-btn:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}

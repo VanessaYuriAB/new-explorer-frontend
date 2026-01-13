@@ -13,6 +13,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import SignupTooltip from '../SignupTooltip/SignupTooltip';
 
 function App() {
   // Variável de estado: status de login
@@ -46,6 +47,7 @@ function App() {
             element={
               <>
                 <PopupWithForm />
+                <SignupTooltip />
                 <Main />
                 <NewsCardList />
                 <Preloader />
