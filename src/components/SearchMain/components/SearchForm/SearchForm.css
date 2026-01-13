@@ -1,4 +1,4 @@
-.search {
+.search__form-news {
   width: 608px;
   height: 64px;
   opacity: 1;
@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.search__input {
+.search__form-input {
   width: calc(608px - 24px - 208px);
   height: calc(64px - 21px - 21px);
   opacity: 1;
@@ -19,7 +19,7 @@
   z-index: 1;
 }
 
-.search__input::placeholder {
+.search__form-input::placeholder {
   width: 376px;
   height: 22px;
   opacity: 1;
@@ -28,7 +28,7 @@
   color: rgba(182, 188, 191, 1);
 }
 
-.search__btn {
+.search__form-btn {
   color: rgba(255, 255, 255, 1);
   width: 168px;
   height: 64px;
@@ -47,12 +47,12 @@
   z-index: 2;
 }
 
-.search__btn:hover {
+.search__form-btn:hover {
   background-color: rgba(52, 126, 255, 1);
   cursor: url('/images/cursor-lapka.png'), pointer;
 }
 
-.search__btn:active {
+.search__form-btn:active {
   background-color: rgba(42, 101, 204, 1);
   cursor: url('/images/cursor-lapka.png'), pointer;
 }

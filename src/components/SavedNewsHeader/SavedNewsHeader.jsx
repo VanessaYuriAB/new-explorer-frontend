@@ -6,7 +6,7 @@ import lineHeaderGray from '../../assets/line-header-gray.svg';
 
 function SavedNewsHeader() {
   return (
-    <header className="header-news">
+    <header className="header-news page__header-news">
       <div className="header-news__box">
         <Link className="header-news__logo-link" to="/">
           <img

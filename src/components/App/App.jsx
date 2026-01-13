@@ -1,5 +1,5 @@
 import Header from '../Header/Header';
-import Main from '../Main/Main';
+import SearchMain from '../SearchMain/SearchMain';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNewsCardList from '../SavedNewsCardList/SavedNewsCardList';
@@ -12,8 +12,8 @@ import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import SignupTooltip from '../SignupTooltip/SignupTooltip';
+/*import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import SignupTooltip from '../SignupTooltip/SignupTooltip';*/
 
 function App() {
   // Variável de estado: status de login
@@ -41,31 +41,34 @@ function App() {
           <Header />
         )}
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <PopupWithForm />
-                <SignupTooltip />
-                <Main />
-                <NewsCardList />
-                <Preloader />
-                <NothingFound />
-                <About />
-              </>
-            }
-          />
+        {/*<PopupWithForm />
+        <SignupTooltip />*/}
 
-          <Route
-            path="/saved-news"
-            element={
-              <ProtectedRoute>
-                <SavedNewsCardList />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+        <main className="main page__main">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SearchMain />
+                  <NewsCardList />
+                  <Preloader />
+                  <NothingFound />
+                  <About />
+                </>
+              }
+            />
+
+            <Route
+              path="/saved-news"
+              element={
+                <ProtectedRoute>
+                  <SavedNewsCardList />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
       </div>
     </AuthContext.Provider>
   );

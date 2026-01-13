@@ -1,13 +1,7 @@
 .header {
-  background-image: url('/images/georgia-de-lotz-unsplash.png');
-  max-width: 1440px;
-  min-width: 320px;
-  height: calc(80px - 19px - 13px);
-  opacity: 1;
+  background-color: transparent;
   padding-top: 19px;
   padding-bottom: 13px;
-  display: flex;
-  flex-direction: column;
 }
 
 .header__box {

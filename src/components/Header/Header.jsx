@@ -6,7 +6,7 @@ import lineHeader from '../../assets/line-header.svg';
 
 function Header() {
   return (
-    <header className="header">
+    <header className="header page__header">
       <div className="header__box">
         <Link className="header__logo-link" to="/">
           <img

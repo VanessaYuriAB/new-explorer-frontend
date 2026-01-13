@@ -3,7 +3,7 @@ import './NothingFound.css';
 
 function NothingFound() {
   return (
-    <section className="nothing-found">
+    <section className="nothing-found main__nothing-found">
       <img
         className="nothing-found__image"
         src={nothingFound}

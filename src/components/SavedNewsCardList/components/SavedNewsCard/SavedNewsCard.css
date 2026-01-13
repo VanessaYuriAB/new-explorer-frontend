@@ -1,4 +1,4 @@
-.saved-news__card {
+.saved-card {
   max-width: 400px;
   min-width: 288px;
   max-height: 576px;
@@ -9,27 +9,28 @@
 }
 
 /* Tag implementada apenas para a semântica html */
-.saved-news__card-art {
+.saved-card__article {
   width: 100%;
   height: 100%;
 }
 
 /* Tag implementada apenas para a semântica html */
-.saved-news__card-fig {
+.saved-card__figure {
   margin: 0;
+  max-width: 400px;
+  min-width: 224px;
 }
 
-.saved-news__card-img {
-  max-width: 400px;
-  min-width: 288px;
-  min-height: 272px;
+.saved-card__img {
+  width: 100%;
+  height: 100%;
   opacity: 1;
   object-fit: cover;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
 
-.saved-news__card-tag {
+.saved-card__tag {
   max-width: 87px;
   min-width: 83px;
   height: calc(
@@ -49,7 +50,7 @@
   padding-top: calc((40px - 24px) / 2);
 }
 
-.saved-news__card-btn {
+.saved-card__btn {
   width: 40px; /* msms dimensões até versão mobile */
   height: 40px;
   opacity: 1;
@@ -65,13 +66,13 @@
   border: none;
 }
 
-.saved-news__card-btn:hover {
+.saved-card__btn:hover {
   background-image: url('/images/trash-card-hover.svg');
   cursor: url('/images/cursor-lapka.png'), pointer;
 }
 
 /* Para implementar tooltip de aviso da lixeira, quando o botão estiver em hover */
-.saved-news__card-btn:hover::before {
+.saved-card__btn:hover::before {
   content: 'Remover dos salvos';
   position: absolute;
   top: 0px;
@@ -94,7 +95,7 @@
   padding-bottom: 11px;
 }
 
-.saved-news__card-infos {
+.saved-card__infos {
   padding-top: 24px;
   padding-bottom: 24px;
   margin-left: 24px;
@@ -105,7 +106,7 @@
   min-height: calc(576px - 272px - 24px - 24px); /* subustraídos os paddings */
 }
 
-.saved-news__card-date {
+.saved-card__date {
   margin: 0;
   min-width: 197.75px;
   max-width: 256px;
@@ -117,7 +118,7 @@
   color: rgba(182, 188, 191, 1);
 }
 
-.saved-news__card-title {
+.saved-card__title {
   margin: 0;
   max-width: 352px;
   min-width: 256px;
@@ -136,7 +137,7 @@
   line-clamp: 3;
 }
 
-.saved-news__card-text {
+.saved-card__text {
   margin: 0;
   max-width: 352px;
   min-width: 256px;
@@ -153,7 +154,7 @@
   line-clamp: 4;
 }
 
-.saved-news__card-source {
+.saved-card__source {
   margin: 0;
   max-width: 352px;
   min-width: 256px;

@@ -1,12 +1,6 @@
 .header-news {
-  max-width: 1440px;
-  min-width: 320px;
-  height: calc(80px - 19px - 13px);
-  opacity: 1;
   padding-top: 19px;
   padding-bottom: 13px;
-  display: flex;
-  flex-direction: column;
 }
 
 .header-news__box {

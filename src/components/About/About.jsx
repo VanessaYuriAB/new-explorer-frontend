@@ -3,7 +3,7 @@ import me from '../../assets/eu.png';
 
 function About() {
   return (
-    <section className="about">
+    <section className="about main__about">
       <div className="about__img-box">
         <img className="about__avatar" src={me} alt="Foto de avatar" />
       </div>

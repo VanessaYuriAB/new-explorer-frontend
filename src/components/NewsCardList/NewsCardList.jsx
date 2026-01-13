@@ -8,7 +8,7 @@ function NewsCardList() {
   const { loggedIn } = useContext(AuthContext);
 
   return (
-    <section className="searched-news">
+    <section className="searched-news main__searched-news">
       <h2 className="searched-news__title">Procurar resultados</h2>
       <div className="searched-news__list">
         {/* Renderizar Cards via .map, de acordo com a lista do resultado da pesquisa */}

@@ -1,4 +1,4 @@
-.searched-news__card {
+.new-card {
   max-width: 400px;
   min-width: 288px;
   max-height: 576px;
@@ -9,27 +9,28 @@
 }
 
 /* Tag implementada apenas para a semântica html */
-.searched-news__card-art {
+.new-card__article {
   width: 100%;
   height: 100%;
 }
 
 /* Tag implementada apenas para a semântica html */
-.searched-news__card-fig {
+.new-card__figure {
   margin: 0;
+  max-width: 400px;
+  min-width: 224px;
 }
 
-.searched-news__card-img {
-  max-width: 400px;
-  min-width: 288px;
-  min-height: 272px;
+.new-card__img {
+  width: 100%;
+  height: 100%;
   opacity: 1;
   object-fit: cover;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
 
-.searched-news__card-btn {
+.new-card__btn {
   width: 40px; /* msms dimensões até versão mobile */
   height: 40px;
   opacity: 1;
@@ -45,13 +46,13 @@
   border: none;
 }
 
-.searched-news__card-btn:hover {
+.new-card__btn:hover {
   background-image: url('/images/tosave-card-hover.svg');
   cursor: url('/images/cursor-lapka.png'), pointer;
 }
 
 /* Para implementar tooltip de aviso sobre adição do cartão, quando o ícone estiver em hover */
-.searched-news__card-btn:hover::before {
+.new-card__btn:hover::before {
   content: 'Adicionar aos salvos';
   position: absolute;
   top: 0px;
@@ -74,27 +75,27 @@
   padding-bottom: 11px;
 }
 
-.searched-news__card-btn_active {
+.new-card__btn_active {
   background-image: url('/images/saved-card.svg');
 }
 
-.searched-news__card-btn_active:hover {
+.new-card__btn_active:hover {
   opacity: 0.8;
   background-image: url('/images/saved-card.svg');
 }
 
 /* Para implementar tooltip de aviso sobre remoção do cartão, quando o ícone estiver em active e hover */
-.searched-news__card-btn_active:hover::before {
+.new-card__btn_active:hover::before {
   content: 'Remover dos salvos';
 }
 
 /* Para implementar tooltip de aviso sobre login, quando o ícone estiver em hover, deslogado */
-.searched-news__card-btn_out:hover::before {
+.new-card__btn_out:hover::before {
   content: 'Faça login para salvar artigos';
   width: 182px;
 }
 
-.searched-news__card-infos {
+.new-card__infos {
   padding-top: 24px;
   padding-bottom: 24px;
   margin-left: 24px;
@@ -105,7 +106,7 @@
   min-height: calc(576px - 272px - 24px - 24px); /* subustraídos os paddings */
 }
 
-.searched-news__card-date {
+.new-card__date {
   margin: 0;
   min-width: 197.75px;
   max-width: 256px;
@@ -117,7 +118,7 @@
   color: rgba(182, 188, 191, 1);
 }
 
-.searched-news__card-title {
+.new-card__title {
   margin: 0;
   max-width: 352px;
   min-width: 256px;
@@ -136,7 +137,7 @@
   line-clamp: 3;
 }
 
-.searched-news__card-text {
+.new-card__text {
   margin: 0;
   max-width: 352px;
   min-width: 256px;
@@ -153,7 +154,7 @@
   line-clamp: 4;
 }
 
-.searched-news__card-source {
+.new-card__source {
   margin: 0;
   max-width: 352px;
   min-width: 256px;

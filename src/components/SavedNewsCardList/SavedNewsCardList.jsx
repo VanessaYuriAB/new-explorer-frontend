@@ -3,7 +3,7 @@ import './SavedNewsCardList.css';
 
 function SavedNews() {
   return (
-    <section className="saved-news">
+    <section className="saved-news main__saved-news">
       <div className="saved-news__infos">
         <h2 className="saved-news__title">Artigos salvos</h2>
         <p className="saved-news__info">Nome, você tem 5 artigos salvos</p>

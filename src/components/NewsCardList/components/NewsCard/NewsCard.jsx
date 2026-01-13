@@ -12,20 +12,20 @@ function NewsCard() {
   const [isSavedFromCurrentUser /*, setIsSavedFromCurrentUser*/] =
     useState(true);
 
-  // Verificação para classe do botão 'salvar': a classe 'searched-news__card-btn_active'
+  // Verificação para classe do botão 'salvar': a classe 'new-card__btn_active'
   // será aplicada para mostrar que o botão está no status "salvo"
-  const getCardBtnClassName = `searched-news__card-btn ${
-    isSavedFromCurrentUser ? 'searched-news__card-btn_active' : ''
+  const getCardBtnClassName = `new-card__btn ${
+    isSavedFromCurrentUser ? 'new-card__btn_active' : ''
   }`;
 
   return (
-    <li className="searched-news__card">
-      <article className="searched-news__card-art">
-        <figure className="searched-news__card-fig">
+    <li className="new-card">
+      <article className="new-card__article">
+        <figure className="new-card__figure">
           {/* Atualizar 'alt' dinâmico, como nome da foto */}
 
           <img
-            className="searched-news__card-img"
+            className="new-card__img"
             src={imgNewCard}
             alt="Foto da notícia do cartão"
           />
@@ -39,35 +39,33 @@ function NewsCard() {
         {loggedIn ? (
           /* Logado */
           <>
-            <button type="button" className={getCardBtnClassName}></button>
+            <button className={getCardBtnClassName} type="button"></button>
           </>
         ) : (
           /* Deslogado */
           <>
             <button
+              className="new-card__btn new-card__btn_out"
               type="button"
-              className="searched-news__card-btn searched-news__card-btn_out"
             ></button>
           </>
         )}
 
-        <div className="searched-news__card-infos">
+        <div className="new-card__infos">
           {/* Atualizar 'datetime' dinâmico */}
 
-          <time className="searched-news__card-date" dateTime="2026-01-12">
+          <time className="new-card__date" dateTime="2026-01-12">
             12 de janeiro de 2026
           </time>
-          <h3 className="searched-news__card-title">
+          <h3 className="new-card__title">
             A natureza faz de você uma pessoa melhor
           </h3>
-          <p className="searched-news__card-text">
+          <p className="new-card__text">
             Todos nós sabemos como a natureza nos faz bem. Nós a conhecemos há
             milênios: o som dos oceanos, os aromas de uma floresta, a forma como
             a luz do sol dança através das folhas.
           </p>
-          <cite className="searched-news__card-source">
-            NATIONAL GEOGRAPHIC
-          </cite>
+          <cite className="new-card__source">NATIONAL GEOGRAPHIC</cite>
         </div>
       </article>
     </li>

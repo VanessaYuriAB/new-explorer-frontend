@@ -1,13 +1,5 @@
 .preloader {
   background-color: rgba(245, 246, 247, 1);
-  overflow: hidden;
-  max-width: 1440px;
-  min-width: 320px;
-  height: calc(282px - 80px - 80px);
-  opacity: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding-top: 80px;
   padding-bottom: 80px;
 }
