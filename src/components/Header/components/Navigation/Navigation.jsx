@@ -24,13 +24,14 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
     );
   };
 
-  // Obj para configurar children para abertura do popup de login (Signin)
-  const SigninPopup = {
+  // Objeto para configurar children de PopupWithForm: abertura do popup de login (Signin)
+  // Obj tbm criado em Signup, duplicado
+  const signinPopup = {
     children: (
       <Signin
         popup={popup}
-        onOpenPopup={handleOpenPopup}
-        onClosePopup={handleClosePopup}
+        handleOpenPopup={handleOpenPopup}
+        handleClosePopup={handleClosePopup}
       />
     ),
   };
@@ -71,7 +72,7 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
           <button
             className="header__btn header__btn_out"
             type="button"
-            onClick={() => handleOpenPopup(SigninPopup)}
+            onClick={() => handleOpenPopup(signinPopup)}
           >
             <p className="header__btn-text header__btn-text_out">Entrar</p>
           </button>
@@ -81,7 +82,7 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
       {/* Se o popup não for nulo, o componente será renderizado na tela */}
 
       {popup && (
-        <PopupWithForm popup={popup} onClose={handleClosePopup}>
+        <PopupWithForm popup={popup} handleClosePopup={handleClosePopup}>
           {popup.children}
         </PopupWithForm>
       )}

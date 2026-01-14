@@ -52,8 +52,8 @@ function App() {
         ) : (
           <Header
             popup={popup}
-            onOpenPopup={handleOpenPopup}
-            onClosePopup={handleClosePopup}
+            handleOpenPopup={handleOpenPopup}
+            handleClosePopup={handleClosePopup}
           />
         )}
 

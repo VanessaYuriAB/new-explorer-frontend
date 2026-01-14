@@ -1,11 +1,17 @@
-import PopupWithForm from '../../PopupWithForm';
 import Signup from '../Signup/Signup';
+import PopupWithForm from '../../PopupWithForm';
 import './Signin.css';
 
-function Signin({ popup, onOpenPopup, onClosePopup }) {
-  // Obj para configurar children para abertura do popup de inscrição (Signup)
-  const SignupPopup = {
-    children: <Signup />,
+function Signin({ popup, handleOpenPopup, handleClosePopup }) {
+  // Objeto para configurar children de PopupWithForm: abertura do popup de inscrição (Signup)
+  const signupPopup = {
+    children: (
+      <Signup
+        popup={popup}
+        handleOpenPopup={handleOpenPopup}
+        handleClosePopup={handleClosePopup}
+      />
+    ),
   };
 
   return (
@@ -46,7 +52,7 @@ function Signin({ popup, onOpenPopup, onClosePopup }) {
         <button
           className="popup__signin-link"
           type="button"
-          onClick={() => onOpenPopup(SignupPopup)}
+          onClick={() => handleOpenPopup(signupPopup)}
         >
           Inscreva-se
         </button>
@@ -55,7 +61,7 @@ function Signin({ popup, onOpenPopup, onClosePopup }) {
       {/* Se o popup não for nulo, o componente será renderizado na tela */}
 
       {popup && (
-        <PopupWithForm popup={popup} onClose={onClosePopup}>
+        <PopupWithForm popup={popup} handleClosePopup={handleClosePopup}>
           {popup.children}
         </PopupWithForm>
       )}

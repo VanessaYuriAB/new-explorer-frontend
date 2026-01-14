@@ -1,6 +1,20 @@
+import Signin from '../Signin/Signin';
+import PopupWithForm from '../../PopupWithForm';
 import './Signup.css';
 
-function Signup() {
+function Signup({ popup, handleOpenPopup, handleClosePopup }) {
+  // Objeto para configurar children de PopupWithForm: abertura do popup de login (Signin)
+  // Obj tbm criado em Navigation, duplicado
+  const signinPopup = {
+    children: (
+      <Signin
+        popup={popup}
+        handleOpenPopup={handleOpenPopup}
+        handleClosePopup={handleClosePopup}
+      />
+    ),
+  };
+
   return (
     <form className="popup__signup">
       <h2 className="popup__signup-title">Inscrever-se</h2>
@@ -50,10 +64,22 @@ function Signup() {
       <p className="popup__signup-plink">
         {/* O espaço depois do texto é proposital para o espaçamento da frase inteira */}
         ou {/* Uso da tag button, e não Link, pq o clique não muda de rota */}
-        <button className="popup__signup-link" type="button">
+        <button
+          className="popup__signup-link"
+          type="button"
+          onClick={() => handleOpenPopup(signinPopup)}
+        >
           Entre
         </button>
       </p>
+
+      {/* Se o popup não for nulo, o componente será renderizado na tela */}
+
+      {popup && (
+        <PopupWithForm popup={popup} handleClosePopup={handleClosePopup}>
+          {popup.children}
+        </PopupWithForm>
+      )}
     </form>
   );
 }

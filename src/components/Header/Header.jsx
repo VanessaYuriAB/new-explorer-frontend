@@ -4,7 +4,7 @@ import lineHeader from '../../assets/line-header.svg';
 import newsExplorer from '../../assets/news-explorer-logo.svg';
 import './Header.css';
 
-function Header({ popup, onOpenPopup, onClosePopup }) {
+function Header({ popup, handleOpenPopup, handleClosePopup }) {
   return (
     <header className="header page__header">
       <div className="header__box">
@@ -17,8 +17,8 @@ function Header({ popup, onOpenPopup, onClosePopup }) {
         </Link>
         <Navigation
           popup={popup}
-          handleOpenPopup={onOpenPopup}
-          handleClosePopup={onClosePopup}
+          handleOpenPopup={handleOpenPopup}
+          handleClosePopup={handleClosePopup}
         />
       </div>
       <img

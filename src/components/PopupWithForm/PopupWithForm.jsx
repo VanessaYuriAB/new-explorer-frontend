@@ -4,7 +4,7 @@ import './PopupWithForm.css';
 function PopupWithForm(props) {
   // Desestruturação do objeto passado como props, onde children é o conteúdo de popup
   // que pode ser Signin ou Signup, configurado no componente de abertura
-  const { popup, onClose, children } = props;
+  const { popup, handleClosePopup, children } = props;
 
   // Ref para encapsulamento de children: para fechamento do popup por clique fora da
   // caixa
@@ -15,7 +15,7 @@ function PopupWithForm(props) {
     const handleEscClose = (evt) => {
       const keyIsEsc = evt.code === 'Escape'; // escape: esc
 
-      if (popup && keyIsEsc) onClose(); // se o popup estiver aberto e a tecla pressionada
+      if (popup && keyIsEsc) handleClosePopup(); // se o popup estiver aberto e a tecla pressionada
       // for a esc, o popup fecha
     };
 
@@ -28,7 +28,7 @@ function PopupWithForm(props) {
       // remove o listener ao desmontar ou ao mudar dependências → evita múltiplas inscrições
       // ou vazamentos
     };
-  }, [popup, onClose]); // aciona sempre que o popup for aberto e limpa sempre que fechar
+  }, [popup, handleClosePopup]); // aciona sempre que o popup for aberto e limpa sempre que fechar
 
   // Handler: fechamento por clique fora
   const handleClickClose = (evt) => {
@@ -36,7 +36,7 @@ function PopupWithForm(props) {
     const clickOutside =
       childrenContent && !childrenContent.contains(evt.target);
 
-    if (clickOutside) onClose(); // se children estiver aberto e o click não for em
+    if (clickOutside) handleClosePopup(); // se children estiver aberto e o click não for em
     // children, fecha o popup
   };
 
@@ -50,7 +50,7 @@ function PopupWithForm(props) {
           <button
             className="popup__close-btn"
             type="button"
-            onClick={onClose}
+            onClick={handleClosePopup}
           ></button>
         </div>
       </div>
