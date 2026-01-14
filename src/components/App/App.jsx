@@ -12,15 +12,27 @@ import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
-/*import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import SignupTooltip from '../SignupTooltip/SignupTooltip';*/
+/*import SignupTooltip from '../SignupTooltip/SignupTooltip';*/
 
 function App() {
   // Variável de estado: status de login
-  const [loggedIn /*, setLoggedIn*/] = useState(true);
+  const [loggedIn /*, setLoggedIn*/] = useState(false);
+
+  // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
+  const [popup, setPopup] = useState(null);
 
   // Hook de localização para saber a rota atual
   const location = useLocation();
+
+  // Handler: abre popup
+  const handleOpenPopup = (popup) => {
+    setPopup(popup);
+  };
+
+  // Handler: fecha popup
+  const handleClosePopup = () => {
+    setPopup(null);
+  };
 
   return (
     // Provedor de contexto: compartilha dados de login e do usuário atual
@@ -38,11 +50,14 @@ function App() {
         {loggedIn && location.pathname === '/saved-news' ? (
           <SavedNewsHeader />
         ) : (
-          <Header />
+          <Header
+            popup={popup}
+            onOpenPopup={handleOpenPopup}
+            onClosePopup={handleClosePopup}
+          />
         )}
 
-        {/*<PopupWithForm />
-        <SignupTooltip />*/}
+        {/*<SignupTooltip />*/}
 
         <main className="main page__main">
           <Routes>

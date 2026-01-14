@@ -1,10 +1,10 @@
-import './Header.css';
 import { Link } from 'react-router-dom';
-import newsExplorer from '../../assets/news-explorer-logo.svg';
 import Navigation from './components/Navigation/Navigation';
 import lineHeader from '../../assets/line-header.svg';
+import newsExplorer from '../../assets/news-explorer-logo.svg';
+import './Header.css';
 
-function Header() {
+function Header({ popup, onOpenPopup, onClosePopup }) {
   return (
     <header className="header page__header">
       <div className="header__box">
@@ -15,7 +15,11 @@ function Header() {
             alt="Logo, escrito NewsExplorer em branco."
           />
         </Link>
-        <Navigation />
+        <Navigation
+          popup={popup}
+          handleOpenPopup={onOpenPopup}
+          handleClosePopup={onClosePopup}
+        />
       </div>
       <img
         className="header__line"

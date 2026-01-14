@@ -1,27 +1,22 @@
 .popup {
-  max-width: 1440px;
-  min-width: 320px;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3; /* para sobrepor ao SearchForm */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .popup__content {
-  max-width: calc(430px - 36px - 36px);
-  min-width: calc(320px - 36px - 36px);
-  padding-top: 34px;
-  padding-bottom: 28px;
-  padding-left: 36px;
-  padding-right: 36px;
-  display: flex;
-  justify-self: center;
-  opacity: 1;
-  border-radius: 16px;
-  background-color: rgba(255, 255, 255, 1);
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
-  position: relative;
-  height: fit-content;
+  display: contents; /* permite que o conteúdo filho mantenha o layout original > para configuração do fechamento dos popups por clique na tela, fora da caixa do popup em si */
+}
+
+.popup__position-btn {
+  position: relative; /* permite o posicionamento do botão fechar em relação à caixa do popup */
 }
 
 .popup__close-btn {
@@ -33,10 +28,11 @@
   background-size: contain;
   padding: 0;
   border: none;
-  background-color: rgba(50, 130, 226, 0.73);
+  background-color: transparent;
   position: absolute;
   top: -46px; /* a medida do próprio elemento somada à medida do espaçamento */
   right: -46px;
+  z-index: 3; /* para sobrepor ao SearchForm */
 }
 
 .popup__close-btn:hover {

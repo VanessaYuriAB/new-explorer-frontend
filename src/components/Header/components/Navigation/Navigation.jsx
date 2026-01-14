@@ -1,10 +1,12 @@
-import './Navigation.css';
-import { NavLink, Link } from 'react-router-dom';
 import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import AuthContext from '../../../../contexts/AuthContext';
+import Signin from '../../../PopupWithForm/components/Signin/Signin';
+import PopupWithForm from '../../../PopupWithForm/PopupWithForm';
 import btnOut from '../../../../assets/btn-out.svg';
+import './Navigation.css';
 
-function Navigation() {
+function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
@@ -20,6 +22,11 @@ function Navigation() {
       'header__link header__link_out' +
       (isActive ? ' header__link_out_active' : '')
     );
+  };
+
+  // Obj para configurar children para abertura do popup de login (Signin)
+  const SigninPopup = {
+    children: <Signin />,
   };
 
   return (
@@ -39,14 +46,14 @@ function Navigation() {
               Artigos salvos
             </NavLink>
           </div>
-          <Link className="header__btn" to="/">
+          <button className="header__btn" type="button">
             <p className="header__btn-text">Nome</p>
             <img
               className="header__btn-out"
               src={btnOut}
               alt="Ícone simbolizando saída/logout."
             />
-          </Link>
+          </button>
         </>
       ) : (
         <>
@@ -55,10 +62,22 @@ function Navigation() {
               Início
             </NavLink>
           </div>
-          <Link className="header__btn header__btn_out" to="/">
+          <button
+            className="header__btn header__btn_out"
+            type="button"
+            onClick={() => handleOpenPopup(SigninPopup)}
+          >
             <p className="header__btn-text header__btn-text_out">Entrar</p>
-          </Link>
+          </button>
         </>
+      )}
+
+      {/* Se o popup não for nulo, o componente será renderizado na tela */}
+
+      {popup && (
+        <PopupWithForm popup={popup} onClose={handleClosePopup}>
+          {popup.children}
+        </PopupWithForm>
       )}
     </nav>
   );
