@@ -1,7 +1,25 @@
+/* =================================================
+   📦 FORMULÁRIOS DE POPUP (signin e signup)
+================================================= */
+
 .popup__signup {
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
+  max-width: calc(430px - 36px - 36px);
+  min-width: calc(320px - 36px - 36px);
+  padding-top: 34px;
+  padding-bottom: 28px;
+  padding-left: 36px;
+  padding-right: 36px;
+  display: flex;
+  justify-self: center;
+  opacity: 1;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+  height: fit-content;
+  z-index: 3; /* para sobrepor ao SearchForm */
 }
 
 .popup__signup-title {
@@ -113,8 +131,11 @@
 }
 
 .popup__signup-link {
-  text-decoration: none;
+  background-color: rgba(255, 255, 255, 1);
+  border: none;
+  padding: 0;
   color: rgba(73, 131, 232, 1);
+  line-height: 1;
 }
 
 .popup__signup-link:hover {

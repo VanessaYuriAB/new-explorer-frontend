@@ -26,7 +26,13 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
 
   // Obj para configurar children para abertura do popup de login (Signin)
   const SigninPopup = {
-    children: <Signin />,
+    children: (
+      <Signin
+        popup={popup}
+        onOpenPopup={handleOpenPopup}
+        onClosePopup={handleClosePopup}
+      />
+    ),
   };
 
   return (
