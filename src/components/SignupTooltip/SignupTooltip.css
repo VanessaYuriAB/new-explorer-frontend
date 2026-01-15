@@ -1,14 +1,4 @@
-.tooltip-signup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 1440px;
-  min-width: 320px;
-  height: 100vh;
-}
-
-.tooltip-signup__content {
-  position: relative;
+.popup__tooltip {
   width: 430px;
   height: 182px;
   opacity: 1;
@@ -18,9 +8,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 3; /* para sobrepor ao SearchForm */
 }
 
-.tooltip-signup__title {
+.popup__tooltip-title {
   width: 315px;
   height: 56px;
   opacity: 1;
@@ -32,7 +23,7 @@
   margin: 43px 0 0 36px;
 }
 
-.tooltip-signup__link {
+.popup__tooltip-link {
   width: 228px;
   height: 18px;
   opacity: 1;
@@ -44,39 +35,16 @@
   text-decoration: none;
   text-align: start;
   margin: 14px 0 0 36px;
-}
-
-.tooltip-signup__link:hover {
-  cursor: url('/images/cursor-lapka.png'), pointer;
-  opacity: 0.8;
-}
-
-.tooltip-signup__link:active {
-  cursor: url('/images/cursor-lapka.png'), pointer;
-  opacity: 0.6;
-}
-
-.tooltip-signup__close-btn {
-  width: 40px;
-  height: 40px;
-  background-image: url('/images/close-icon.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding: 0;
+  background-color: rgba(255, 255, 255, 1);
   border: none;
-  background-color: rgba(50, 130, 226, 0.73);
-  position: absolute;
-  top: -46px; /* a medida do próprio elemento somada à medida do espaçamento */
-  right: -46px;
 }
 
-.tooltip-signup__close-btn:hover {
+.popup__tooltip-link:hover {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.8;
 }
 
-.tooltip-signup__close-btn:active {
+.popup__tooltip-link:active {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.6;
 }

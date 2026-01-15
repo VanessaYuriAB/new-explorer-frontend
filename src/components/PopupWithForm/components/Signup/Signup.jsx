@@ -1,4 +1,5 @@
 import Signin from '../Signin/Signin';
+import SignupTooltip from '../../../SignupTooltip/SignupTooltip';
 import PopupWithForm from '../../PopupWithForm';
 import './Signup.css';
 
@@ -8,6 +9,18 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
   const signinPopup = {
     children: (
       <Signin
+        popup={popup}
+        handleOpenPopup={handleOpenPopup}
+        handleClosePopup={handleClosePopup}
+      />
+    ),
+  };
+
+  // Objeto para configurar children de PopupWithForm: abertura do popup tooltip
+  // (SignupTooltip)
+  const signupTooltip = {
+    children: (
+      <SignupTooltip
         popup={popup}
         handleOpenPopup={handleOpenPopup}
         handleClosePopup={handleClosePopup}
@@ -58,7 +71,12 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         Span para msg de erro do input-name
       </span>
       <span className="popup__signup-span">Span para msg de Server-Error</span>
-      <button className="popup__signup-btn" type="submit" disabled>
+      <button
+        className="popup__signup-btn"
+        type="submit"
+        onClick={() => handleOpenPopup(signupTooltip)}
+        /*disabled*/
+      >
         Inscrever-se
       </button>
       <p className="popup__signup-plink">
@@ -73,7 +91,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         </button>
       </p>
 
-      {/* Se o popup não for nulo, o componente será renderizado na tela */}
+      {/* Se o popup não for nulo, o componente será renderizado na tela:
+      Signin ou SignupTooltip*/}
 
       {popup && (
         <PopupWithForm popup={popup} handleClosePopup={handleClosePopup}>
