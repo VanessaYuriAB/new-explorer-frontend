@@ -7,6 +7,7 @@
   border-width: 1px;
   padding-top: 160px;
   padding-bottom: 80px;
+  text-align: start;
 }
 
 .search__title {
@@ -17,6 +18,8 @@
   font-size: 60px;
   line-height: 1.07;
   margin: 0 auto;
+  position: relative;
+  left: 45px; /* medida pela régua no DevTools, comparado com search_text*/
 }
 
 .search__text {
@@ -26,4 +29,8 @@
   font-size: 18px;
   line-height: 1.33;
   margin: 32px auto 64px;
+}
+
+.search__form-box {
+  align-self: center;
 }
