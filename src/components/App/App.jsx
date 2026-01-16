@@ -7,6 +7,7 @@ import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import About from '../About/About';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
 import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -16,7 +17,7 @@ import './App.css';
 
 function App() {
   // Variável de estado: status de login
-  const [loggedIn /*, setLoggedIn*/] = useState(false);
+  const [loggedIn /*, setLoggedIn*/] = useState(true);
 
   // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
   const [popup, setPopup] = useState(null);
@@ -84,6 +85,8 @@ function App() {
             />
           </Routes>
         </main>
+
+        <Footer />
       </div>
     </AuthContext.Provider>
   );
