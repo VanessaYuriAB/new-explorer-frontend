@@ -42,7 +42,6 @@
   left: -13px; /* medido pela régua do DevTools */
   width: 70px;
   height: 3px;
-  opacity: 1;
   background: url('/images/line-link-active.svg') no-repeat center;
   background-size: contain;
   margin: 23px auto 0;
@@ -80,7 +79,6 @@
   left: -13px; /* medido pela régua do DevTools */
   width: 68px;
   height: 3px;
-  opacity: 1;
   background: url('/images/line-link-active.svg') no-repeat center;
   background-size: contain;
   margin: 23px auto 0;
@@ -95,7 +93,6 @@
   width: 112px;
   height: 48px;
   border-width: 1px;
-  opacity: 1;
   border: 1px solid rgba(255, 255, 255, 1);
   border-radius: 100px;
   background-color: transparent;
@@ -134,7 +131,6 @@
 .header__btn-out {
   width: 17.41px;
   height: 16px;
-  opacity: 1;
   position: relative;
   z-index: 2;
 }

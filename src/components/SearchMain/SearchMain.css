@@ -13,7 +13,6 @@
 .search__title {
   width: 700.53px;
   height: 128px;
-  opacity: 1;
   font-family: 'Roboto Slab';
   font-size: 60px;
   line-height: 1.07;
@@ -25,7 +24,6 @@
 .search__text {
   width: 608px;
   height: 48px;
-  opacity: 1;
   font-size: 18px;
   line-height: 1.33;
   margin: 32px auto 64px;

@@ -12,7 +12,6 @@
 .saved-news__title {
   max-width: 712px;
   min-height: 24px;
-  opacity: 1;
   font-size: 18px;
   line-height: 1.33;
   font-weight: 400;
@@ -22,7 +21,6 @@
 .saved-news__info {
   max-width: 530px;
   min-height: 92px;
-  opacity: 1;
   font-family: 'Roboto Slab';
   font-size: 40px;
   line-height: 1.15;
@@ -33,7 +31,6 @@
 .saved-news__keywords {
   max-width: 712px;
   min-height: 24px;
-  opacity: 1;
   font-size: 18px;
   line-height: 1.33;
   margin: 0;
@@ -42,7 +39,6 @@
 .saved-news__list {
   max-width: 1440px;
   min-width: 320px;
-  opacity: 1;
   background-color: rgba(245, 246, 247, 1);
   padding-top: 62px;
   padding-bottom: 62px;

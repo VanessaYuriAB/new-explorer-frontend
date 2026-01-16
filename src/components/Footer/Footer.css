@@ -1,5 +1,4 @@
 .footer {
-  opacity: 1;
   background: rgba(255, 255, 255, 1);
   margin-left: 40px;
   margin-right: 40px;
@@ -9,7 +8,6 @@
   margin: 0;
   width: 433px;
   height: 22px;
-  opacity: 1;
   line-height: 1.37;
   color: rgba(182, 188, 191, 1);
   text-align: start;

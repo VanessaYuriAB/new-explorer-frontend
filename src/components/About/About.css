@@ -6,7 +6,6 @@
 .about__img-box {
   width: 464px;
   height: 464px;
-  opacity: 1;
 }
 
 .about__avatar {
@@ -19,7 +18,6 @@
 .about__text {
   text-align: start;
   width: 600px;
-  opacity: 1;
   margin-left: 56px;
 }
 

@@ -2,7 +2,6 @@
   max-width: 400px;
   min-width: 288px;
   max-height: 576px;
-  opacity: 1;
   background-color: white;
   border-radius: 16px;
   position: relative;
@@ -24,7 +23,6 @@
 .saved-card__img {
   width: 100%;
   height: 100%;
-  opacity: 1;
   object-fit: cover;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -36,7 +34,6 @@
   height: calc(
     40px - 8px
   ); /* subtraído o padding / a altura é a mesma até em mobile */
-  opacity: 1;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   font-weight: 500;
@@ -53,7 +50,6 @@
 .saved-card__btn {
   width: 40px; /* msms dimensões até versão mobile */
   height: 40px;
-  opacity: 1;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 1);
   background-image: url('/images/trash-card.svg');
@@ -82,7 +78,6 @@
   height: calc(
     40px - 14px - 11px
   ); /* subtraídos os paddings / a altura é a mesma até em mobile */
-  opacity: 1;
   border-radius: 10px;
   font-weight: 500;
   font-size: 12px;
@@ -111,7 +106,6 @@
   min-width: 197.75px;
   max-width: 256px;
   height: 24px;
-  opacity: 1;
   font-size: 18px;
   line-height: 1.33;
   vertical-align: middle;
@@ -123,7 +117,6 @@
   max-width: 352px;
   min-width: 256px;
   max-height: 90px;
-  opacity: 1;
   font-family: 'Roboto Slab';
   font-weight: 400;
   font-size: 26px;
@@ -143,7 +136,6 @@
   min-width: 256px;
   max-height: 88px;
   min-height: 66px;
-  opacity: 1;
   font-size: 16px;
   line-height: 1.37;
   overflow: hidden;

@@ -17,13 +17,13 @@
   text-align: center;
   letter-spacing: 0px;
   height: 100vh; /* para remover o espaço em branco no final da página, devido o deslocamento dos componentes para ajuste do Header */
+  opacity: 1;
 }
 
 .page__header {
   max-width: 1440px;
   min-width: 320px;
   height: calc(80px - 19px - 13px);
-  opacity: 1;
   display: flex;
   flex-direction: column;
 }
@@ -32,7 +32,6 @@
   max-width: 1440px;
   min-width: 320px;
   height: calc(80px - 19px - 13px);
-  opacity: 1;
   display: flex;
   flex-direction: column;
 }
@@ -47,7 +46,6 @@
   max-width: 1440px;
   min-width: 320px;
   height: calc(576px - 160px - 80px);
-  opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -62,7 +60,6 @@
   max-width: 1440px;
   min-width: 320px;
   height: calc(282px - 80px - 80px);
-  opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,7 +70,6 @@
   max-width: 1440px;
   min-width: 320px;
   height: calc(374px - 86px - 80px);
-  opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,7 +79,6 @@
   max-width: 1440px;
   min-width: 320px;
   height: calc(624px - 80px - 80px);
-  opacity: 1;
   display: flex;
   justify-content: center;
 }

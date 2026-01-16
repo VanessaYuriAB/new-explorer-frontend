@@ -13,7 +13,6 @@
   padding-right: 36px;
   display: flex;
   justify-self: center;
-  opacity: 1;
   border-radius: 16px;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
@@ -25,7 +24,6 @@
 .popup__signup-title {
   width: 358px;
   height: 32px;
-  opacity: 1;
   font-weight: 900;
   font-size: 24px;
   line-height: 1;
@@ -84,7 +82,6 @@
   align-self: center;
   width: 360px;
   height: 64px;
-  opacity: 1;
   border-radius: 100px;
   background-color: rgba(47, 113, 229, 1);
   box-shadow: 0px 5px 15px 0px rgba(14, 26, 57, 0.2);
@@ -122,7 +119,6 @@
   align-self: center;
   width: 226px;
   height: 20px;
-  opacity: 1;
   font-family: 'Inter';
   font-size: 14px;
   line-height: 1;

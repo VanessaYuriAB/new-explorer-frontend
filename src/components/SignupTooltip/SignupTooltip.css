@@ -1,7 +1,6 @@
 .popup__tooltip {
   width: 430px;
   height: 182px;
-  opacity: 1;
   border-radius: 16px;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
@@ -14,7 +13,6 @@
 .popup__tooltip-title {
   width: 315px;
   height: 56px;
-  opacity: 1;
   font-weight: 900;
   font-size: 24px;
   line-height: 1;
@@ -26,7 +24,6 @@
 .popup__tooltip-link {
   width: 228px;
   height: 18px;
-  opacity: 1;
   font-family: 'Inter';
   font-weight: 400;
   font-size: 18px;

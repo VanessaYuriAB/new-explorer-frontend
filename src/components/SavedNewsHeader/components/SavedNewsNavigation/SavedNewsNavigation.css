@@ -41,7 +41,6 @@
   left: -13px; /* medido pela régua do DevTools */
   width: 70px;
   height: 3px;
-  opacity: 1;
   background: url('/images/line-link-active-black.svg') no-repeat center;
   background-size: cover;
   margin: 23px auto 0;
@@ -62,7 +61,6 @@
   width: 112px;
   height: 48px;
   border-width: 1px;
-  opacity: 1;
   border: 1px solid rgba(26, 27, 34, 1);
   border-radius: 100px;
   background-color: transparent;
@@ -97,7 +95,6 @@
 .header-news__btn-out {
   width: 17.41px;
   height: 16px;
-  opacity: 1;
   position: relative;
   z-index: 2;
 }
