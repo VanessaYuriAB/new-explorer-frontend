@@ -25,7 +25,7 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
   };
 
   // Objeto para configurar children de PopupWithForm: abertura do popup de login (Signin)
-  // Obj tbm criado em Signup, duplicado
+  // Obj criado em Signup, SignupTooltip, ForMobileHeaderAndNav e aqui
   const signinPopup = {
     children: (
       <Signin

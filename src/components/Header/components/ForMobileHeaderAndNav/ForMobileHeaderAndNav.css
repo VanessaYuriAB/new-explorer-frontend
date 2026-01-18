@@ -1,0 +1,238 @@
+@media screen and (min-width: 641px) {
+  .header-mobile {
+    display: none;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .header-mobile {
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3; /* para sobrepor ao SearchForm */
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .header-mobile__content {
+    background-color: rgba(26, 27, 34, 1);
+    padding-top: 16px;
+    /* padding-bottom passado como padding-top ao elemento .header-mobile__nav, devido
+    alteração do layout */
+  }
+
+  .header-mobile__box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .header-mobile__logo-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-mobile__logo-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1);
+    width: 117px;
+    height: 24px;
+    text-align: start;
+    margin-left: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .header-mobile__logo-link:hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header-mobile__logo-link:active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.6;
+  }
+
+  .header-mobile__logo-img {
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    margin-top: 4px; /* ajustado pelo DevTools, para centralizar verticalmente,
+    align não funcionou */
+  }
+
+  .header-mobile__logo-menu {
+    border: none;
+    width: 24px;
+    height: 24px;
+    background: url('/images/back-menu.svg') no-repeat center;
+    z-index: 2;
+    margin-right: 16px;
+    padding: 0;
+  }
+
+  .header-mobile__logo-menu:hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header-mobile__logo-menu:active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.6;
+  }
+
+  .header-mobile__line {
+    min-width: 320px;
+    max-width: 640px;
+    height: 56px;
+    position: absolute; /* para posicionar imagem sob primeira linha do cabeçalho e
+    habilitar z-index e linha não sobrepor logo e ícone */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    object-fit: cover;
+  }
+
+  .header-mobile__nav {
+    display: flex;
+    margin-right: 0;
+    flex-direction: column;
+    padding-top: 16px; /* padding-bottom de .header-mobile__content passado como
+    padding-top para este, devido alteração do layout */
+  }
+
+  .header-mobile__links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    flex-direction: column;
+    margin: 15.49px auto 2px 16px;
+    text-align: start;
+  }
+
+  .header-mobile__link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    vertical-align: middle;
+    color: rgba(182, 188, 191, 1);
+    position: relative;
+    z-index: 2;
+    height: 55.6px;
+    line-height: 3.1;
+  }
+
+  .header-mobile__link:first-of-type {
+    width: 288px;
+  }
+
+  .header-mobile__link:last-of-type {
+    width: 288px;
+    margin: 0;
+  }
+
+  /* Para configurar o efeito do hover apenas quando o link não estiver ativo */
+  .header-mobile__link:not(.header__link_active):hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header-mobile__link_active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    color: rgba(255, 255, 255, 1);
+    pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente
+    (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+    position: relative; /* para o posicionamento do ::after */
+  }
+
+  /* Para implementar linha de link ativo, logado */
+  .header-mobile__link_active::after {
+    content: '';
+    position: absolute; /* baseado em __link_active */
+    top: 23px;
+    height: 3px;
+    background: url('/images/line-link-active.svg') no-repeat center;
+    margin: 23px auto 0;
+    left: 0; /* início junto ao __link correspondente, ajustado pelo DevTools */
+    width: 45px; /* comprimento do sublinhado igual ao comprimento do __link */
+  }
+
+  .header-mobile__link_out:last-of-type {
+    margin: 0;
+    width: 288px;
+    height: 55.6px;
+  }
+
+  /* Para configurar o efeito do hover apenas quando o link não estiver ativo */
+  .header-mobile__link_out:not(.header__link_active):hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header-mobile__link_out_active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    color: rgba(255, 255, 255, 1);
+    pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente
+    (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+    position: relative; /* para o posicionamento do ::after */
+  }
+
+  .header-mobile__btn {
+    border-width: 1px;
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 100px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 288px;
+    height: 55.6px;
+    justify-content: center;
+    align-self: flex-start;
+    margin-left: 16px;
+    margin-bottom: 25.45px;
+  }
+
+  .header-mobile__btn:hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header-mobile__btn:active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.6;
+  }
+
+  .header-mobile__btn_out {
+    margin-top: 21.85px;
+  }
+
+  .header-mobile__btn-text {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    vertical-align: middle;
+    color: rgba(255, 255, 255, 1);
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Elemento: ícone ('sair') do botão, quando logado  */
+  .header-mobile__btn-out {
+    width: 17.41px;
+    height: 16px;
+    position: relative;
+    z-index: 2;
+    margin-left: 16px;
+  }
+}

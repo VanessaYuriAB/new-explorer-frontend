@@ -13,14 +13,15 @@ import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
-/*import SignupTooltip from '../SignupTooltip/SignupTooltip';*/
-
 function App() {
   // Variável de estado: status de login
   const [loggedIn /*, setLoggedIn*/] = useState(true);
 
   // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
   const [popup, setPopup] = useState(null);
+
+  // Variável de estado: controle do header e nav para mobile
+  const [mobile, setMobile] = useState(false);
 
   // Hook de localização para saber a rota atual
   const location = useLocation();
@@ -49,16 +50,16 @@ function App() {
         acesse '/saved-news' */}
 
         {loggedIn && location.pathname === '/saved-news' ? (
-          <SavedNewsHeader />
+          <SavedNewsHeader mobile={mobile} setMobile={setMobile} />
         ) : (
           <Header
             popup={popup}
             handleOpenPopup={handleOpenPopup}
             handleClosePopup={handleClosePopup}
+            mobile={mobile}
+            setMobile={setMobile}
           />
         )}
-
-        {/*<SignupTooltip />*/}
 
         <main className="main page__main">
           <Routes>

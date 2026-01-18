@@ -7,7 +7,7 @@
   display: flex;
   list-style: none;
   padding: 0;
-  margin: 11px 0 13px;
+  margin: 11px 0 13px; /* medidas faltantes para totalizar com paddings top e bottom */
 }
 
 .header__link {
@@ -19,6 +19,17 @@
   color: rgba(182, 188, 191, 1);
   position: relative;
   z-index: 2;
+  height: 24px;
+}
+
+.header__link:first-of-type {
+  width: 45px;
+}
+
+.header__link:last-of-type {
+  margin-right: 63px;
+  margin-left: 77px;
+  width: 116px;
 }
 
 /* Para configurar o efeito do hover apenas quando o link não estiver ativo */
@@ -30,32 +41,27 @@
 .header__link_active {
   cursor: url('/images/cursor-lapka.png'), pointer;
   color: rgba(255, 255, 255, 1);
-  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
-  position: relative;
+  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente
+  (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+  position: relative; /* para o posicionamento do ::after */
 }
 
-/* Para implementar linha de link ativo */
+/* Para implementar linha de link ativo, logado */
 .header__link_active::after {
   content: '';
-  position: absolute; /* posicionado devido deslocamento à esquerda quando em display block ou flex */
+  position: absolute; /* baseado em __link_active */
   top: 23px;
-  left: -13px; /* medido pela régua do DevTools */
+  left: -13px; /* deslocamento de 13px à esqueda de __link, no caso o primeiro */
   width: 70px;
   height: 3px;
   background: url('/images/line-link-active.svg') no-repeat center;
-  background-size: contain;
   margin: 23px auto 0;
 }
 
-.header__link_active:last-of-type::after {
-  width: 178px;
-  background-size: cover;
-  left: -30px;
-}
-
-.header__link:last-of-type {
-  margin-right: 63px;
-  margin-left: 77px;
+.header__link_out:last-of-type {
+  margin-right: 44px;
+  margin-left: 0;
+  width: 45px;
 }
 
 /* Para configurar o efeito do hover apenas quando o link não estiver ativo */
@@ -67,26 +73,22 @@
 .header__link_out_active {
   cursor: url('/images/cursor-lapka.png'), pointer;
   color: rgba(255, 255, 255, 1);
-  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
-  position: relative;
+  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente
+  (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+  position: relative; /* para o posicionamento do ::after */
 }
 
-/* Para implementar linha de link ativo */
+/* Para implementar linha de link ativo, deslogado */
 .header__link_out_active::after {
   content: '';
-  position: absolute; /* posicionado devido deslocamento à esquerda quando em display block ou flex */
+  position: absolute; /* baseado em __link_out_active */
   top: 23px;
-  left: -13px; /* medido pela régua do DevTools */
+  left: -13px; /* medido pela régua do DevTools em relação ao link */
   width: 68px;
   height: 3px;
   background: url('/images/line-link-active.svg') no-repeat center;
   background-size: contain;
   margin: 23px auto 0;
-}
-
-.header__link_out:last-of-type {
-  margin-right: 44px;
-  margin-left: 0;
 }
 
 .header__btn {
@@ -113,8 +115,10 @@
   opacity: 0.6;
 }
 
+/* Elemento: botão, quando deslogado */
 .header__btn_out {
   width: 176px;
+  height: 48px;
 }
 
 .header__btn-text {
@@ -128,9 +132,83 @@
   z-index: 2;
 }
 
+/* Elemento: ícone ('sair') do botão, quando logado  */
 .header__btn-out {
   width: 17.41px;
   height: 16px;
   position: relative;
   z-index: 2;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .header__nav {
+    margin-right: 40px;
+  }
+
+  .header__links {
+    margin-top: calc(22px - 11px);
+    margin-bottom: calc(20px - 13px);
+    /* medidas faltantes para totalizar espaçamento vertical com paddings top e bottom */
+  }
+
+  .header__link {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .header__link:first-of-type {
+    width: 64px;
+  }
+
+  .header__link:last-of-type {
+    margin-right: 16px;
+    margin-left: 16px;
+    width: 160px;
+  }
+
+  /* Para implementar linha de link ativo, logado */
+  .header__link_active::after {
+    top: 17px;
+    left: 1px; /* deslocamento de 1px à direita de __link, no caso o primeiro */
+    width: 60px;
+    margin-top: 21px; /* ajuste de altura devido margens de __links */
+  }
+
+  .header__link_out:last-of-type {
+    margin-right: 16px;
+    width: 64px;
+  }
+
+  /* Para implementar linha de link ativo, deslogado */
+  .header__link_out_active::after {
+    top: 17px;
+    left: 1px;
+    margin-top: 21px;
+  }
+
+  .header__btn {
+    width: 100px;
+    height: 40px;
+  }
+
+  .header__btn_out {
+    width: 152px;
+    height: 40px;
+  }
+
+  .header__btn-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .header__nav {
+    display: none; /* o nav para versão mobile possui layout diferente, é renderizado
+    através do componente ForMobileHeaderAndNav */
+  }
 }

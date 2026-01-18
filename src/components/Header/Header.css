@@ -36,15 +36,97 @@
   opacity: 0.6;
 }
 
-.header__logo {
+.header__logo-img {
   object-fit: contain;
   position: relative;
   z-index: 2;
 }
 
 .header__line {
-  width: 1440px;
+  min-width: 961px;
+  max-width: 1440px;
   position: absolute;
   top: 0px;
   z-index: 1;
+  object-fit: cover;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .header {
+    padding-top: 14px;
+    padding-bottom: 12px;
+  }
+
+  .header__logo-link {
+    height: 24.8px;
+    margin-left: 40px;
+    margin-top: calc(22.73px - 14px);
+    margin-bottom: calc(18.47px - 12px);
+  }
+
+  .header__line {
+    min-width: 641px;
+    max-width: 960px;
+    height: 66px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .header__box {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .header__logo-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header__logo-link {
+    width: 117px;
+    height: 24px;
+    margin-left: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .header__logo-img {
+    margin-top: 4px; /* ajustado pelo DevTools, para centralizar verticalmente,
+    align não funcionou */
+  }
+
+  .header__logo-menu {
+    border: none;
+    width: 24px;
+    height: 24px;
+    background: url('/images/menu.svg') no-repeat center;
+    z-index: 2;
+    margin-right: 16px;
+    padding: 0;
+  }
+
+  .header__logo-menu:hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header__logo-menu:active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.6;
+  }
+
+  .header__line {
+    min-width: 320px;
+    max-width: 640px;
+    height: 56px;
+  }
 }
