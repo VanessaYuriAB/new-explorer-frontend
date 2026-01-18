@@ -52,3 +52,57 @@
   background-color: rgba(42, 101, 204, 1);
   cursor: url('/images/cursor-lapka.png'), pointer;
 }
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .search__form-news {
+    width: 452px;
+    height: 56px;
+  }
+
+  .search__form-input {
+    width: calc(452px - 24px - 196px);
+    height: calc(56px - 17px - 17px);
+    backdrop-filter: blur(100px);
+    padding: 17px 196px 17px 24px;
+  }
+
+  .search__form-input::placeholder {
+    width: 228px;
+  }
+
+  .search__form-btn {
+    width: 160px;
+    height: 56px;
+    box-shadow: 0px 5px 15px 0px rgba(14, 26, 57, 0.2);
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .search__form-news {
+    width: 288px;
+    height: 128px;
+    flex-direction: column;
+  }
+
+  .search__form-input {
+    width: calc(288px - 16px - 16px);
+    height: calc(56px - 17px - 17px);
+    padding: 17px 16px;
+    backdrop-filter: blur(100px);
+  }
+
+  .search__form-input::placeholder {
+    width: 256px;
+  }
+
+  .search__form-btn {
+    margin-top: 16px;
+    width: 288px;
+    height: 56px;
+    position: initial;
+  }
+}
