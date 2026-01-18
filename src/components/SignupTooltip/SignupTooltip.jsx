@@ -4,7 +4,7 @@ import './SignupTooltip.css';
 
 function SignupTooltip({ popup, handleOpenPopup, handleClosePopup }) {
   // Objeto para configurar children de PopupWithForm: abertura do popup de login (Signin)
-  // Obj tbm criado em Navigation e Signup, triplicado
+  // Obj criado em Navigation, Signup, ForMobileHeaderAndNav e aqui
   const signinPopup = {
     children: (
       <Signin
