@@ -12,8 +12,8 @@ function SavedNewsNavigation() {
 
   return (
     <nav className="header-news__nav">
-      {/* Se o link estiver ativo, a classe header__link_active será adicionada à lista de
-      classes. */}
+      {/* Se o link estiver ativo, a classe header-news__link_active será adicionada à lista
+      de classes. */}
 
       <div className="header-news__links">
         <NavLink className={getNewsNavLinkClass} to="/">
