@@ -6,12 +6,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  min-width: 320px;
   max-width: 1440px;
   margin: 0 auto;
   text-align: center;
@@ -20,18 +20,12 @@
   opacity: 1;
 }
 
-.page__header {
-  max-width: 1440px;
-  min-width: 320px;
-  height: calc(80px - 19px - 13px);
-  display: flex;
-  flex-direction: column;
-}
-
+.page__header,
 .page__header-news {
   max-width: 1440px;
-  min-width: 320px;
-  height: calc(80px - 19px - 13px);
+  height: calc(
+    80px - 19px - 13px
+  ); /* subtraídos paddings: menores espaçamentos verticais, os do botão */
   display: flex;
   flex-direction: column;
 }
@@ -44,7 +38,6 @@
 /* ------- main ------- */
 .main__search {
   max-width: 1440px;
-  min-width: 320px;
   height: calc(576px - 160px - 80px);
   display: flex;
   flex-direction: column;
@@ -58,7 +51,6 @@
 
 .main__preloader {
   max-width: 1440px;
-  min-width: 320px;
   height: calc(282px - 80px - 80px);
   display: flex;
   flex-direction: column;
@@ -68,7 +60,6 @@
 
 .main__nothing-found {
   max-width: 1440px;
-  min-width: 320px;
   height: calc(374px - 86px - 80px);
   display: flex;
   flex-direction: column;
@@ -77,7 +68,6 @@
 
 .main__about {
   max-width: 1440px;
-  min-width: 320px;
   height: calc(624px - 80px - 80px);
   display: flex;
   justify-content: center;
@@ -87,7 +77,6 @@
   position: relative;
   top: 80px;
   max-width: 1440px;
-  min-width: 320px;
   display: flex;
   flex-direction: column;
 }
@@ -97,7 +86,6 @@
   position: relative;
   top: -80px;
   max-width: 1440px;
-  min-width: 320px;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -107,4 +95,80 @@
 .page__footer_saved-news {
   position: relative;
   top: 0px;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .page__header,
+  .page__header-news {
+    height: calc(
+      66px - 14px - 12px
+    ); /* subtraídos paddings: menores espaçamentos verticais, os do botão */
+  }
+
+  .page__main {
+    top: -66px;
+  }
+
+  .main__search {
+    height: calc(400px - 104px - 48px);
+  }
+
+  .main__preloader {
+  }
+
+  .main__nothing-found {
+  }
+
+  .main__about {
+    height: calc(354px - 61px - 61px);
+  }
+
+  .main__saved-news {
+    top: 66px;
+  }
+
+  .page__footer {
+    height: 64px;
+    top: -66px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .page__header,
+  .page__header-news {
+    height: calc(
+      56px - 16px - 16px
+    ); /* subtraídos paddings: espaçamentos verticais, que são iguais em ambos elementos, logo e nav */
+  }
+
+  .page__main {
+    top: -56px;
+  }
+
+  .main__search {
+    height: calc(536px - 86px - 32px);
+  }
+
+  .main__preloader {
+  }
+
+  .main__nothing-found {
+  }
+
+  .main__about {
+    height: calc(752px - 32px - 128px);
+  }
+
+  .main__saved-news {
+    top: 56px;
+  }
+
+  .page__footer {
+    height: 176px;
+    top: -56px;
+  }
 }
