@@ -63,7 +63,6 @@
 
 .main__nothing-found {
   width: 100%;
-  height: calc(374px - 86px - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,9 +123,6 @@
     height: calc(400px - 104px - 48px);
   }
 
-  .main__nothing-found {
-  }
-
   .main__about {
     height: calc(354px - 61px - 61px);
   }
@@ -162,9 +158,6 @@
 
   .main__search {
     height: calc(536px - 86px - 32px);
-  }
-
-  .main__nothing-found {
   }
 
   .main__about {

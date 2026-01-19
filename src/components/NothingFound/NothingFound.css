@@ -28,3 +28,46 @@
   color: rgba(182, 188, 191, 1);
   margin: 0;
 }
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .nothing-found {
+    padding-top: 76px;
+    padding-bottom: 70px;
+  }
+
+  .nothing-found__image {
+    width: 72.5px;
+    height: 72.5px;
+  }
+
+  .nothing-found__title {
+    font-size: 24px;
+    line-height: 1.13;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .nothing-found {
+    padding-top: 66px;
+    padding-bottom: 60px;
+  }
+
+  .nothing-found__image {
+    width: 62.5px;
+    height: 62.5px;
+  }
+
+  .nothing-found__title {
+    font-size: 22px;
+    line-height: 1.11;
+  }
+
+  .nothing-found__text {
+    font-size: 16px;
+    line-height: 1.15;
+  }
+}
