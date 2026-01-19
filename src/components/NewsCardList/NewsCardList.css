@@ -5,8 +5,7 @@
 }
 
 .searched-news__title {
-  max-width: 712px;
-  min-width: 288px;
+  width: 712px;
   min-height: 46px;
   font-family: 'Roboto Slab';
   font-weight: 400;
@@ -16,8 +15,6 @@
   text-align: start;
 }
 .searched-news__list {
-  max-width: 1440px;
-  min-width: 320px;
   background-color: rgba(245, 246, 247, 1);
   padding-top: 64px;
   padding-bottom: 64px;
@@ -25,14 +22,14 @@
 
 .searched-news__cards {
   list-style: none;
-  max-width: 1440px;
-  min-width: 320px;
   margin: 0 104px;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: max-content; /* linhas criadas automaticamente e dimensionadas de acordo com seu conteúdo */
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(224px, 1fr));
+  grid-auto-rows: max-content; /* linhas criadas automaticamente e dimensionadas de acordo
+  com seu conteúdo */
+  gap: 16px 16px;
+  justify-content: center; /* centraliza as colunas no container */
 }
 
 .searched-news__btn {
@@ -55,4 +52,69 @@
 
 .searched-news__btn_out {
   background-color: rgba(232, 232, 232, 1);
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .searched-news {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .searched-news__title {
+    width: 336px;
+    min-height: 34px;
+    font-size: 30px;
+    line-height: 1.13;
+    margin: 0 0 0 40px;
+  }
+  .searched-news__list {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .searched-news__cards {
+    margin: 0 40px;
+    grid-template-columns: repeat(auto-fit, 224px);
+    gap: 8px 8px;
+  }
+
+  .searched-news__btn {
+    width: 240px;
+    height: 56px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .searched-news {
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+
+  .searched-news__title {
+    width: 288px;
+    min-height: 34px;
+    font-size: 30px;
+    line-height: 1.13;
+    margin: 0 auto;
+  }
+  .searched-news__list {
+    padding-top: 58px;
+    padding-bottom: 16px;
+  }
+
+  .searched-news__cards {
+    margin: 0 16px;
+    grid-template-columns: repeat(1, 288px);
+    gap: 10px;
+    justify-items: center; /* centraliza itens no container */
+  }
+
+  .searched-news__btn {
+    width: 288px;
+    height: 56px;
+  }
 }

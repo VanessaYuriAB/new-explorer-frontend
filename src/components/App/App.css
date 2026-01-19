@@ -17,7 +17,8 @@
   margin: 0 auto;
   text-align: center;
   letter-spacing: 0px;
-  height: 100vh; /* para remover o espaço em branco no final da página, devido o deslocamento dos componentes para ajuste do Header */
+  height: 100vh; /* para remover o espaço em branco no final da página, devido o
+  deslocamento dos componentes para ajuste do Header */
   opacity: 1;
 }
 
@@ -47,6 +48,7 @@
 }
 
 .main__searched-news {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -154,7 +156,8 @@
   .page__header-news {
     height: calc(
       56px - 16px - 16px
-    ); /* subtraídos paddings: espaçamentos verticais, que são iguais em ambos elementos, logo e nav */
+    ); /* subtraídos paddings: espaçamentos verticais, que são iguais em ambos
+    elementos, logo e nav */
   }
 
   .page__main {
