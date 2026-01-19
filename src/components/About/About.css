@@ -4,8 +4,8 @@
 }
 
 .about__img-box {
-  width: 464px;
-  height: 464px;
+  max-width: 464px;
+  max-height: 464px;
 }
 
 .about__avatar {
@@ -15,10 +15,10 @@
   object-fit: cover;
 }
 
-.about__text {
+.about__text-box {
   text-align: start;
-  width: 600px;
-  margin-left: 56px;
+  width: 41.67%; /* 1440/100 - 600/x > 1440x=60000 > x=41,66666666666667 */
+  margin-left: 3.89%; /* 1440/100 - 56/x > 1440x=5600 > x=3,888888888888889 */
 }
 
 .about__title {
@@ -26,12 +26,63 @@
   font-family: 'Roboto Slab';
   font-size: 40px;
   line-height: 1.15;
-  margin: 51px 0 24px;
+  margin: 0 0 24px;
 }
 
 .about__description {
-  height: 120px;
   font-size: 18px;
   line-height: 1.33;
   margin: 0;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .about {
+    padding-top: 61px;
+    padding-bottom: 61px;
+  }
+
+  .about__img-box {
+    width: 232px;
+    height: 232px;
+  }
+
+  .about__text-box {
+    width: 44.17%; /* 960/100 - 424/x > 960x=42400 > x=44,16666666666667 */
+    margin-left: 3.33%; /* 960/100 - 32/x > 960x=3200 > x=3,333333333333333 */
+  }
+
+  .about__title {
+    height: 34px;
+    font-size: 30px;
+    line-height: 1.33;
+    margin: 0 0 16px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .about {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .about__img-box {
+    width: 272px;
+    height: 272px;
+  }
+
+  .about__text-box {
+    width: 45%; /* 640/100 - 288/x > 640x=28800 > x=45 */
+    margin-left: 0;
+  }
+
+  .about__title {
+    height: 40px;
+    font-size: 30px;
+    line-height: 1.33;
+    margin: 24px 0 16px;
+  }
 }

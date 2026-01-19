@@ -7,7 +7,7 @@ function About() {
       <div className="about__img-box">
         <img className="about__avatar" src={me} alt="Foto de avatar" />
       </div>
-      <div className="about__text">
+      <div className="about__text-box">
         <h2 className="about__title">Sobre a autora</h2>
         <p className="about__description">
           Me chamo Vanessa e sou desenvolvedora web em formação pelo bootcamp
