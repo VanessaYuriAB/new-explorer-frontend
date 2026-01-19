@@ -55,7 +55,6 @@
 
 .main__preloader {
   width: 100%;
-  height: calc(282px - 80px - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,9 +124,6 @@
     height: calc(400px - 104px - 48px);
   }
 
-  .main__preloader {
-  }
-
   .main__nothing-found {
   }
 
@@ -166,9 +162,6 @@
 
   .main__search {
     height: calc(536px - 86px - 32px);
-  }
-
-  .main__preloader {
   }
 
   .main__nothing-found {

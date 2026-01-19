@@ -31,3 +31,36 @@
   line-height: 1.33;
   color: rgba(182, 188, 191, 1);
 }
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .preloader {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .preloader__circle {
+    width: 64px;
+    height: 64px;
+  }
+}
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .preloader {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .preloader__circle {
+    width: 54px;
+    height: 54px;
+  }
+
+  .preloader__text {
+    margin: 14px 0 0;
+    font-size: 16px;
+    line-height: 1.15;
+  }
+}
