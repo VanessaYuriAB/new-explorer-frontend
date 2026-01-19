@@ -13,6 +13,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 1440px;
+  min-width: 961px;
   margin: 0 auto;
   text-align: center;
   letter-spacing: 0px;
@@ -22,7 +23,7 @@
 
 .page__header,
 .page__header-news {
-  max-width: 1440px;
+  width: 100%;
   height: calc(
     80px - 19px - 13px
   ); /* subtraídos paddings: menores espaçamentos verticais, os do botão */
@@ -37,7 +38,7 @@
 
 /* ------- main ------- */
 .main__search {
-  max-width: 1440px;
+  width: 100%;
   height: calc(576px - 160px - 80px);
   display: flex;
   flex-direction: column;
@@ -50,7 +51,7 @@
 }
 
 .main__preloader {
-  max-width: 1440px;
+  width: 100%;
   height: calc(282px - 80px - 80px);
   display: flex;
   flex-direction: column;
@@ -59,7 +60,7 @@
 }
 
 .main__nothing-found {
-  max-width: 1440px;
+  width: 100%;
   height: calc(374px - 86px - 80px);
   display: flex;
   flex-direction: column;
@@ -67,7 +68,7 @@
 }
 
 .main__about {
-  max-width: 1440px;
+  width: 100%;
   height: calc(624px - 80px - 80px);
   display: flex;
   justify-content: center;
@@ -76,7 +77,7 @@
 .main__saved-news {
   position: relative;
   top: 80px;
-  max-width: 1440px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -85,7 +86,7 @@
 .page__footer {
   position: relative;
   top: -80px;
-  max-width: 1440px;
+  width: 100%;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -101,6 +102,11 @@
 
 /* ------ Tablet ------ */
 @media screen and (min-width: 641px) and (max-width: 960px) {
+  .page {
+    max-width: 960px;
+    min-width: 641px;
+  }
+
   .page__header,
   .page__header-news {
     height: calc(
@@ -138,6 +144,11 @@
 
 /* ---- Smartphone ---- */
 @media screen and (min-width: 320px) and (max-width: 640px) {
+  .page {
+    max-width: 640px;
+    min-width: 320px;
+  }
+
   .page__header,
   .page__header-news {
     height: calc(
