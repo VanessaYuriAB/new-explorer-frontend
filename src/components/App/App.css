@@ -42,7 +42,8 @@
   height: calc(576px - 160px - 80px);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .main__searched-news {

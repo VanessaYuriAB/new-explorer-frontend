@@ -16,9 +16,8 @@
   font-family: 'Roboto Slab';
   font-size: 60px;
   line-height: 1.07;
-  margin: 0 auto;
-  position: relative;
-  left: 45px; /* medida pela régua no DevTools, comparado com search_text*/
+  font-weight: 400;
+  margin: 0;
 }
 
 .search__text {
@@ -26,9 +25,48 @@
   height: 48px;
   font-size: 18px;
   line-height: 1.33;
-  margin: 32px auto 64px;
+  margin: 32px 0 64px;
 }
 
-.search__form-box {
-  align-self: center;
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .search {
+    padding-top: 104px;
+    padding-bottom: 48px;
+  }
+
+  .search__title {
+    width: 425px;
+    height: 80px;
+    font-size: 36px;
+    line-height: 1.11;
+  }
+
+  .search__text {
+    width: 452px;
+    margin: 16px 0 48px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .search {
+    padding-top: 86px;
+    padding-bottom: 32px;
+  }
+
+  .search__title {
+    width: 285px;
+    height: 120px;
+    font-size: 36px;
+    line-height: 1.11;
+  }
+
+  .search__text {
+    width: 288px;
+    height: 72px;
+    margin: 11.56px auto 86.44px;
+  }
 }
