@@ -50,7 +50,9 @@
   }
 
   .about__text-box {
-    width: 44.17%; /* 960/100 - 424/x > 960x=42400 > x=44,16666666666667 */
+    width: 400px; /* largura menor do que a do layout do Figma, devido ao ponto de
+    interrupção do media query, para versão mobile: com 424px de width, o texto fica
+    cortado na tela  */
     margin-left: 3.33%; /* 960/100 - 32/x > 960x=3200 > x=3,333333333333333 */
   }
 
@@ -75,11 +77,13 @@
   }
 
   .about__text-box {
-    width: 45%; /* 640/100 - 288/x > 640x=28800 > x=45 */
+    width: 288px;
     margin-left: 0;
   }
 
   .about__title {
+    min-width: 205px; /* medido pelo DevTools, em que ponto a linha
+    quebra */
     height: 40px;
     font-size: 30px;
     line-height: 1.33;
