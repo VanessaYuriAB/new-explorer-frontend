@@ -15,14 +15,14 @@ function Footer() {
       }
     >
       <p className="footer__copyright">
-        &copy; 2026 News Explorer, desenvolvido por Vanessa, with s2
+        &copy; 2026 News Explorer, desenvolvido por Vanessa
       </p>
 
       <div className="footer__navs">
         {/* Navegação principal */}
         <nav className="footer__nav footer__nav_main">
           <ul className="footer__list footer__list_main">
-            <li className="footer__item">
+            <li className="footer__item footer__item_home">
               <NavLink
                 /* isActive: suporte nativo da NavLink para estado ativo da rota */
                 className={({ isActive }) =>
@@ -35,7 +35,7 @@ function Footer() {
               </NavLink>
             </li>
 
-            <li className="footer__item">
+            <li className="footer__item footer__item_triple">
               <a
                 className="footer__link"
                 href="https://tripleten.com/"
