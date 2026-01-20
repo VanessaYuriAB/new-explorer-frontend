@@ -39,6 +39,8 @@
   object-fit: contain;
   position: relative;
   z-index: 2;
+  display: flex;
+  align-self: flex-end; /* alinha o logo com os outros elementos do bloco */
 }
 
 .header-news__logo-menu {
@@ -100,11 +102,6 @@
     margin-left: 16px;
     margin-top: 0;
     margin-bottom: 0;
-  }
-
-  .header-news__logo-img {
-    margin-top: 4px; /* ajustado pelo DevTools, para centralizar verticalmente,
-    align mas não funcionou */
   }
 
   .header-news__logo-menu {

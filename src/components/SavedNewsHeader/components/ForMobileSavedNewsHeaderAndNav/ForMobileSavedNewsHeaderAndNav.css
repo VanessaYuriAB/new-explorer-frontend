@@ -65,8 +65,8 @@
     object-fit: contain;
     position: relative;
     z-index: 2;
-    margin-top: 4px; /* ajustado pelo DevTools, para centralizar verticalmente,
-    align não funcionou */
+    display: flex;
+    align-self: flex-end; /* alinha o logo com os outros elementos do bloco */
   }
 
   .header-news-mobile__logo-menu {
