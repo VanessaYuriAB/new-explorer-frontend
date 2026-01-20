@@ -1,6 +1,4 @@
 .saved-news__infos {
-  max-width: 1440px;
-  min-width: 320px;
   padding-top: 40px;
   padding-bottom: 56px;
   margin-left: 104px;
@@ -35,11 +33,10 @@
   font-size: 18px;
   line-height: 1.33;
   margin: 0;
+  text-align: start;
 }
 
 .saved-news__list {
-  max-width: 1440px;
-  min-width: 320px;
   background-color: rgba(245, 246, 247, 1);
   padding-top: 62px;
   padding-bottom: 62px;
@@ -47,12 +44,87 @@
 
 .saved-news__cards {
   list-style: none;
-  max-width: 1440px;
-  min-width: 320px;
   margin: 0 102px;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: max-content; /* linhas criadas automaticamente e dimensionadas de acordo com seu conteúdo */
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(224px, 1fr));
+  grid-auto-rows: max-content; /* linhas criadas automaticamente e dimensionadas de
+  acordo com seu conteúdo */
+  gap: 16px 16px;
+  justify-content: center; /* centraliza as colunas no container */
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .saved-news__infos {
+    padding-top: 24px;
+    padding-bottom: 32px;
+    margin-left: 40px;
+  }
+
+  .saved-news__title {
+    font-size: 14px;
+    line-height: 1.71;
+  }
+
+  .saved-news__info {
+    max-width: 336px;
+    min-height: 68px;
+    font-size: 30px;
+    line-height: 1.13;
+    margin: 16px 0 16px;
+  }
+
+  .saved-news__list {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .saved-news__cards {
+    margin: 0 40px;
+    grid-template-columns: repeat(auto-fit, 224px);
+    gap: 8px 8px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .saved-news__infos {
+    padding-top: 8px;
+    padding-bottom: 32px;
+    margin-left: 16px;
+  }
+
+  .saved-news__title {
+    max-width: 288px;
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .saved-news__info {
+    max-width: 288px;
+    min-height: 68px;
+    font-size: 30px;
+    line-height: 1.13;
+    margin: 16px 0 50px;
+  }
+
+  .saved-news__keywords {
+    max-width: 288px;
+    min-height: 24px;
+  }
+
+  .saved-news__list {
+    padding-top: 62px;
+    padding-bottom: 62px;
+  }
+
+  .saved-news__cards {
+    margin: 0 16px;
+    grid-template-columns: repeat(1, 288px);
+    gap: 10px;
+    justify-items: center; /* centraliza itens no container */
+  }
 }
