@@ -34,6 +34,7 @@
   margin: 14px 0 0 36px;
   background-color: rgba(255, 255, 255, 1);
   border: none;
+  padding: 0;
 }
 
 .popup__tooltip-link:hover {
@@ -44,4 +45,18 @@
 .popup__tooltip-link:active {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.6;
+}
+
+/* ------ Responsividade ------ */
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .popup__tooltip {
+    width: 320px;
+  }
+
+  .popup__tooltip-title {
+    width: 234px; /* 430/315 - 320/x > x=234,4186046511628  */
+    margin: 43px 0 0 36px;
+  }
 }

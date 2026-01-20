@@ -47,11 +47,14 @@ function PopupWithForm(props) {
         {/* Para posicionamento do botão fechar */}
         <div className="popup__position-btn">
           {children}
-          <button
-            className="popup__close-btn"
-            type="button"
-            onClick={handleClosePopup}
-          ></button>
+          {/* Para a faixa do botão fechar em telas mobile */}
+          <div className="popup_ribbon-btn">
+            <button
+              className="popup__close-btn"
+              type="button"
+              onClick={handleClosePopup}
+            ></button>
+          </div>
         </div>
       </div>
     </div>
