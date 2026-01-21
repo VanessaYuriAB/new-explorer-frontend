@@ -24,11 +24,22 @@
   align-items: center;
   position: relative;
   z-index: 2;
+  will-change: filter;
+  transition:
+    filter 300ms,
+    transform 0.5s ease-in-out;
+  transform: scale3d(1, 1, 1);
 }
 
 .header__logo-link:hover {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.8;
+  filter: drop-shadow(0 0 0.5em #46a9bbff); /* aplica iluminação azul claro */
+  transform: scale3d(
+    1.1,
+    1.1,
+    1.1
+  ); /* altera os 3 eixos juntos, aumentando o logo */
 }
 
 .header__logo-link:active {
