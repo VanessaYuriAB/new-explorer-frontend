@@ -12,6 +12,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         handleClosePopup={handleClosePopup}
       />
     ),
+    type: 'signup',
   };
 
   return (
@@ -61,7 +62,11 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
       {/* Se o popup não for nulo, o componente será renderizado na tela */}
 
       {popup && (
-        <PopupWithForm popup={popup} handleClosePopup={handleClosePopup}>
+        <PopupWithForm
+          popup={popup}
+          handleClosePopup={handleClosePopup}
+          type={popup.type}
+        >
           {popup.children}
         </PopupWithForm>
       )}

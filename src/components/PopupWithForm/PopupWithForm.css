@@ -3,12 +3,23 @@
   height: 100%; /* em porcentagem para cobrir a altura da página toda */
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 3; /* para sobrepor ao SearchForm */
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.popup_signin {
+  padding-top: 207px;
+}
+
+.popup_signup {
+  padding-top: 167px;
+}
+
+.popup_tooltip {
+  padding-top: 339px;
 }
 
 .popup__content {
@@ -54,6 +65,18 @@
   .popup {
     align-items: flex-start;
     margin-top: calc(24px + 16px + 16px);
+  }
+
+  .popup_signin {
+    padding-top: 0;
+  }
+
+  .popup_signup {
+    padding-top: 0;
+  }
+
+  .popup_tooltip {
+    padding-top: 0;
   }
 
   .popup_ribbon-btn {

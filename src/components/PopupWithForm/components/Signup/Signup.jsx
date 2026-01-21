@@ -14,6 +14,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         handleClosePopup={handleClosePopup}
       />
     ),
+    type: 'signin',
   };
 
   // Objeto para configurar children de PopupWithForm: abertura do popup tooltip
@@ -26,6 +27,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         handleClosePopup={handleClosePopup}
       />
     ),
+    type: 'tooltip',
   };
 
   return (
@@ -95,7 +97,11 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
       Signin ou SignupTooltip*/}
 
       {popup && (
-        <PopupWithForm popup={popup} handleClosePopup={handleClosePopup}>
+        <PopupWithForm
+          popup={popup}
+          handleClosePopup={handleClosePopup}
+          type={popup.type}
+        >
           {popup.children}
         </PopupWithForm>
       )}

@@ -4,7 +4,7 @@ import './PopupWithForm.css';
 function PopupWithForm(props) {
   // Desestruturação do objeto passado como props, onde children é o conteúdo de popup
   // que pode ser Signin ou Signup, configurado no componente de abertura
-  const { popup, handleClosePopup, children } = props;
+  const { popup, handleClosePopup, children, type } = props;
 
   // Ref para encapsulamento de children: para fechamento do popup por clique fora da
   // caixa
@@ -41,9 +41,13 @@ function PopupWithForm(props) {
   };
 
   return (
-    <div className="popup" onClick={handleClickClose}>
+    /* Modificadores, para ajuste da margem superior para cada tipo de janela modal */
+    <div
+      className={`popup ${type === 'signin' ? 'popup_signin' : ''} ${type === 'signup' ? 'popup_signup' : ''} ${type === 'tooltip' ? 'popup_tooltip' : ''}`}
+      onClick={handleClickClose}
+    >
       {/* Para configuração do fechamento dos popups por clique na tela */}
-      <div className="popup__content" ref={childrenPopupRef}>
+      <div className="popup__content " ref={childrenPopupRef}>
         {/* Para posicionamento do botão fechar */}
         <div className="popup__position-btn">
           {children}
