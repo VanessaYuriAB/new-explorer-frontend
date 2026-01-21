@@ -48,8 +48,9 @@
 }
 
 .header-news__line {
-  min-width: 961px;
+  width: 100%;
   max-width: 1440px;
+  height: 80px;
   position: absolute;
   top: 0px;
   z-index: 1;
@@ -73,8 +74,6 @@
   }
 
   .header-news__line {
-    min-width: 641px;
-    max-width: 960px;
     height: 66px;
   }
 }
@@ -126,8 +125,6 @@
   }
 
   .header-news__line {
-    min-width: 320px;
-    max-width: 640px;
     height: 56px;
   }
 }
