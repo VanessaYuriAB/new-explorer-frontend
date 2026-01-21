@@ -15,7 +15,7 @@ import './App.css';
 
 function App() {
   // Variável de estado: status de login
-  const [loggedIn /*, setLoggedIn*/] = useState(true);
+  const [loggedIn /*, setLoggedIn*/] = useState(false);
 
   // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
   const [popup, setPopup] = useState(null);
