@@ -13,7 +13,7 @@
 .nothing-found__title {
   width: 356px;
   height: 30px;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 26px;
   line-height: 1.15;
   color: rgba(26, 27, 34, 1);

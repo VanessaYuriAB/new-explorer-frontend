@@ -24,7 +24,7 @@
 .popup__tooltip-link {
   width: 228px;
   height: 18px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1;

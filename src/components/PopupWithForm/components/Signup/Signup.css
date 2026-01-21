@@ -28,7 +28,7 @@
 }
 
 .popup__signup-label {
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   line-height: 1;
   color: rgba(47, 113, 229, 1);
@@ -38,7 +38,7 @@
 }
 
 .popup__signup-input {
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1;
@@ -53,7 +53,7 @@
 }
 
 .popup__signup-span {
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 1;
@@ -114,7 +114,7 @@
   align-self: center;
   width: 226px;
   height: 20px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   line-height: 1;
   margin-top: 16px;

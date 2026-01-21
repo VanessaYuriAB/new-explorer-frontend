@@ -20,7 +20,7 @@
 .saved-news__info {
   max-width: 530px;
   min-height: 92px;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 40px;
   line-height: 1.15;
   margin: 28px 0 30px;
