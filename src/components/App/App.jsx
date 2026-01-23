@@ -23,6 +23,9 @@ function App() {
   // Variável de estado: controle do header e nav para mobile
   const [mobile, setMobile] = useState(false);
 
+  // Variável de estado: controle do Preloader
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
+
   // Hook de localização para saber a rota atual
   const location = useLocation();
 
@@ -71,10 +74,16 @@ function App() {
                     popup={popup}
                     handleOpenPopup={handleOpenPopup}
                     handleClosePopup={handleClosePopup}
+                    setIsSearchLoading={setIsSearchLoading}
                   />
-                  <NewsCardList />
-                  <Preloader />
-                  <NothingFound />
+
+                  {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza o Preloader */}
+
+                  {isSearchLoading && <Preloader />}
+
+                  {/*<NewsCardList />
+                  <NothingFound />*/}
+
                   <About />
                 </>
               }

@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import useFormSubmit from '../../../../hooks/useFormSubmit';
+import getNews from '../../../../utils/NewsApi';
 import SearchTooltip from '../../../Popups/components/SearchTooltip/SearchTooltip';
 import Popups from '../../../Popups/Popups';
 import './SearchForm.css';
 
-import getNews from '../../../../utils/NewsApi';
-
-function SearchForm({ popup, handleOpenPopup, handleClosePopup }) {
+function SearchForm({
+  popup,
+  handleOpenPopup,
+  handleClosePopup,
+  setIsSearchLoading,
+}) {
   // Variável de estado: controle do input do formulário
   const [queryString, setQueryString] = useState('');
 
@@ -16,23 +21,38 @@ function SearchForm({ popup, handleOpenPopup, handleClosePopup }) {
     type: 'tooltip',
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Valida formulário antes de enviar a requisição HTTP à API
-    if (queryString.length === 0) {
-      // Se não houver palavra-chave, abre modal de informativo ao usuário
-      handleOpenPopup(searchTooltip);
-    } else {
-      // Se houver, envia a solicitação de pesquisa do usuário
-      getNews(queryString);
-      // E limpa o input e a variável de estado
+  // Envio do formulário com hook personalizado (inclui preventDefault,
+  // loading, onSubmit, onSuccess e onError)
+  const { handleSubmit } = useFormSubmit(
+    // onSubmit
+    () => {
+      // Valida formulário antes de enviar a requisição HTTP à API
+      if (queryString.length === 0) {
+        // Se não houver palavra-chave, abre modal de informativo ao usuário
+        handleOpenPopup(searchTooltip);
+      } else {
+        // Se houver, define o início do estado de carregamento da pesquisa
+        setIsSearchLoading(true);
+        // E envia a solicitação de pesquisa do usuário
+        return getNews(queryString); // retorna a Promisse, é aqui que será aguardado (vide hook)
+      }
+    },
+    // onSuccess
+    () => {
+      // Define o final do estado de carregamento da pesquisa
+      setIsSearchLoading(false);
+      // Limpa o input e a variável de estado
       setQueryString('');
-    }
-  };
+    },
+    // onError
+    () => {
+      // Define o final do estado de carregamento da pesquisa
+      setIsSearchLoading(false);
+    },
+  );
 
   return (
-    <form className="search__form-news" noValidate onSubmit={handleSubmit}>
+    <form className="search__form-news" onSubmit={handleSubmit} noValidate>
       <input
         className="search__form-input"
         type="text"

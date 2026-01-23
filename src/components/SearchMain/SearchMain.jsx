@@ -1,7 +1,12 @@
 import SearchForm from './components/SearchForm/SearchForm';
 import './SearchMain.css';
 
-function SearchMain({ popup, handleOpenPopup, handleClosePopup }) {
+function SearchMain({
+  popup,
+  handleOpenPopup,
+  handleClosePopup,
+  setIsSearchLoading,
+}) {
   return (
     <section className="search main__search">
       <h1 className="search__title">O que está acontecendo no mundo?</h1>
@@ -14,6 +19,7 @@ function SearchMain({ popup, handleOpenPopup, handleClosePopup }) {
           popup={popup}
           handleOpenPopup={handleOpenPopup}
           handleClosePopup={handleClosePopup}
+          setIsSearchLoading={setIsSearchLoading}
         />
       </div>
     </section>
