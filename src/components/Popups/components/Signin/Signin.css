@@ -107,13 +107,13 @@
 
 .popup__signin-plink {
   align-self: center;
-  width: 226px;
   height: 20px;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   line-height: 1;
   margin-top: 16px;
   margin-bottom: 0;
+  color: rgba(0, 0, 0, 1);
 }
 
 .popup__signin-link {
