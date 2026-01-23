@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import Signin from '../Signin/Signin';
+import Popups from '../../Popups';
 import './SignupTooltip.css';
 
 function SignupTooltip({ popup, handleOpenPopup, handleClosePopup }) {
