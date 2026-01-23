@@ -67,7 +67,11 @@ function App() {
               path="/"
               element={
                 <>
-                  <SearchMain />
+                  <SearchMain
+                    popup={popup}
+                    handleOpenPopup={handleOpenPopup}
+                    handleClosePopup={handleClosePopup}
+                  />
                   <NewsCardList />
                   <Preloader />
                   <NothingFound />
