@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import Signin from '../PopupWithForm/components/Signin/Signin';
+import Signin from '../Signin/Signin';
 import './SignupTooltip.css';
 
 function SignupTooltip({ popup, handleOpenPopup, handleClosePopup }) {
-  // Objeto para configurar children de PopupWithForm: abertura do popup de login (Signin)
+  // Objeto para configurar children de Popups: abertura do popup de login (Signin)
   // Obj criado em Navigation, Signup, ForMobileHeaderAndNav e aqui
   const signinPopup = {
     children: (
@@ -30,13 +30,13 @@ function SignupTooltip({ popup, handleOpenPopup, handleClosePopup }) {
       {/* Se o popup não for nulo, o componente será renderizado na tela */}
 
       {popup && (
-        <PopupWithForm
+        <Popups
           popup={popup}
           handleClosePopup={handleClosePopup}
           type={popup.type}
         >
           {popup.children}
-        </PopupWithForm>
+        </Popups>
       )}
     </div>
   );

@@ -1,9 +1,9 @@
 import Signup from '../Signup/Signup';
-import PopupWithForm from '../../PopupWithForm';
+import Popups from '../../Popups';
 import './Signin.css';
 
 function Signin({ popup, handleOpenPopup, handleClosePopup }) {
-  // Objeto para configurar children de PopupWithForm: abertura do popup de inscrição (Signup)
+  // Objeto para configurar children de Popups: abertura do popup de inscrição (Signup)
   const signupPopup = {
     children: (
       <Signup
@@ -62,13 +62,13 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
       {/* Se o popup não for nulo, o componente será renderizado na tela */}
 
       {popup && (
-        <PopupWithForm
+        <Popups
           popup={popup}
           handleClosePopup={handleClosePopup}
           type={popup.type}
         >
           {popup.children}
-        </PopupWithForm>
+        </Popups>
       )}
     </form>
   );

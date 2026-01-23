@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../../../contexts/AuthContext';
-import Signin from '../../../PopupWithForm/components/Signin/Signin';
-import PopupWithForm from '../../../PopupWithForm/PopupWithForm';
+import Signin from '../../../Popups/components/Signin/Signin';
+import Popups from '../../../Popups/Popups';
 import newsExplorer from '../../../../assets/news-explorer-logo.svg';
 import lineHeader from '../../../../assets/line-header.svg';
 import btnOut from '../../../../assets/btn-out.svg';
@@ -33,7 +33,7 @@ function ForMobileHeaderAndNav({
     );
   };
 
-  // Objeto para configurar children de PopupWithForm: abertura do popup de login (Signin)
+  // Objeto para configurar children de Popups: abertura do popup de login (Signin)
   // Obj criado em Navigation, Signup, SignupTooltip e aqui
   const signinPopup = {
     children: (
@@ -118,13 +118,13 @@ function ForMobileHeaderAndNav({
           {/* Se o popup não for nulo, o componente será renderizado na tela */}
 
           {popup && (
-            <PopupWithForm
+            <Popups
               popup={popup}
               handleClosePopup={handleClosePopup}
               type={popup.type}
             >
               {popup.children}
-            </PopupWithForm>
+            </Popups>
           )}
         </nav>
       </div>

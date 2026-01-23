@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import './PopupWithForm.css';
+import './Popups.css';
 
-function PopupWithForm(props) {
+function Popups(props) {
   // Desestruturação do objeto passado como props, onde children é o conteúdo de popup
   // que pode ser Signin ou Signup, configurado no componente de abertura
   const { popup, handleClosePopup, children, type } = props;
@@ -65,4 +65,4 @@ function PopupWithForm(props) {
   );
 }
 
-export default PopupWithForm;
+export default Popups;
