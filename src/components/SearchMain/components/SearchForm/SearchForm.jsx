@@ -19,20 +19,27 @@ function SearchForm({ popup, handleOpenPopup, handleClosePopup }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Valida formulário antes de enviar a requisição HTTP à API
     if (queryString.length === 0) {
+      // Se não houver palavra-chave, abre modal de informativo ao usuário
       handleOpenPopup(searchTooltip);
     } else {
+      // Se houver, envia a solicitação de pesquisa do usuário
       getNews(queryString);
+      // E limpa o input e a variável de estado
+      setQueryString('');
     }
   };
 
   return (
-    <form className="search__form-news" onSubmit={handleSubmit}>
+    <form className="search__form-news" noValidate onSubmit={handleSubmit}>
       <input
         className="search__form-input"
         type="text"
         placeholder="Inserir tema"
         name="search-news"
+        pattern="^[^<>]+$" /* bloqueia os caracteres < e > para evitar inserção de tags
+        HTML diretamente > barreira simples contra injeção de HTML no campo */
         value={queryString}
         onChange={(e) => {
           setQueryString(e.target.value);
