@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
-import getNews from '../../../../utils/NewsApi';
 import SearchTooltip from '../../../Popups/components/SearchTooltip/SearchTooltip';
 import Popups from '../../../Popups/Popups';
 import './SearchForm.css';
@@ -10,6 +9,8 @@ function SearchForm({
   handleOpenPopup,
   handleClosePopup,
   setIsSearchLoading,
+  handleGetNews,
+  setSearchedNews,
 }) {
   // Variável de estado: controle do input do formulário
   const [queryString, setQueryString] = useState('');
@@ -33,8 +34,11 @@ function SearchForm({
       } else {
         // Se houver, define o início do estado de carregamento da pesquisa
         setIsSearchLoading(true);
+        // Reset do estado de notícias pesquisadas para 'null' antes da nova pesquisa, pois
+        // havendo ou não resultados para a busca, o obj é retornado
+        setSearchedNews(null);
         // E envia a solicitação de pesquisa do usuário
-        return getNews(queryString); // retorna a Promisse, é aqui que será aguardado (vide hook)
+        return handleGetNews(queryString); // retorna a Promisse, é aqui que será aguardado (vide hook)
       }
     },
     // onSuccess

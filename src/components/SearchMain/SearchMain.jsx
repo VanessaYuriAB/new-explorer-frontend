@@ -6,6 +6,8 @@ function SearchMain({
   handleOpenPopup,
   handleClosePopup,
   setIsSearchLoading,
+  handleGetNews,
+  setSearchedNews,
 }) {
   return (
     <section className="search main__search">
@@ -20,6 +22,8 @@ function SearchMain({
           handleOpenPopup={handleOpenPopup}
           handleClosePopup={handleClosePopup}
           setIsSearchLoading={setIsSearchLoading}
+          handleGetNews={handleGetNews}
+          setSearchedNews={setSearchedNews}
         />
       </div>
     </section>

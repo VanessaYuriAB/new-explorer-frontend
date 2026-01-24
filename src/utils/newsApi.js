@@ -3,7 +3,7 @@ import {
   newsApiKey,
   makeApisRequest,
   dataFromSevenDays,
-} from './utils';
+} from './utilsApis';
 
 // Assinatura: fetch(url-to-requested-resource, options-object);
 // É um método assíncrono, retorna uma promisse e method padrão: GET
@@ -25,16 +25,13 @@ const getNews = async (queryString) => {
       },
     });
 
-    // Se a solicitação for bem-sucedida, aplica os dados onde necessário
-
-    console.log(news); // Implementação: atualizar o estado ou renderizar os dados
+    // Se a solicitação for bem-sucedida, retorna os dados para serem aplicados
+    // no handleGetNews
+    return news;
   } catch (error) {
-    // Se a solicitação não for bem-sucedida, aplica devido tratamento de erro
-    // Ex: .error() e/ou informativo ao usuário
-
-    console.error('Erro ao buscar notícias:', error.message);
-
-    // Implementação do tratamento de erros: exibir uma mensagem amigável para o usuário
+    // Se a solicitação não for bem-sucedida, repassa o erro adiante
+    console.error('Erro em getNews, repassado ao handle em App:', error);
+    throw error;
   }
 };
 

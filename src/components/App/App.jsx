@@ -9,11 +9,15 @@ import About from '../About/About';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
+import getNews from '../../utils/NewsApi';
 import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
 function App() {
+  // Hook de localização para saber a rota atual
+  const location = useLocation();
+
   // Variável de estado: status de login
   const [loggedIn /*, setLoggedIn*/] = useState(false);
 
@@ -26,8 +30,23 @@ function App() {
   // Variável de estado: controle do Preloader
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
-  // Hook de localização para saber a rota atual
-  const location = useLocation();
+  // Variável de estado: controle do resultado de notícias pesquisadas
+  const [searchedNews, setSearchedNews] = useState(null);
+
+  // Handler para getNews
+  const handleGetNews = async (queryToSearch) => {
+    const responseOfNews = await getNews(queryToSearch);
+
+    // Se o status for 'ok': define o estado do resultado de pesquisa, com o obj inteiro
+    // retornado > para acesso às propriedades em outras funcionalidades
+    // Caso status seja 'error': não altera (continua null)
+
+    responseOfNews.status === 'ok'
+      ? setSearchedNews(responseOfNews)
+      : console.error(
+          `Erro no handleGetNews: ${responseOfNews.code} - ${responseOfNews.message}`,
+        );
+  };
 
   // Handler: abre popup
   const handleOpenPopup = (popup) => {
@@ -75,14 +94,27 @@ function App() {
                     handleOpenPopup={handleOpenPopup}
                     handleClosePopup={handleClosePopup}
                     setIsSearchLoading={setIsSearchLoading}
+                    handleGetNews={handleGetNews}
+                    setSearchedNews={setSearchedNews}
                   />
 
-                  {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza o Preloader */}
+                  {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza
+                  o Preloader */}
 
                   {isSearchLoading && <Preloader />}
 
-                  {/*<NewsCardList />
-                  <NothingFound />*/}
+                  {/* Se não estiver em loading e não houver resultados para a pesquisa
+                  realizada, renderiza o NothingFound */}
+
+                  {!isSearchLoading &&
+                    searchedNews?.status === 'ok' &&
+                    searchedNews?.totalResults === 0 && <NothingFound />}
+
+                  {/* Se não estiver em loading e houver resultados, renderiza o
+                  NewsCardList */}
+
+                  {/* {!isSearchLoading && searchedNews?.totalResults > 0 && <NewsCardList
+                    searchedNews={searchedNews} />} */}
 
                   <About />
                 </>
