@@ -1,6 +1,6 @@
 import {
   baseNewsApiUrl,
-  /*newsApiKey,*/
+  newsApiKey,
   makeApisRequest,
   dataFromSevenDays,
 } from './utilsApis';
@@ -20,9 +20,9 @@ const getNews = async (queryString) => {
         pageSize: 100,
       },
       method: 'GET',
-      /*headers: {
+      headers: {
         'X-Api-Key': `${newsApiKey}`,
-      },*/
+      },
     });
 
     // Se a solicitação for bem-sucedida, retorna os dados para serem aplicados

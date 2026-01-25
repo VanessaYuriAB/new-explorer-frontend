@@ -48,6 +48,12 @@ function App() {
     }
   };
 
+  // Handler: salvar cards
+  // const handleCardSave = async () => {};
+
+  // Handlers: des-salvar cards
+  // const handleCardUnsave = async () => {};
+
   // Handler: abre popup
   const handleOpenPopup = (popup) => {
     setPopup(popup);
@@ -117,7 +123,11 @@ function App() {
                   {!isSearchLoading &&
                     (searchedNews?.totalResults > 0 ||
                       searchedNews?.status === 'error') && (
-                      <NewsCardList searchedNews={searchedNews} />
+                      <NewsCardList
+                        searchedNews={searchedNews}
+                        /*handleCardSave={handleCardSave}
+                        handleCardUnsave={handleCardUnsave}*/
+                      />
                     )}
 
                   <About />

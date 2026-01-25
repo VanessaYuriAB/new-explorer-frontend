@@ -3,7 +3,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useContext } from 'react';
 import './NewsCardList.css';
 
-function NewsCardList({ searchedNews }) {
+function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
@@ -27,12 +27,23 @@ function NewsCardList({ searchedNews }) {
       <section className="searched-news main__searched-news">
         <h2 className="searched-news__title">Procurar resultados</h2>
         <div className="searched-news__list">
-          {/* Renderizar Cards via .map, de acordo com a lista do resultado da pesquisa */}
+          {/* Renderiza cards via .map, de acordo com a lista do array do resultado
+          da pesquisa */}
 
           <ul className="searched-news__cards">
-            <NewsCard />
-            <NewsCard />
-            <NewsCard />
+            {searchedNews?.articles.map((searchedNewsCard) => (
+              /* Aqui, o return é necessário e está implícito: arrow function com
+              parênteses, retornando JSX */
+              <NewsCard
+                key={
+                  searchedNewsCard.url
+                } /* A API da NewsAPI não fornece _id, então foi aplicado url, por ser
+                algo único */
+                searchedNewsCard={searchedNewsCard}
+                /*handleCardSave={handleCardSave}
+                handleCardUnsave={handleCardUnsave}*/
+              />
+            ))}
           </ul>
         </div>
 

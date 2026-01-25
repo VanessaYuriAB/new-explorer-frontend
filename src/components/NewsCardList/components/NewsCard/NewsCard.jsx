@@ -2,9 +2,12 @@ import { useContext, useState } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import './NewsCard.css';
 
-import imgNewCard from '../../../../assets/card-img-nature.png';
+function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
+  // Desestruturação de propriedades do obj para cada notícia, dentro do array de
+  // artigos da resposta bem-sucedida da NewsApi
+  const { source, title, description, url, urlToImage, publishedAt } =
+    searchedNewsCard;
 
-function NewsCard() {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
@@ -22,19 +25,14 @@ function NewsCard() {
     <li className="new-card">
       <article className="new-card__article">
         <figure className="new-card__figure">
-          {/* Atualizar 'alt' dinâmico, como nome da foto */}
-
-          <img
-            className="new-card__img"
-            src={imgNewCard}
-            alt="Foto da notícia do cartão"
-          />
+          <img className="new-card__img" src={urlToImage} alt={title} />
         </figure>
 
         {/* Tooltip de aviso do botão implementado via CSS, com :hover::before (usando
             regra 'content') */}
 
-        {/* Condição para renderização de versões para o tooltip do botão: versão logada e versão deslogada */}
+        {/* Condição para renderização de versões para o tooltip do botão: versão logada e
+        versão deslogada */}
 
         {loggedIn ? (
           /* Logado */
@@ -52,20 +50,26 @@ function NewsCard() {
         )}
 
         <div className="new-card__infos">
-          {/* Atualizar 'datetime' dinâmico */}
+          {/* Formatar __date */}
 
           <time className="new-card__date" dateTime="2026-01-12">
-            12 de janeiro de 2026
+            {`${publishedAt}`}
           </time>
-          <h3 className="new-card__title">
-            A natureza faz de você uma pessoa melhor
-          </h3>
-          <p className="new-card__text">
-            Todos nós sabemos como a natureza nos faz bem. Nós a conhecemos há
-            milênios: o som dos oceanos, os aromas de uma floresta, a forma como
-            a luz do sol dança através das folhas.
-          </p>
-          <cite className="new-card__source">NATIONAL GEOGRAPHIC</cite>
+
+          {/* Tag __title-link apenas para envolver o títutlo com link e redirecionar
+          para a página da notícia */}
+
+          <a
+            className="new-card__title-link"
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="new-card__title">{`${title}`}</h3>
+          </a>
+
+          <p className="new-card__text">{`${description}`}</p>
+          <cite className="new-card__source">{`${source.name}`}</cite>
         </div>
       </article>
     </li>

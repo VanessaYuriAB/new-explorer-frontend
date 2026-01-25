@@ -119,6 +119,14 @@ deslogado */
   color: rgba(182, 188, 191, 1);
 }
 
+.new-card__title-link {
+  display: contents;
+}
+
+.new-card__title-link {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+}
+
 .new-card__title {
   margin: 0;
   width: 88%; /* 400/100 - 352/x > 400x = 35200 > X = 88 */
@@ -134,6 +142,17 @@ deslogado */
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* número máximo de linhas */
   line-clamp: 3; /* padrão futuro */
+}
+
+.new-card__title:hover {
+  opacity: 0.8;
+  filter: drop-shadow(
+    0 0 0.2em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul claro */
+}
+
+.new-card__title:active {
+  opacity: 0.6;
 }
 
 .new-card__text {
