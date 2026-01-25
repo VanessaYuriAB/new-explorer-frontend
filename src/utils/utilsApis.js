@@ -39,15 +39,18 @@ const makeApisRequest = async ({
     // Se mal, vai para o bloco .catch()
 
     if (!response.ok) {
-      // Diferencia erros de rede (fetch falhou) e erros HTTP (status não OK)
-      throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`);
+      // Repassa obj de erro original da API
+      throw data;
     }
 
     return data;
   } catch (error) {
-    throw new Error(`Erro na requisição para ${endpoint}: ${error.message}`); // esse bloco
-    // captura falhas do fetch (erros de rede, DNS, servidor offline) e adiciona contexto
-    // sobre qual endpoint falhou
+    console.error(
+      `Erro em makeApisRequest, repassado à função utilitária: ${error}`,
+    );
+    throw error; // Esse bloco captura falhas do fetch (erros de rede, DNS, servidor offline)
+    // ou erros inesperados no código; erros HTTP (status não OK) são tratados antes,
+    // lançando o objeto original da API
   }
 };
 
