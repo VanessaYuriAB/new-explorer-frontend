@@ -1,11 +1,23 @@
 import NewsCard from './components/NewsCard/NewsCard';
 import AuthContext from '../../contexts/AuthContext';
-import { useContext } from 'react';
+import { useContext /*, useCallback*/ } from 'react';
 import './NewsCardList.css';
 
 function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
+
+  // Memoriza as funções passadas ao NewsCard, para não recriar a cada render
+  // Em conjunto com React.memo() para os dados
+  /*const memoizedHandleSave = useCallback(
+    (card) => handleCardSave(card),
+    [handleCardSave],
+  );
+
+  const memoizedHandleUnsave = useCallback(
+    (card) => handleCardUnsave(card),
+    [handleCardUnsave],
+  );*/
 
   // Se a resposta de NewsApi for erro, renderiza a msg de erro
   // Se for o obj com artigos, renderiza os cartões
@@ -40,8 +52,8 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
                 } /* A API da NewsAPI não fornece _id, então foi aplicado url, por ser
                 algo único */
                 searchedNewsCard={searchedNewsCard}
-                /*handleCardSave={handleCardSave}
-                handleCardUnsave={handleCardUnsave}*/
+                /*handleCardSave={memoizedHandleSave} // valor memorizado
+                handleCardUnsave={memoizedHandleUnsave}*/
               />
             ))}
           </ul>

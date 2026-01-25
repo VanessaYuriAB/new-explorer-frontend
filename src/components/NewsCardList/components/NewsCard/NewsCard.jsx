@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import './NewsCard.css';
 
@@ -76,4 +76,9 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
   );
 }
 
-export default NewsCard;
+// Exporta envolto em memo
+// Evita renderizações desnecessárias de componentes funcionais, memoriza o resultado da
+// renderização e só re-renderiza se as props mudarem
+// Os cartões que não tiveram suas props alteradas não serão re-renderizados, apenas os
+// novos a serem mostrados
+export default React.memo(NewsCard);
