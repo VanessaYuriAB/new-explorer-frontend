@@ -35,17 +35,17 @@ function App() {
 
   // Handler para getNews
   const handleGetNews = async (queryToSearch) => {
-    const responseOfNews = await getNews(queryToSearch);
+    try {
+      const responseOfNews = await getNews(queryToSearch);
 
-    // Se o status for 'ok': define o estado do resultado de pesquisa, com o obj inteiro
-    // retornado > para acesso às propriedades em outras funcionalidades
-    // Caso status seja 'error': não altera (continua null)
-
-    responseOfNews.status === 'ok'
-      ? setSearchedNews(responseOfNews)
-      : console.error(
-          `Erro no handleGetNews: ${responseOfNews.code} - ${responseOfNews.message}`,
-        );
+      // Define o estado do resultado de pesquisa, com o obj inteiro retornado
+      // Para acesso às propriedades do obj em outras funcionalidades
+      // Caso o status seja 'ok' ou, tbm, 'error'; condicionando a renderização de
+      // componentes
+      setSearchedNews(responseOfNews); // status 'ok'
+    } catch (responseOfErrorNews) {
+      setSearchedNews(responseOfErrorNews); // status 'error'
+    }
   };
 
   // Handler: abre popup
