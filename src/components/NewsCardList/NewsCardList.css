@@ -4,6 +4,14 @@
   background-color: rgba(245, 246, 247, 1);
 }
 
+.searched-news__msg-error {
+  font-size: 20px;
+  line-height: 1.33;
+  margin: 0;
+  width: 70%;
+  align-self: center;
+}
+
 .searched-news__title {
   width: 712px;
   min-height: 46px;
@@ -63,6 +71,10 @@
     padding-bottom: 40px;
   }
 
+  .searched-news__msg-error {
+    font-size: 18px;
+  }
+
   .searched-news__title {
     width: 336px;
     min-height: 34px;
@@ -92,6 +104,11 @@
   .searched-news {
     padding-top: 32px;
     padding-bottom: 24px;
+  }
+
+  .searched-news__msg-error {
+    font-size: 16px;
+    margin-top: calc(-32px + 24px);
   }
 
   .searched-news__title {

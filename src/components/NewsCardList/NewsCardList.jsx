@@ -3,32 +3,49 @@ import AuthContext from '../../contexts/AuthContext';
 import { useContext } from 'react';
 import './NewsCardList.css';
 
-function NewsCardList() {
+function NewsCardList({ searchedNews }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
-  return (
-    <section className="searched-news main__searched-news">
-      <h2 className="searched-news__title">Procurar resultados</h2>
-      <div className="searched-news__list">
-        {/* Renderizar Cards via .map, de acordo com a lista do resultado da pesquisa */}
+  // Se a resposta de NewsApi for erro, renderiza a msg de erro
+  // Se for o obj com artigos, renderiza os cartões
 
-        <ul className="searched-news__cards">
-          <NewsCard />
-          <NewsCard />
-          <NewsCard />
-        </ul>
-      </div>
+  if (searchedNews?.status === 'error') {
+    return (
+      <section className="searched-news main__searched-news">
+        <p className="searched-news__msg-error">
+          Desculpe, algo deu errado durante a solicitação. Pode haver um
+          problema de conexão ou o servidor pode estar inativo. Por favor, tente
+          novamente mais tarde.
+        </p>
+      </section>
+    );
+  }
 
-      {/* Condição para renderização de versões para o botão: logado e deslogado */}
-      <button
-        className={`searched-news__btn ${!loggedIn ? 'searched-news__btn_out' : ''} `}
-        type="button"
-      >
-        Mostrar mais
-      </button>
-    </section>
-  );
+  if (searchedNews?.totalResults > 0) {
+    return (
+      <section className="searched-news main__searched-news">
+        <h2 className="searched-news__title">Procurar resultados</h2>
+        <div className="searched-news__list">
+          {/* Renderizar Cards via .map, de acordo com a lista do resultado da pesquisa */}
+
+          <ul className="searched-news__cards">
+            <NewsCard />
+            <NewsCard />
+            <NewsCard />
+          </ul>
+        </div>
+
+        {/* Condição para renderização de versões para o botão: logado e deslogado */}
+        <button
+          className={`searched-news__btn ${!loggedIn ? 'searched-news__btn_out' : ''} `}
+          type="button"
+        >
+          Mostrar mais
+        </button>
+      </section>
+    );
+  }
 }
 
 export default NewsCardList;

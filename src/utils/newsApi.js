@@ -1,6 +1,6 @@
 import {
   baseNewsApiUrl,
-  newsApiKey,
+  /*newsApiKey,*/
   makeApisRequest,
   dataFromSevenDays,
 } from './utilsApis';
@@ -20,9 +20,9 @@ const getNews = async (queryString) => {
         pageSize: 100,
       },
       method: 'GET',
-      headers: {
+      /*headers: {
         'X-Api-Key': `${newsApiKey}`,
-      },
+      },*/
     });
 
     // Se a solicitação for bem-sucedida, retorna os dados para serem aplicados
@@ -30,7 +30,7 @@ const getNews = async (queryString) => {
     return news;
   } catch (error) {
     // Se a solicitação não for bem-sucedida, repassa o erro adiante
-    console.error('Erro em getNews, repassado ao handle em App:', error);
+    console.error('Erro em getNews, repassado à handleGetNews em App:', error);
     throw error;
   }
 };

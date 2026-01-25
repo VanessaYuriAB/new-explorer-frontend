@@ -110,11 +110,15 @@ function App() {
                     searchedNews?.status === 'ok' &&
                     searchedNews?.totalResults === 0 && <NothingFound />}
 
-                  {/* Se não estiver em loading e houver resultados, renderiza o
-                  NewsCardList */}
+                  {/* Se não estiver em loading e houver resultados ou se não estiver em
+                  loading e o status for 'error', renderiza o NewsCardList com o devido
+                  conteúdo */}
 
-                  {/* {!isSearchLoading && searchedNews?.totalResults > 0 && <NewsCardList
-                    searchedNews={searchedNews} />} */}
+                  {!isSearchLoading &&
+                    (searchedNews?.totalResults > 0 ||
+                      searchedNews?.status === 'error') && (
+                      <NewsCardList searchedNews={searchedNews} />
+                    )}
 
                   <About />
                 </>
