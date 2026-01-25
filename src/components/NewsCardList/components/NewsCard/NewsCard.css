@@ -16,8 +16,8 @@
 /* Tag implementada apenas para a semântica html */
 .new-card__figure {
   margin: 0;
-  max-width: 400px;
-  min-width: 224px;
+  width: 400px;
+  height: 272px;
 }
 
 .new-card__img {
