@@ -1,5 +1,6 @@
 import React, { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
+import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './NewsCard.css';
 
 function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
@@ -39,7 +40,11 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
     <li className="new-card">
       <article className="new-card__article">
         <figure className="new-card__figure">
-          <img className="new-card__img" src={urlToImage} alt={title} />
+          <img
+            className="new-card__img"
+            src={urlToImage ? urlToImage : imgIndisponivel}
+            alt={`Imagem do artigo: ${title ? title : 'descrição indisponível'}`}
+          />
         </figure>
 
         {/* Tooltip de aviso do botão implementado via CSS, com :hover::before (usando
@@ -77,11 +82,11 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h3 className="new-card__title">{`${title}`}</h3>
+            <h3 className="new-card__title">{`${title ? title : 'Título indisponível'}`}</h3>
           </a>
 
-          <p className="new-card__text">{`${description}`}</p>
-          <cite className="new-card__source">{`${source.name}`}</cite>
+          <p className="new-card__text">{`${description ? description : 'Descrição indisponível'}`}</p>
+          <cite className="new-card__source">{`${source.name ? source.name : 'Fonte indisponível'}`}</cite>
         </div>
       </article>
     </li>
