@@ -1,11 +1,14 @@
 import NewsCard from './components/NewsCard/NewsCard';
 import AuthContext from '../../contexts/AuthContext';
-import { useContext /*, useCallback*/ } from 'react';
+import { useContext /*, useCallback*/, useState } from 'react';
 import './NewsCardList.css';
 
 function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
+
+  // Variável de estado: controle da qtdd de cards renderizados, iniciando com apenas três
+  const [visibleCards, setVisibleCards] = useState(3);
 
   // Memoriza as funções passadas ao NewsCard, para não recriar a cada render
   // Em conjunto com React.memo() para os dados
@@ -18,6 +21,13 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
     (card) => handleCardUnsave(card),
     [handleCardUnsave],
   );*/
+
+  // Handler: mostrar mais três cartões
+  const handleShowMore = () => {
+    setVisibleCards((prev) => {
+      return prev + 3;
+    });
+  };
 
   // Se a resposta de NewsApi for erro, renderiza a msg de erro
   // Se for o obj com artigos, renderiza os cartões
@@ -38,34 +48,48 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
     return (
       <section className="searched-news main__searched-news">
         <h2 className="searched-news__title">Procurar resultados</h2>
-        <div className="searched-news__list">
+        <div
+          /* Adiciona uma classe para remover o padding-bottom da lista de cards quando
+          o botão não estiver renderizado */
+          className={`searched-news__list ${visibleCards >= 100 ? 'searched-news__list_nobtn' : ''}`}
+        >
           {/* Renderiza cards via .map, de acordo com a lista do array do resultado
           da pesquisa */}
 
           <ul className="searched-news__cards">
-            {searchedNews.articles.map((searchedNewsCard) => (
-              /* Aqui, o return é necessário e está implícito: arrow function com
+            {searchedNews.articles
+              .slice(0, visibleCards) // copia uma parte do vetor e retorna como um novo vetor
+              .map((searchedNewsCard) => (
+                /* Aqui, o return é necessário e está implícito: arrow function com
               parênteses, retornando JSX */
-              <NewsCard
-                key={
-                  searchedNewsCard.url
-                } /* A API da NewsAPI não fornece _id, então foi aplicado url, por ser
+                <NewsCard
+                  key={
+                    searchedNewsCard.url
+                  } /* A API da NewsAPI não fornece _id, então foi aplicado url, por ser
                 algo único */
-                searchedNewsCard={searchedNewsCard}
-                /*handleCardSave={memoizedHandleSave} // valor memorizado
+                  searchedNewsCard={searchedNewsCard}
+                  /*handleCardSave={memoizedHandleSave} // valor memorizado
                 handleCardUnsave={memoizedHandleUnsave}*/
-              />
-            ))}
+                />
+              ))}
           </ul>
         </div>
 
-        {/* Condição para renderização de versões para o botão: logado e deslogado */}
-        <button
-          className={`searched-news__btn ${!loggedIn ? 'searched-news__btn_out' : ''} `}
-          type="button"
-        >
-          Mostrar mais
-        </button>
+        {/* Condição para renderização do botão, apenas quando não houverem mais cartões
+        a serem exibidos > Como a conta da NewsApi (gratuita) permite apenas 100, a condição
+        está definida desta forma, mas existe a propriedade totalResults para renderização
+        do total de artigos pesquisados */}
+        {/* {visibleCards < searchedNews.totalResults && ( */}
+        {visibleCards < 100 && (
+          <button
+            /* Condição para renderização de versões para o botão: logado e deslogado */
+            className={`searched-news__btn ${!loggedIn ? 'searched-news__btn_out' : ''} `}
+            type="button"
+            onClick={handleShowMore}
+          >
+            Mostrar mais
+          </button>
+        )}
       </section>
     );
   }

@@ -22,10 +22,15 @@
   margin: 0 0 0 104px;
   text-align: start;
 }
+
 .searched-news__list {
   background-color: rgba(245, 246, 247, 1);
   padding-top: 64px;
   padding-bottom: 64px;
+}
+
+.searched-news__list_nobtn {
+  padding-bottom: 0;
 }
 
 .searched-news__cards {
@@ -82,6 +87,7 @@
     line-height: 1.13;
     margin: 0 0 0 40px;
   }
+
   .searched-news__list {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -118,6 +124,7 @@
     line-height: 1.13;
     margin: 0 auto;
   }
+
   .searched-news__list {
     padding-top: 58px;
     padding-bottom: 16px;
