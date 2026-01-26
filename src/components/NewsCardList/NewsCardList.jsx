@@ -22,7 +22,7 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
   // Se a resposta de NewsApi for erro, renderiza a msg de erro
   // Se for o obj com artigos, renderiza os cartões
 
-  if (searchedNews?.status === 'error') {
+  if (searchedNews.status === 'error') {
     return (
       <section className="searched-news main__searched-news">
         <p className="searched-news__msg-error">
@@ -34,7 +34,7 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
     );
   }
 
-  if (searchedNews?.totalResults > 0) {
+  if (searchedNews.totalResults > 0) {
     return (
       <section className="searched-news main__searched-news">
         <h2 className="searched-news__title">Procurar resultados</h2>
@@ -43,7 +43,7 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
           da pesquisa */}
 
           <ul className="searched-news__cards">
-            {searchedNews?.articles.map((searchedNewsCard) => (
+            {searchedNews.articles.map((searchedNewsCard) => (
               /* Aqui, o return é necessário e está implícito: arrow function com
               parênteses, retornando JSX */
               <NewsCard
