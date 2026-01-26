@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import './NewsCard.css';
 
@@ -7,6 +7,20 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
   // artigos da resposta bem-sucedida da NewsApi
   const { source, title, description, url, urlToImage, publishedAt } =
     searchedNewsCard;
+
+  // Reformatação da data (publishedAt) com Intl.DateTimeFormat
+  // For Brazilian Portuguese: "26 de janeiro de 2025"
+  // useMemo para evitar processamento de cálculos desnecessários
+  // Verificação da propriedade, com fallback caso não exista
+  const formattedDateBR = useMemo(() => {
+    return publishedAt
+      ? new Intl.DateTimeFormat('pt-BR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }).format(new Date(publishedAt))
+      : 'Data indisponível';
+  }, [publishedAt]);
 
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
@@ -50,10 +64,8 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
         )}
 
         <div className="new-card__infos">
-          {/* Formatar __date */}
-
-          <time className="new-card__date" dateTime="2026-01-12">
-            {`${publishedAt}`}
+          <time className="new-card__date" dateTime={publishedAt}>
+            {`${formattedDateBR}`}
           </time>
 
           {/* Tag __title-link apenas para envolver o títutlo com link e redirecionar
