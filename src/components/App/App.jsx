@@ -10,7 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
 import getNews from '../../utils/NewsApi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
@@ -31,7 +31,19 @@ function App() {
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
   // Variável de estado: controle do resultado de notícias pesquisadas
-  const [searchedNews, setSearchedNews] = useState(null);
+  // Inicia com os dados do localStorage, se houver
+  const [searchedNews, setSearchedNews] = useState(() => {
+    const searched = localStorage.getItem('searchedNewsData');
+    return searched ? JSON.parse(searched) : null;
+  });
+
+  // Efeito para sincronizar o localStorage sempre que o estado para notícias pesquisadas
+  // mudar > para persistência dos dados > ex: salvar ou des-salvar um card
+  useEffect(() => {
+    if (searchedNews) {
+      localStorage.setItem('searchedNewsData', JSON.stringify(searchedNews));
+    }
+  }, [searchedNews]);
 
   // Handler para getNews
   const handleGetNews = async (queryToSearch) => {
