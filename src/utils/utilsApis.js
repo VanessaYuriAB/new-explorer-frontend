@@ -13,47 +13,46 @@ const makeApisRequest = async ({
   // permite que a função seja usada para requisições sem cabeçalhos (como GET simples)
   reqBody,
 }) => {
-  try {
-    // Converte objeto em query string
-    const paramsForQuery = Object.keys(reqParams).length
-      ? new URLSearchParams(reqParams).toString()
-      : '';
+  // Converte objeto em query string
+  const paramsForQuery = Object.keys(reqParams).length
+    ? new URLSearchParams(reqParams).toString()
+    : '';
 
-    const url = paramsForQuery ? `${endpoint}?${paramsForQuery}` : endpoint;
+  const url = paramsForQuery ? `${endpoint}?${paramsForQuery}` : endpoint;
 
-    const options = {
-      headers,
-      method,
-      body: reqBody ? JSON.stringify(reqBody) : undefined,
-    };
+  const options = {
+    headers,
+    method,
+    body: reqBody ? JSON.stringify(reqBody) : undefined,
+  };
 
-    const response = await fetch(url, options);
+  const response = await fetch(url, options);
 
-    // O método fetch retorna o objeto de resposta no formato JSON
-    // O método res.json() converte o obj para JavaScript
-    // res é a resposta em JSON
-    // .json() converte res para JS e o return retorna os dados
+  // O método fetch retorna o objeto de resposta no formato JSON
+  // O método res.json() converte o obj para JavaScript
+  // res é a resposta em JSON
+  // .json() converte res para JS e o return retorna os dados
 
-    const data = await response.json();
+  const data = await response.json();
 
-    // Verifica se a solicitação foi bem ou mal sucedida
-    // Se bem, retorna o obj com dados, convertidos para JS
-    // Se mal, vai para o bloco .catch()
+  // Verifica se a solicitação foi bem ou mal sucedida
+  // Se bem, retorna o obj com dados, convertidos para JS
+  // Se mal, vai para o bloco .catch()
 
-    if (!response.ok) {
-      // Repassa obj de erro original da API
-      throw data;
-    }
-
-    return data;
-  } catch (error) {
-    console.error(
-      `Erro em makeApisRequest, repassado à função utilitária: ${error}`,
-    );
-    throw error; // Esse bloco captura falhas do fetch (erros de rede, DNS, servidor offline)
-    // ou erros inesperados no código; erros HTTP (status não OK) são tratados antes,
-    // lançando o objeto original da API
+  if (!response.ok) {
+    // Repassa obj de erro original da API
+    throw data;
   }
+
+  return data;
+
+  // Se a solicitação não for bem-sucedida, repassa o erro adiante
+
+  // Try/catch desnecessário aqui
+
+  // Esse bloco captura falhas do fetch (erros de rede, DNS, servidor offline) ou erros
+  // inesperados no código; erros HTTP (status não OK) são tratados antes, lançando o
+  // objeto original da API
 };
 
 // Função para data from > reqParams, em getNews
