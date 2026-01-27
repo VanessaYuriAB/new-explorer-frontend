@@ -34,11 +34,14 @@ function App() {
   // Inicia com os dados do localStorage, se houver
   const [searchedNews, setSearchedNews] = useState(() => {
     const searched = localStorage.getItem('searchedNewsData');
-    return searched ? JSON.parse(searched) : null;
+    return searched
+      ? JSON.parse(searched)
+      : { status: null, totalResults: 0, articles: [] };
+    // Definição do obj para evitar verificações e erros, não podendo ser null, articles é um array e pode ser iterado sem erros
   });
 
   // Efeito para sincronizar o localStorage sempre que o estado para notícias pesquisadas
-  // mudar > para persistência dos dados > ex: salvar ou des-salvar um card
+  // (searchedNews) mudar > para persistência dos dados ao recarregar a página
   useEffect(() => {
     if (searchedNews) {
       localStorage.setItem('searchedNewsData', JSON.stringify(searchedNews));
@@ -56,7 +59,8 @@ function App() {
       // componentes
       setSearchedNews(responseOfNews); // status 'ok'
     } catch (responseOfErrorNews) {
-      setSearchedNews(responseOfErrorNews); // status 'error'
+      setSearchedNews(responseOfErrorNews); // status 'error' > para renderização da
+      // msg de erro
     }
   };
 
@@ -125,16 +129,16 @@ function App() {
                   realizada, renderiza o NothingFound */}
 
                   {!isSearchLoading &&
-                    searchedNews?.status === 'ok' &&
-                    searchedNews?.totalResults === 0 && <NothingFound />}
+                    searchedNews.status === 'ok' &&
+                    searchedNews.totalResults === 0 && <NothingFound />}
 
                   {/* Se não estiver em loading e houver resultados ou se não estiver em
                   loading e o status for 'error', renderiza o NewsCardList com o devido
                   conteúdo */}
 
                   {!isSearchLoading &&
-                    (searchedNews?.totalResults > 0 ||
-                      searchedNews?.status === 'error') && (
+                    (searchedNews.totalResults > 0 ||
+                      searchedNews.status === 'error') && (
                       <NewsCardList
                         searchedNews={searchedNews}
                         /*handleCardSave={handleCardSave}
