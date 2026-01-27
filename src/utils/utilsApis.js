@@ -1,6 +1,8 @@
 const baseNewsApiUrl = import.meta.env.VITE_BASE_NEWS_API_URL;
 const newsApiKey = import.meta.env.VITE_NEWS_API_KEY;
 
+const baseMainApiUrl = import.meta.env.VITE_BASE_MAIN_API_URL;
+
 // Função genérica para enviar requisições HTTP
 const makeApisRequest = async ({
   endpoint,
@@ -63,4 +65,10 @@ const dataFromSevenDays = () => {
   return date.toISOString(); // formato ISO 8601 completo
 };
 
-export { baseNewsApiUrl, newsApiKey, makeApisRequest, dataFromSevenDays };
+export {
+  baseNewsApiUrl,
+  newsApiKey,
+  makeApisRequest,
+  dataFromSevenDays,
+  baseMainApiUrl,
+};
