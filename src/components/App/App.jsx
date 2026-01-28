@@ -20,7 +20,7 @@ function App() {
   const location = useLocation();
 
   // Variável de estado: status de login
-  const [loggedIn /*, setLoggedIn*/] = useState(false);
+  const [loggedIn /*, setLoggedIn*/] = useState(true);
 
   // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
   const [popup, setPopup] = useState(null);
@@ -43,7 +43,7 @@ function App() {
 
   // Variável de estado: controle da lista de cartões salvos do usuário atual
   // Inicia, tbm, com os dados do localStorage, se houver
-  const [/*savedUserNews,*/ setSavedUserNews] = useState(() => {
+  const [savedUserNews, setSavedUserNews] = useState(() => {
     const saved = localStorage.getItem('savedUserNewsData');
     return saved ? JSON.parse(saved) : [];
     // Definição de obj vazio para evitar verificações e erros, não podendo ser null, savedUserNews é um array de objs e pode ser iterado sem erros
@@ -56,6 +56,15 @@ function App() {
       localStorage.setItem('searchedNewsData', JSON.stringify(searchedNews));
     }
   }, [searchedNews]);
+
+  // Efeito para sincronizar o localStorage sempre que o estado para notícias salvas do
+  // usuário atual (savedUserNews) mudar > para persistência dos dados ao recarregar a página,
+  // configiração para cards salvos ou não salvos
+  useEffect(() => {
+    if (savedUserNews) {
+      localStorage.setItem('savedUserNewsData', JSON.stringify(savedUserNews));
+    }
+  }, [savedUserNews]);
 
   // Handler para getNews
   const handleGetNews = async (queryToSearch) => {
