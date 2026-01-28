@@ -1,9 +1,9 @@
 import NewsCard from './components/NewsCard/NewsCard';
 import AuthContext from '../../contexts/AuthContext';
-import { useContext /*, useCallback*/, useState } from 'react';
+import { useContext, useCallback, useState } from 'react';
 import './NewsCardList.css';
 
-function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
+function NewsCardList({ searchedNews, handleSaveCard, handleUnsaveCard }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
@@ -11,16 +11,16 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
   const [visibleCards, setVisibleCards] = useState(3);
 
   // Memoriza as funções passadas ao NewsCard, para não recriar a cada render
-  // Em conjunto com React.memo() para os dados
-  /*const memoizedHandleSave = useCallback(
-    (card) => handleCardSave(card),
-    [handleCardSave],
+  // Em conjunto com React.memo() e useMemo() para os dados
+  const memoizedHandleSave = useCallback(
+    (card) => handleSaveCard(card),
+    [handleSaveCard],
   );
 
   const memoizedHandleUnsave = useCallback(
-    (card) => handleCardUnsave(card),
-    [handleCardUnsave],
-  );*/
+    (card) => handleUnsaveCard(card),
+    [handleUnsaveCard],
+  );
 
   // Handler: mostrar mais três cartões
   const handleShowMore = () => {
@@ -68,8 +68,8 @@ function NewsCardList({ searchedNews /*, handleCardSave, handleCardUnsave*/ }) {
                   } /* A API da NewsAPI não fornece _id, então foi aplicado url, por ser
                 algo único */
                   searchedNewsCard={searchedNewsCard}
-                  /*handleCardSave={memoizedHandleSave} // valor memorizado
-                handleCardUnsave={memoizedHandleUnsave}*/
+                  handleSaveCard={memoizedHandleSave} // valor memorizado
+                  handleUnsaveCard={memoizedHandleUnsave} // valor memorizado
                 />
               ))}
           </ul>

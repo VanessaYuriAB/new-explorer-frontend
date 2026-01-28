@@ -3,11 +3,27 @@ import AuthContext from '../../../../contexts/AuthContext';
 import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './NewsCard.css';
 
-function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
+function NewsCard({ searchedNewsCard, handleSaveCard, handleUnsaveCard }) {
   // Desestruturação de propriedades do obj para cada notícia, dentro do array de
   // artigos da resposta bem-sucedida da NewsApi
-  const { source, title, description, url, urlToImage, publishedAt } =
-    searchedNewsCard;
+  const {
+    source,
+    title,
+    description,
+    url,
+    urlToImage,
+    publishedAt /*, isSaved*/,
+  } = searchedNewsCard;
+
+  // VARIÁVEL DE ESTADO TEMPORÁRIA PARA CONTROLE DO STATUS DO BOTÃO 'SALVAR'
+  const [isSavedFromCurrentUser, setIsSavedFromCurrentUser] = useState(false);
+
+  // Contexto de autenticação, extraindo estado de login
+  const { loggedIn } = useContext(AuthContext);
+
+  // Verificação para classe do botão 'salvar': a classe 'new-card__btn_active'
+  // será aplicada para mostrar que o botão está no status "salvo"
+  const getCardBtnClassName = `new-card__btn ${/*isSaved ||*/ isSavedFromCurrentUser ? 'new-card__btn_active' : ''}`;
 
   // Reformatação da data (publishedAt) com Intl.DateTimeFormat
   // For Brazilian Portuguese: "26 de janeiro de 2025"
@@ -22,19 +38,6 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
         }).format(new Date(publishedAt))
       : 'Data indisponível';
   }, [publishedAt]);
-
-  // Contexto de autenticação, extraindo estado de login
-  const { loggedIn } = useContext(AuthContext);
-
-  // Variável de estado temporária para estado ativo do botão 'salvar'
-  const [isSavedFromCurrentUser /*, setIsSavedFromCurrentUser*/] =
-    useState(true);
-
-  // Verificação para classe do botão 'salvar': a classe 'new-card__btn_active'
-  // será aplicada para mostrar que o botão está no status "salvo"
-  const getCardBtnClassName = `new-card__btn ${
-    isSavedFromCurrentUser ? 'new-card__btn_active' : ''
-  }`;
 
   return (
     <li className="new-card">
@@ -56,7 +59,24 @@ function NewsCard({ searchedNewsCard /*, handleCardSave, handleCardUnsave*/ }) {
         {loggedIn ? (
           /* Logado */
           <>
-            <button className={getCardBtnClassName} type="button"></button>
+            <button
+              className={getCardBtnClassName}
+              type="button"
+              aria-label={
+                /*isSaved ||*/ isSavedFromCurrentUser
+                  ? 'Remover dos salvos'
+                  : 'Salvar notícia'
+              }
+              onClick={() => {
+                if (/*!isSaved ||*/ !isSavedFromCurrentUser) {
+                  setIsSavedFromCurrentUser(true);
+                  handleSaveCard(searchedNewsCard);
+                } else {
+                  setIsSavedFromCurrentUser(false);
+                  handleUnsaveCard(searchedNewsCard);
+                }
+              }}
+            ></button>
           </>
         ) : (
           /* Deslogado */

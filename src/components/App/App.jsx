@@ -10,6 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
 import getNews from '../../utils/NewsApi';
+import { saveNews, unsaveNews /*, getUserNews*/ } from '../../utils/mainApi';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
@@ -40,6 +41,14 @@ function App() {
     // Definição do obj para evitar verificações e erros, não podendo ser null, articles é um array e pode ser iterado sem erros
   });
 
+  // Variável de estado: controle da lista de cartões salvos do usuário atual
+  // Inicia, tbm, com os dados do localStorage, se houver
+  const [/*savedUserNews,*/ setSavedUserNews] = useState(() => {
+    const saved = localStorage.getItem('savedUserNewsData');
+    return saved ? JSON.parse(saved) : [];
+    // Definição de obj vazio para evitar verificações e erros, não podendo ser null, savedUserNews é um array de objs e pode ser iterado sem erros
+  });
+
   // Efeito para sincronizar o localStorage sempre que o estado para notícias pesquisadas
   // (searchedNews) mudar > para persistência dos dados ao recarregar a página
   useEffect(() => {
@@ -65,10 +74,39 @@ function App() {
   };
 
   // Handler: salvar cards
-  // const handleCardSave = async () => {};
+  const handleSaveCard = async (searchedNewsCard) => {
+    try {
+      // POST para o banco de dados
+      const savedCard = await saveNews(searchedNewsCard);
+
+      // Set do estado para cartões salvos do usuário (savedUserCards)
+      setSavedUserNews((prev) => {
+        return [...prev, savedCard];
+      });
+    } catch (error) {
+      console.error(`Erro no handleSaveCard: ${error}`);
+    }
+  };
 
   // Handlers: des-salvar cards
-  // const handleCardUnsave = async () => {};
+  const handleUnsaveCard = async (searchedNewsCard) => {
+    try {
+      // DELETE para o banco de dados
+      const unsavedCard = await unsaveNews(searchedNewsCard);
+
+      // Set do estado para cartões salvos do usuário (savedUserCards)
+      setSavedUserNews((prev) => {
+        // .filter(): cria um novo vetor baseado no original, filtrando elementos e
+        // retornando apenas os que estão de acordo com a verificação fornecida
+        return prev.filter((userCard) => {
+          return userCard.url !== unsavedCard.url; // verificação feita pela .url pq a
+          // NewsApi não utiliza o _id no obj do elemento
+        });
+      });
+    } catch (error) {
+      console.error(`Erro no handleUnsaveCard: ${error}`);
+    }
+  };
 
   // Handler: abre popup
   const handleOpenPopup = (popup) => {
@@ -141,8 +179,8 @@ function App() {
                       searchedNews.status === 'error') && (
                       <NewsCardList
                         searchedNews={searchedNews}
-                        /*handleCardSave={handleCardSave}
-                        handleCardUnsave={handleCardUnsave}*/
+                        handleSaveCard={handleSaveCard}
+                        handleUnsaveCard={handleUnsaveCard}
                       />
                     )}
 
