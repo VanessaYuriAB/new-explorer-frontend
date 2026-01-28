@@ -12,7 +12,7 @@ const saveNews = async (cardObject) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    reqBody: cardObject, // vem do componente NewsCardList, um obj simple pq a
+    reqBody: cardObject, // vem do componente NewsCardList/NewsCard, um obj simple pq a
     // conversão para JSON é aplicada no makeApisRequest
   });
 

@@ -38,7 +38,8 @@ function App() {
     return searched
       ? JSON.parse(searched)
       : { status: null, totalResults: 0, articles: [] };
-    // Definição do obj para evitar verificações e erros, não podendo ser null, articles é um array e pode ser iterado sem erros
+    // Definição do obj para evitar verificações e erros, não podendo ser null, articles
+    // é um array e pode ser iterado sem erros
   });
 
   // Variável de estado: controle da lista de cartões salvos do usuário atual
@@ -46,7 +47,8 @@ function App() {
   const [savedUserNews, setSavedUserNews] = useState(() => {
     const saved = localStorage.getItem('savedUserNewsData');
     return saved ? JSON.parse(saved) : [];
-    // Definição de obj vazio para evitar verificações e erros, não podendo ser null, savedUserNews é um array de objs e pode ser iterado sem erros
+    // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
+    // savedUserNews é um array de objs e pode ser iterado sem erros
   });
 
   // Efeito de montagem
@@ -104,7 +106,7 @@ function App() {
       // POST para o banco de dados
       const savedCard = await saveNews(searchedNewsCard);
 
-      // Set do estado para cartões salvos do usuário (savedUserCards)
+      // Set do estado para cartões salvos do usuário (savedUserNews)
       setSavedUserNews((prev) => {
         return [...prev, savedCard];
       });
@@ -119,7 +121,7 @@ function App() {
       // DELETE para o banco de dados
       const unsavedCard = await unsaveNews(searchedNewsCard);
 
-      // Set do estado para cartões salvos do usuário (savedUserCards)
+      // Set do estado para cartões salvos do usuário (savedUserNews)
       setSavedUserNews((prev) => {
         // .filter(): cria um novo vetor baseado no original, filtrando elementos e
         // retornando apenas os que estão de acordo com a verificação fornecida
