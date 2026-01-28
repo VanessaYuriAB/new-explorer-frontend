@@ -10,7 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
 import getNews from '../../utils/NewsApi';
-import { saveNews, unsaveNews /*, getUserNews*/ } from '../../utils/mainApi';
+import { saveNews, unsaveNews, getUserNews } from '../../utils/mainApi';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
@@ -48,6 +48,22 @@ function App() {
     return saved ? JSON.parse(saved) : [];
     // Definição de obj vazio para evitar verificações e erros, não podendo ser null, savedUserNews é um array de objs e pode ser iterado sem erros
   });
+
+  // Efeito de montagem
+  useEffect(() => {
+    async function fetchSavedCards() {
+      try {
+        // Busca cards do usuário atual, na Api do servidor
+        const userSavedCards = await getUserNews();
+        // Seta a variável de estado
+        setSavedUserNews(userSavedCards);
+      } catch (error) {
+        console.error(`Erro no efeito de montagem, fetchSavedCards: ${error}`);
+      }
+    }
+
+    fetchSavedCards();
+  }, []);
 
   // Efeito para sincronizar o localStorage sempre que o estado para notícias pesquisadas
   // (searchedNews) mudar > para persistência dos dados ao recarregar a página
