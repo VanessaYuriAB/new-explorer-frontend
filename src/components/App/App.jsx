@@ -37,9 +37,16 @@ function App() {
     const searched = localStorage.getItem('searchedNewsData');
     return searched
       ? JSON.parse(searched)
-      : { status: null, totalResults: 0, articles: [] };
+      : {
+          status: null,
+          totalResults: 0,
+          articles: [],
+          code: null,
+          message: null,
+        };
     // Definição do obj para evitar verificações e erros, não podendo ser null, articles
     // é um array e pode ser iterado sem erros
+    // Propriedades do obj de retorno de erro da Api inclusas no mesmo objeto definido
   });
 
   // Variável de estado: controle da lista de cartões salvos do usuário atual
@@ -147,6 +154,7 @@ function App() {
   // Handler para getNews
   const handleGetNews = async (queryToSearch) => {
     try {
+      // GET para a API externa: News Api
       const responseOfNews = await getNews(queryToSearch);
 
       // Define o estado do resultado de pesquisa, com o obj inteiro retornado
@@ -154,9 +162,14 @@ function App() {
       // Caso o status seja 'ok' ou, tbm, 'error'; condicionando a renderização de
       // componentes
       setSearchedNews(responseOfNews); // status 'ok'
-    } catch (responseOfErrorNews) {
-      setSearchedNews(responseOfErrorNews); // status 'error' > para renderização da
-      // msg de erro
+    } catch (responseOfError) {
+      setSearchedNews({
+        status: 'error',
+        code: responseOfError.code,
+        message: responseOfError.message,
+        totalResults: 0,
+        articles: [],
+      }); // status 'error' > para renderização da msg de erro em NewsCardList
     }
   };
 
