@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './NewsCard.css';
@@ -6,24 +6,15 @@ import './NewsCard.css';
 function NewsCard({ searchedNewsCard, handleSaveCard, handleUnsaveCard }) {
   // Desestruturação de propriedades do obj para cada notícia, dentro do array de
   // artigos da resposta bem-sucedida da NewsApi
-  const {
-    source,
-    title,
-    description,
-    url,
-    urlToImage,
-    publishedAt /*, isSaved*/,
-  } = searchedNewsCard;
-
-  // VARIÁVEL DE ESTADO TEMPORÁRIA PARA CONTROLE DO STATUS DO BOTÃO 'SALVAR'
-  const [isSavedFromCurrentUser, setIsSavedFromCurrentUser] = useState(false);
+  const { source, title, description, url, urlToImage, publishedAt, isSaved } =
+    searchedNewsCard;
 
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
   // Verificação para classe do botão 'salvar': a classe 'new-card__btn_active'
   // será aplicada para mostrar que o botão está no status "salvo"
-  const getCardBtnClassName = `new-card__btn ${/*isSaved ||*/ isSavedFromCurrentUser ? 'new-card__btn_active' : ''}`;
+  const getCardBtnClassName = `new-card__btn ${isSaved === true ? 'new-card__btn_active' : ''}`;
 
   // Reformatação da data (publishedAt) com Intl.DateTimeFormat
   // For Brazilian Portuguese: "26 de janeiro de 2025"
@@ -63,16 +54,12 @@ function NewsCard({ searchedNewsCard, handleSaveCard, handleUnsaveCard }) {
               className={getCardBtnClassName}
               type="button"
               aria-label={
-                /*isSaved ||*/ isSavedFromCurrentUser
-                  ? 'Remover dos salvos'
-                  : 'Salvar notícia'
+                isSaved === true ? 'Remover dos salvos' : 'Salvar notícia'
               }
               onClick={() => {
-                if (/*!isSaved ||*/ !isSavedFromCurrentUser) {
-                  setIsSavedFromCurrentUser(true);
+                if (isSaved === false) {
                   handleSaveCard(searchedNewsCard);
                 } else {
-                  setIsSavedFromCurrentUser(false);
                   handleUnsaveCard(searchedNewsCard);
                 }
               }}

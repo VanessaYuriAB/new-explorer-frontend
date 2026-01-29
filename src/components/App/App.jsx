@@ -83,6 +83,66 @@ function App() {
       localStorage.setItem('savedUserNewsData', JSON.stringify(savedUserNews));
     }
   }, [savedUserNews]);
+  // Efeito para mergear lista de cards salvos (do usuário) com a lista de cards
+  // retornados da pesquisa > para o ícone do botão 'salvar', no NewsCard
+  // Apenas se estiver logado
+  useEffect(() => {
+    // Se não estiver logado, não executa
+    if (!loggedIn) return;
+
+    // Verificação de segurança para erro de leitura de searchedNews.articles > null
+    // Com o same dentro do setState, o efeito só altera o estado quando os articles
+    // realmente mudam
+    if (!searchedNews || !Array.isArray(searchedNews.articles)) return;
+
+    async function mergeNewsLists() {
+      // Lista de notícias da pesquisa > searchedNews.articles
+      // Lista de notícias salvas do usuário atual > savedUserNews
+
+      try {
+        // Dentro do array searchedNews.articles, existe algum elemento com a propriedade
+        // url igual a algum elemento dentro do array savedUserNews? Se sim, adiciona flag
+        // isSaved como true, se não, como false
+        const mergedArticles = searchedNews.articles.map((searchedItem) => {
+          const isSaved = savedUserNews.some((savedItem) => {
+            return searchedItem.url === savedItem.url;
+          });
+
+          return { ...searchedItem, isSaved };
+        });
+
+        // Merge: atualizando estado
+        setSearchedNews((prev) => {
+          // Verificação: evita loop
+
+          // E o efeito só altera o estado quando os articles realmente mudam, por causa
+          // do searchedNews nas dependências do efeito e não searchedNews.articles que é
+          // o que é realmente utilizado no efeito > recomendado pelo React: não coloque
+          // dependência profunda em efeitos pq o React avalia a dependência antes do effect
+          // e o estado pode estar null em transições
+
+          // Gerada por I.A. (Copilot)
+          const same =
+            prev.articles.length === mergedArticles.length &&
+            prev.articles.every(
+              (a, i) =>
+                a.url === mergedArticles[i].url &&
+                a.isSaved === mergedArticles[i].isSaved,
+            );
+
+          if (same) return prev; // evita re-render
+
+          return { ...prev, articles: mergedArticles };
+        });
+      } catch (error) {
+        console.error(
+          `Erro no efeito de merge das listas de cards, mergeNewsLists: ${error}`,
+        );
+      }
+    }
+
+    mergeNewsLists();
+  }, [loggedIn, searchedNews, savedUserNews]);
 
   // Handler para getNews
   const handleGetNews = async (queryToSearch) => {
@@ -103,8 +163,15 @@ function App() {
   // Handler: salvar cards
   const handleSaveCard = async (searchedNewsCard) => {
     try {
-      // POST para o banco de dados
-      const savedCard = await saveNews(searchedNewsCard);
+      let savedCard;
+
+      try {
+        // POST para o banco de dados
+        savedCard = await saveNews(searchedNewsCard);
+      } catch {
+        // Backend offline → usa fallback local
+        savedCard = searchedNewsCard;
+      }
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       setSavedUserNews((prev) => {
@@ -118,8 +185,15 @@ function App() {
   // Handlers: des-salvar cards
   const handleUnsaveCard = async (searchedNewsCard) => {
     try {
-      // DELETE para o banco de dados
-      const unsavedCard = await unsaveNews(searchedNewsCard);
+      let unsavedCard;
+
+      try {
+        // DELETE para o banco de dados
+        unsavedCard = await unsaveNews(searchedNewsCard);
+      } catch {
+        // backend offline → fallback local
+        unsavedCard = searchedNewsCard;
+      }
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       setSavedUserNews((prev) => {
