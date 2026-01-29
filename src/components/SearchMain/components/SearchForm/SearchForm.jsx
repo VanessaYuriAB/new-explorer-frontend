@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
 import SearchTooltip from '../../../Popups/components/SearchTooltip/SearchTooltip';
 import Popups from '../../../Popups/Popups';
@@ -11,10 +10,9 @@ function SearchForm({
   setIsSearchLoading,
   handleGetNews,
   setSearchedNews,
+  queryString,
+  setQueryString,
 }) {
-  // Variável de estado: controle do input do formulário
-  const [queryString, setQueryString] = useState('');
-
   // Objeto para configurar children de Popups: abertura do search tooltip
   // (SearchTooltip)
   const searchTooltip = {

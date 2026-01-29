@@ -8,6 +8,8 @@ function SearchMain({
   setIsSearchLoading,
   handleGetNews,
   setSearchedNews,
+  queryString,
+  setQueryString,
 }) {
   return (
     <section className="search main__search">
@@ -24,6 +26,8 @@ function SearchMain({
           setIsSearchLoading={setIsSearchLoading}
           handleGetNews={handleGetNews}
           setSearchedNews={setSearchedNews}
+          queryString={queryString}
+          setQueryString={setQueryString}
         />
       </div>
     </section>
