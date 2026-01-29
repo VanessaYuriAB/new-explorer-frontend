@@ -1,5 +1,6 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
+import useFormattedDateBR from '../../../../hooks/useformattedDateBR';
 import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './NewsCard.css';
 
@@ -16,19 +17,8 @@ function NewsCard({ searchedNewsCard, handleSaveCard, handleUnsaveCard }) {
   // será aplicada para mostrar que o botão está no status "salvo"
   const getCardBtnClassName = `new-card__btn ${isSaved === true ? 'new-card__btn_active' : ''}`;
 
-  // Reformatação da data (publishedAt) com Intl.DateTimeFormat
-  // For Brazilian Portuguese: "26 de janeiro de 2025"
-  // useMemo para evitar processamento de cálculos desnecessários
-  // Verificação da propriedade, com fallback caso não exista
-  const formattedDateBR = useMemo(() => {
-    return publishedAt
-      ? new Intl.DateTimeFormat('pt-BR', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }).format(new Date(publishedAt))
-      : 'Data indisponível';
-  }, [publishedAt]);
+  // Reformatação da data (publishedAt) com hook personalizado
+  const formattedDateBR = useFormattedDateBR(publishedAt);
 
   return (
     <li className="new-card">
