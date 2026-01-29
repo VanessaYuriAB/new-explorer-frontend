@@ -10,7 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
 import getNews from '../../utils/NewsApi';
-import { saveNews, unsaveNews, getUserNews } from '../../utils/mainApi';
+import { saveNews, unsaveNews /*, getUserNews*/ } from '../../utils/mainApi';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
@@ -58,23 +58,7 @@ function App() {
     // savedUserNews é um array de objs e pode ser iterado sem erros
   });
 
-  // Efeito de montagem
-  useEffect(() => {
-    async function fetchSavedCards() {
-      try {
-        // Busca cards do usuário atual, na Api do servidor
-        const userSavedCards = await getUserNews();
-        // Seta a variável de estado
-        setSavedUserNews(userSavedCards);
-      } catch (error) {
-        console.error(`Erro no efeito de montagem, fetchSavedCards: ${error}`);
-      }
-    }
-
-    fetchSavedCards();
-  }, []);
-
-  // Efeito para sincronizar o localStorage sempre que o estado para notícias pesquisadas
+  // Efeito para atualizar o localStorage sempre que o estado para notícias pesquisadas
   // (searchedNews) mudar > para persistência dos dados ao recarregar a página
   useEffect(() => {
     if (searchedNews) {
@@ -82,7 +66,7 @@ function App() {
     }
   }, [searchedNews]);
 
-  // Efeito para sincronizar o localStorage sempre que o estado para notícias salvas do
+  // Efeito para atualizar o localStorage sempre que o estado para notícias salvas do
   // usuário atual (savedUserNews) mudar > para persistência dos dados ao recarregar a página,
   // configiração para cards salvos ou não salvos
   useEffect(() => {
@@ -90,6 +74,31 @@ function App() {
       localStorage.setItem('savedUserNewsData', JSON.stringify(savedUserNews));
     }
   }, [savedUserNews]);
+
+  /*
+  // Efeito 'de montagem' para cards salvos na Api do servidor > apenas com backend ativo
+  // Só roda se estiver logado, se não usa dados do localStorage configurados na
+  // variável de estado
+  useEffect(() => {
+    if (!loggedIn) return;
+
+    async function fetchSavedCards() {
+      try {
+        // Busca cards do usuário atual, na Api do banco de dados
+        const userSavedCards = await getUserNews();
+        // Seta a variável de estado
+        setSavedUserNews(userSavedCards);
+      } catch (error) {
+        console.error(
+          `Erro no efeito 'de montagem' para cards salvos, fetchSavedCards: ${error}`,
+        );
+      }
+    }
+
+    fetchSavedCards();
+  }, [loggedIn]);
+  */
+
   // Efeito para mergear lista de cards salvos (do usuário) com a lista de cards
   // retornados da pesquisa > para o ícone do botão 'salvar', no NewsCard
   // Apenas se estiver logado
