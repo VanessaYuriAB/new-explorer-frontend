@@ -80,16 +80,17 @@ function NewsCardList({ searchedNews, handleSaveCard, handleUnsaveCard }) {
         está definida desta forma, mas existe a propriedade totalResults para renderização
         do total de artigos pesquisados */}
         {/* {visibleCards < searchedNews.totalResults && ( */}
-        {visibleCards < 100 && (
-          <button
-            /* Condição para renderização de versões para o botão: logado e deslogado */
-            className={`searched-news__btn ${!loggedIn ? 'searched-news__btn_out' : ''} `}
-            type="button"
-            onClick={handleShowMore}
-          >
-            Mostrar mais
-          </button>
-        )}
+        {visibleCards < searchedNews.totalResults &&
+          searchedNews.totalResults < 100 && (
+            <button
+              /* Condição para renderização de versões para o botão: logado e deslogado */
+              className={`searched-news__btn ${!loggedIn ? 'searched-news__btn_out' : ''} `}
+              type="button"
+              onClick={handleShowMore}
+            >
+              Mostrar mais
+            </button>
+          )}
       </section>
     );
   }
