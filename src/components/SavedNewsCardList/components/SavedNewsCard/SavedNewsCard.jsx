@@ -1,46 +1,70 @@
+import React from 'react';
+import useFormattedDateBR from '../../../../hooks/useformattedDateBR';
+import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './SavedNewsCard.css';
 
-import imgCard from '../../../../assets/card-img-nature.png';
+function SavedNewsCard({ savedCard, handleUnsaveCard }) {
+  // Desestruturação das propriedades de cada card salvo
+  const { source, title, description, url, urlToImage, publishedAt, tag } =
+    savedCard;
 
-function SavedNewsCard() {
+  const { name } = source;
+
+  // Reformatação da data (publishedAt) com hook personalizado
+  const formattedDateBR = useFormattedDateBR(publishedAt);
+
   return (
     <li className="saved-card">
       <article className="saved-card__article">
         <figure className="saved-card__figure">
-          {/* Atualizar 'alt' dinâmico, como nome da foto */}
-
           <img
             className="saved-card__img"
-            src={imgCard}
-            alt="Foto da notícia do cartão"
+            src={urlToImage ? urlToImage : imgIndisponivel}
+            alt={`Imagem do artigo: ${title ? title : 'descrição indisponível'}`}
           />
-          <figcaption className="saved-card__tag">Tag da News</figcaption>
+          <figcaption className="saved-card__tag">{`${tag}`}</figcaption>
         </figure>
 
         {/* Tooltip de aviso da lixeira implementado via CSS, com :hover::before (usando
         regra 'content') */}
 
-        <button type="button" className="saved-card__btn"></button>
+        <button
+          type="button"
+          className="saved-card__btn"
+          aria-label="Remover dos salvos"
+          onClick={() => handleUnsaveCard(savedCard)}
+        ></button>
 
         <div className="saved-card__infos">
           {/* Atualizar 'datetime' dinâmico */}
 
-          <time className="saved-card__date" dateTime="2026-01-09">
-            09 de janeiro de 2026
+          <time className="saved-card__date" dateTime={publishedAt}>
+            {`${formattedDateBR}`}
           </time>
-          <h3 className="saved-card__title">
-            A natureza faz de você uma pessoa melhor
-          </h3>
+
+          {/* Tag __title-link apenas para envolver o títutlo com link e redirecionar
+          para a página da notícia */}
+
+          <a
+            className="saved-card__title-link"
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="saved-card__title">
+              {`${title ? title : 'Título indisponível'}`}
+            </h3>
+          </a>
+
           <p className="saved-card__text">
-            Todos nós sabemos como a natureza nos faz bem. Nós a conhecemos há
-            milênios: o som dos oceanos, os aromas de uma floresta, a forma como
-            a luz do sol dança através das folhas.
+            {`${description ? description : 'Descrição indisponível'}`}
           </p>
-          <cite className="saved-card__source">NATIONAL GEOGRAPHIC</cite>
+          <cite className="saved-card__source">{`${name ? name : 'Fonte indisponível'}`}</cite>
         </div>
       </article>
     </li>
   );
 }
 
-export default SavedNewsCard;
+// Exporta envolto em memo
+export default React.memo(SavedNewsCard);

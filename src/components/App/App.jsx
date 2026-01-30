@@ -223,17 +223,18 @@ function App() {
     }
   };
 
-  // Handlers: des-salvar cards
-  const handleUnsaveCard = async (searchedNewsCard) => {
+  // Handler: des-salvar cards de pesquisa (NewsCard) e remover cards de salvos
+  // (SavedNewsCard)
+  const handleUnsaveCard = async (card) => {
     try {
       let unsavedCard;
 
       try {
         // DELETE para o banco de dados
-        unsavedCard = await unsaveNews(searchedNewsCard);
+        unsavedCard = await unsaveNews(card);
       } catch {
         // backend offline → fallback local
-        unsavedCard = searchedNewsCard;
+        unsavedCard = card;
       }
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
@@ -335,7 +336,10 @@ function App() {
               path="/saved-news"
               element={
                 <ProtectedRoute>
-                  <SavedNewsCardList />
+                  <SavedNewsCardList
+                    savedUserNews={savedUserNews}
+                    handleUnsaveCard={handleUnsaveCard}
+                  />
                 </ProtectedRoute>
               }
             />
