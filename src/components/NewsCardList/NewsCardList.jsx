@@ -3,23 +3,18 @@ import AuthContext from '../../contexts/AuthContext';
 import { useContext, useCallback, useState } from 'react';
 import './NewsCardList.css';
 
-function NewsCardList({ searchedNews, handleSaveCard, handleUnsaveCard }) {
+function NewsCardList({ searchedNews, handleSaveCard, memoizedHandleUnsave }) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
   // Variável de estado: controle da qtdd de cards renderizados, iniciando com apenas três
   const [visibleCards, setVisibleCards] = useState(3);
 
-  // Memoriza as funções passadas ao NewsCard, para não recriar a cada render
+  // Memoriza a função passada ao NewsCard, para não recriar a cada render
   // Em conjunto com React.memo() e useMemo() para os dados
   const memoizedHandleSave = useCallback(
     (card) => handleSaveCard(card),
     [handleSaveCard],
-  );
-
-  const memoizedHandleUnsave = useCallback(
-    (card) => handleUnsaveCard(card),
-    [handleUnsaveCard],
   );
 
   // Handler: mostrar mais três cartões
@@ -69,7 +64,7 @@ function NewsCardList({ searchedNews, handleSaveCard, handleUnsaveCard }) {
                 algo único */
                   searchedNewsCard={searchedNewsCard}
                   handleSaveCard={memoizedHandleSave} // valor memorizado
-                  handleUnsaveCard={memoizedHandleUnsave} // valor memorizado
+                  memoizedHandleUnsave={memoizedHandleUnsave}
                 />
               ))}
           </ul>

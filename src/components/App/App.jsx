@@ -11,7 +11,7 @@ import Footer from '../Footer/Footer';
 import AuthContext from '../../contexts/AuthContext';
 import getNews from '../../utils/NewsApi';
 import { saveNews, unsaveNews /*, getUserNews*/ } from '../../utils/mainApi';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
@@ -225,7 +225,10 @@ function App() {
 
   // Handler: des-salvar cards de pesquisa (NewsCard) e remover cards de salvos
   // (SavedNewsCard)
-  const handleUnsaveCard = async (card) => {
+  // useCallback: para memorizar a função e não recriar a cada render > NewsCard
+  // e SavedNewsCard
+  // Em conjunto com React.memo() e useMemo() para os dados
+  const memoizedHandleUnsave = useCallback(async (card) => {
     try {
       let unsavedCard;
 
@@ -247,9 +250,9 @@ function App() {
         });
       });
     } catch (error) {
-      console.error(`Erro no handleUnsaveCard: ${error}`);
+      console.error(`Erro no memoizedHandleUnsave: ${error}`);
     }
-  };
+  }, []);
 
   // Handler: abre popup
   const handleOpenPopup = (popup) => {
@@ -323,7 +326,7 @@ function App() {
                       <NewsCardList
                         searchedNews={searchedNews}
                         handleSaveCard={handleSaveCard}
-                        handleUnsaveCard={handleUnsaveCard}
+                        memoizedHandleUnsave={memoizedHandleUnsave}
                       />
                     )}
 
@@ -338,7 +341,7 @@ function App() {
                 <ProtectedRoute>
                   <SavedNewsCardList
                     savedUserNews={savedUserNews}
-                    handleUnsaveCard={handleUnsaveCard}
+                    memoizedHandleUnsave={memoizedHandleUnsave}
                   />
                 </ProtectedRoute>
               }

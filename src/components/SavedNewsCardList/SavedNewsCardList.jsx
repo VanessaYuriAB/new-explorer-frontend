@@ -1,7 +1,7 @@
 import SavedNewsCard from './components/SavedNewsCard/SavedNewsCard';
 import './SavedNewsCardList.css';
 
-function SavedNewsCardList({ savedUserNews, handleUnsaveCard }) {
+function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
   // Se o array do estado para os cards salvos do usuário estiver vazio, renderiza msg
   if (savedUserNews.length === 0) {
     return (
@@ -70,7 +70,7 @@ function SavedNewsCardList({ savedUserNews, handleUnsaveCard }) {
                 <SavedNewsCard
                   key={savedCard.url}
                   savedCard={savedCard}
-                  handleUnsaveCard={handleUnsaveCard}
+                  memoizedHandleUnsave={memoizedHandleUnsave}
                 />
               );
             })}

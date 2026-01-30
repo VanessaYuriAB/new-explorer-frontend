@@ -4,7 +4,7 @@ import useFormattedDateBR from '../../../../hooks/useformattedDateBR';
 import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './NewsCard.css';
 
-function NewsCard({ searchedNewsCard, handleSaveCard, handleUnsaveCard }) {
+function NewsCard({ searchedNewsCard, handleSaveCard, memoizedHandleUnsave }) {
   // Desestruturação de propriedades do obj para cada notícia, dentro do array de
   // artigos da resposta bem-sucedida da NewsApi
   const { source, title, description, url, urlToImage, publishedAt, isSaved } =
@@ -50,7 +50,7 @@ function NewsCard({ searchedNewsCard, handleSaveCard, handleUnsaveCard }) {
                 if (isSaved === false) {
                   handleSaveCard(searchedNewsCard);
                 } else {
-                  handleUnsaveCard(searchedNewsCard);
+                  memoizedHandleUnsave(searchedNewsCard);
                 }
               }}
             ></button>

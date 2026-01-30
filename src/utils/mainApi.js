@@ -33,7 +33,7 @@ const unsaveNews = async (cardId) => {
   // Se a solicitação for bem-sucedida, retorna os dados
   return unsavedCard;
 
-  // Se a solicitação não for bem-sucedida, repassa o erro adiante > handleUnsaveCard
+  // Se a solicitação não for bem-sucedida, repassa o erro adiante > memoizedHandleUnsave
   // Try/catch desnecessário aqui tbm
 };
 

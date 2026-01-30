@@ -3,7 +3,7 @@ import useFormattedDateBR from '../../../../hooks/useformattedDateBR';
 import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './SavedNewsCard.css';
 
-function SavedNewsCard({ savedCard, handleUnsaveCard }) {
+function SavedNewsCard({ savedCard, memoizedHandleUnsave }) {
   // Desestruturação das propriedades de cada card salvo
   const { source, title, description, url, urlToImage, publishedAt, tag } =
     savedCard;
@@ -32,7 +32,7 @@ function SavedNewsCard({ savedCard, handleUnsaveCard }) {
           type="button"
           className="saved-card__btn"
           aria-label="Remover dos salvos"
-          onClick={() => handleUnsaveCard(savedCard)}
+          onClick={() => memoizedHandleUnsave(savedCard)}
         ></button>
 
         <div className="saved-card__infos">
