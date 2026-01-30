@@ -28,9 +28,6 @@ function App() {
   // Variável de estado: controle do header e nav para mobile
   const [mobile, setMobile] = useState(false);
 
-  // Variável de estado: controle do input do formulário de pesquisa de notícias (SearchForm)
-  const [queryString, setQueryString] = useState('');
-
   // Variável de estado: controle do Preloader
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
@@ -282,8 +279,6 @@ function App() {
                     setIsSearchLoading={setIsSearchLoading}
                     handleGetNews={handleGetNews}
                     setSearchedNews={setSearchedNews}
-                    queryString={queryString}
-                    setQueryString={setQueryString}
                   />
 
                   {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza
