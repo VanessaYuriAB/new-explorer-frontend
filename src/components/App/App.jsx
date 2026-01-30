@@ -160,17 +160,36 @@ function App() {
     mergeNewsLists();
   }, [loggedIn, searchedNews, savedUserNews]);
 
-  // Handler para getNews
+  // Handler para getNews + adicionar queryString para a tag do card
   const handleGetNews = async (queryToSearch) => {
     try {
       // GET para a API externa: News Api
       const responseOfNews = await getNews(queryToSearch);
 
+      // Apenas a primeira palavra da queryString
+      const tag = queryToSearch.split(' ')[0];
+
+      // Adiciona uma nova propriedade ('tag') no obj de cada cartão, para implementar na
+      // tag, se salvo
+      const articlesWithTag = responseOfNews.articles.map((card) => {
+        return {
+          ...card,
+          tag: tag,
+        };
+      });
+
+      // Atualizado todo o objeto de resposta, com a atualização da flag 'tag' em cada card,
+      // no array para artigos
+      const responseOfNewsWithTag = {
+        ...responseOfNews,
+        articles: articlesWithTag,
+      };
+
       // Define o estado do resultado de pesquisa, com o obj inteiro retornado
       // Para acesso às propriedades do obj em outras funcionalidades
       // Caso o status seja 'ok' ou, tbm, 'error'; condicionando a renderização de
       // componentes
-      setSearchedNews(responseOfNews); // status 'ok'
+      setSearchedNews(responseOfNewsWithTag); // status 'ok'
     } catch (responseOfError) {
       setSearchedNews({
         status: 'error',
