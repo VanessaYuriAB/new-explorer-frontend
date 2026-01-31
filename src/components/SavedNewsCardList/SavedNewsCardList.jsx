@@ -51,7 +51,7 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
           <h2 className="saved-news__title">Artigos salvos</h2>
           <p className="saved-news__info">
             <span className="saved-news__username">Nome</span>
-            {`, você tem ${savedUserNews.length} artigos salvos`}
+            {`, você tem ${savedUserNews.length} artigo(s) salvo(s)`}
           </p>
           <p className="saved-news__keywords">
             Por palavras-chave: {/* A tag do último e penúlitmo card salvo */}
