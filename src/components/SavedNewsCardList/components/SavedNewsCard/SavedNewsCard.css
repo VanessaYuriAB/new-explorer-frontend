@@ -16,8 +16,8 @@
 /* Tag implementada apenas para a semântica html */
 .saved-card__figure {
   margin: 0;
-  max-width: 400px;
-  min-width: 224px;
+  width: 400px;
+  height: 272px;
 }
 
 .saved-card__img {
@@ -69,6 +69,9 @@
 .saved-card__btn:hover {
   background-image: url('/images/trash-card-hover.svg');
   cursor: url('/images/cursor-lapka.png'), pointer;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul claro */
 }
 
 /* Para implementar tooltip de aviso da lixeira, quando o botão estiver em hover */
