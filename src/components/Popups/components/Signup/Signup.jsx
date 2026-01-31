@@ -41,6 +41,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         type="email"
         placeholder="Insira e-mail"
         id="email"
+        aria-label="Inserir e-mail para cadastro"
         required
       ></input>
       <span className="popup__signup-span">
@@ -54,6 +55,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         type="password"
         placeholder="Insira a senha"
         id="password"
+        aria-label="Inserir senha para cadastro"
         required
       ></input>
       <span className="popup__signup-span">
@@ -67,6 +69,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         type="text"
         placeholder="Insira seu nome de usuário"
         id="name"
+        aria-label="Inserir seu nome de usuário"
         required
       ></input>
       <span className="popup__signup-span">

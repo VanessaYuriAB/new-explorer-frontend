@@ -20,7 +20,11 @@ function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
       <div className="header-news-mobile__content">
         <div className="header-news-mobile__box">
           <div className="header-news-mobile__logo-box">
-            <Link className="header-news-mobile__logo-link" to="/">
+            <Link
+              className="header-news-mobile__logo-link"
+              to="/"
+              aria-label="Logo do site, é um link: navegar para a página inicial."
+            >
               <img
                 className="header-news-mobile__logo-img"
                 src={newsExplorerBlack}
@@ -31,6 +35,7 @@ function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
               className="header-news-mobile__logo-menu"
               type="button"
               onClick={() => setMobile(false)}
+              aria-label="Ícone com traços, um abaixo do outro, na horizontal: abrir menu"
             ></button>
           </div>
         </div>
@@ -52,7 +57,11 @@ function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
               Artigos salvos
             </NavLink>
           </div>
-          <button className="header-news-mobile__btn" type="button">
+          <button
+            className="header-news-mobile__btn"
+            type="button"
+            aria-label="Deslogar usuário"
+          >
             <p className="header-news-mobile__btn-text">Nome</p>
             <img
               className="header-news-mobile__btn-out"

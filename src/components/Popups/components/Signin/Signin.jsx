@@ -26,6 +26,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         type="email"
         placeholder="Insira e-mail"
         id="email"
+        aria-label="Inserir e-mail cadastrado"
         required
       ></input>
       <span className="popup__signin-span">
@@ -39,6 +40,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         type="password"
         placeholder="Insira a senha"
         id="password"
+        aria-label="Inserir senha cadastrada"
         required
       ></input>
       <span className="popup__signin-span">

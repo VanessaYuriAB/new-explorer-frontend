@@ -54,7 +54,11 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
               Artigos salvos
             </NavLink>
           </div>
-          <button className="header__btn" type="button">
+          <button
+            className="header__btn"
+            type="button"
+            aria-label="Deslogar usuário"
+          >
             <p className="header__btn-text">Nome</p>
             <img
               className="header__btn-out"
@@ -74,6 +78,7 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
             className="header__btn header__btn_out"
             type="button"
             onClick={() => handleOpenPopup(signinPopup)}
+            aria-label="Logar usuário"
           >
             <p className="header__btn-text header__btn-text_out">Entrar</p>
           </button>

@@ -23,7 +23,7 @@ function SavedNewsNavigation() {
           Artigos salvos
         </NavLink>
       </div>
-      <Link className="header-news__btn" to="/">
+      <Link className="header-news__btn" to="/" aria-label="Deslogar usuário">
         <p className="header-news__btn-text">Nome</p>
         <img
           className="header-news__btn-out"

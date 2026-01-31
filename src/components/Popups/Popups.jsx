@@ -57,6 +57,7 @@ function Popups(props) {
               className="popup__close-btn"
               type="button"
               onClick={handleClosePopup}
+              aria-label='Ícone "X" para fechar'
             ></button>
           </div>
         </div>

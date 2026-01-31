@@ -61,6 +61,7 @@ function NewsCard({ searchedNewsCard, handleSaveCard, memoizedHandleUnsave }) {
             <button
               className="new-card__btn new-card__btn_out"
               type="button"
+              aria-label="Logar para poder salvar"
             ></button>
           </>
         )}

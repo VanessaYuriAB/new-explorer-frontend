@@ -68,8 +68,13 @@ function SearchForm({
         onChange={(e) => {
           setQueryString(e.target.value);
         }}
+        aria-label="Inserir tema para pesquisa"
       ></input>
-      <button className="search__form-btn" type="submit">
+      <button
+        className="search__form-btn"
+        type="submit"
+        aria-label="Procurar notícias"
+      >
         Procurar
       </button>
 

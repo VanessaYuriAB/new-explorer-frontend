@@ -17,7 +17,11 @@ function Header({
       <div className="header__box">
         {/* __logo-box adicionado para configuração do layout de menu para mobile */}
         <div className="header__logo-box">
-          <Link className="header__logo-link" to="/">
+          <Link
+            className="header__logo-link"
+            to="/"
+            aria-label="Logo do site, é um link: navegar para a página inicial."
+          >
             <img
               className="header__logo-img"
               src={newsExplorer}
@@ -28,6 +32,7 @@ function Header({
             className="header__logo-menu"
             type="button"
             onClick={() => setMobile(true)}
+            aria-label="Ícone com traços, um abaixo do outro, na horizontal: abrir menu"
           ></button>
         </div>
         <Navigation

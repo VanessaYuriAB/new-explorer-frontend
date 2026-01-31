@@ -11,7 +11,11 @@ function SavedNewsHeader({ mobile, setMobile }) {
       <div className="header-news__box">
         {/* __logo-box adicionado para configuração do layout de menu para mobile */}
         <div className="header-news__logo-box">
-          <Link className="header-news__logo-link" to="/">
+          <Link
+            className="header-news__logo-link"
+            to="/"
+            aria-label="Logo do site, é um link: navegar para a página inicial."
+          >
             <img
               className="header-news__logo-img"
               src={newsExplorerBlack}
@@ -22,6 +26,7 @@ function SavedNewsHeader({ mobile, setMobile }) {
             className="header-news__logo-menu"
             type="button"
             onClick={() => setMobile(true)}
+            aria-label="Ícone com traços, um abaixo do outro, na horizontal: abrir menu"
           ></button>
         </div>
         <SavedNewsNavigation />

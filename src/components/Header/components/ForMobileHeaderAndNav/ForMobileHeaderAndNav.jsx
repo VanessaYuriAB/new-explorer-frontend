@@ -51,7 +51,11 @@ function ForMobileHeaderAndNav({
       <div className="header-mobile__content">
         <div className="header-mobile__box">
           <div className="header-mobile__logo-box">
-            <Link className="header-mobile__logo-link" to="/">
+            <Link
+              className="header-mobile__logo-link"
+              to="/"
+              aria-label="Logo do site, é um link: navegar para a página inicial."
+            >
               <img
                 className="header-mobile__logo-img"
                 src={newsExplorer}
@@ -62,6 +66,7 @@ function ForMobileHeaderAndNav({
               className="header-mobile__logo-menu"
               type="button"
               onClick={() => setMobile(false)}
+              aria-label="Ícone com traços, um abaixo do outro, na horizontal: abrir menu"
             ></button>
           </div>
         </div>
@@ -87,7 +92,11 @@ function ForMobileHeaderAndNav({
                   Artigos salvos
                 </NavLink>
               </div>
-              <button className="header-mobile__btn" type="button">
+              <button
+                className="header-mobile__btn"
+                type="button"
+                aria-label="Deslogar usuário"
+              >
                 <p className="header-mobile__btn-text">Nome</p>
                 <img
                   className="header-mobile__btn-out"
@@ -107,6 +116,7 @@ function ForMobileHeaderAndNav({
                 className="header-mobile__btn header-mobile__btn_out"
                 type="button"
                 onClick={() => handleOpenPopup(signinPopup)}
+                aria-label="Logar usuário"
               >
                 <p className="header-mobile__btn-text header-mobile__btn-text_out">
                   Entrar
