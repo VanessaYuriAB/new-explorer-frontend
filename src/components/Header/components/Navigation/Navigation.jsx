@@ -7,8 +7,8 @@ import btnOut from '../../../../assets/btn-out.svg';
 import './Navigation.css';
 
 function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
-  // Contexto de autenticação, extraindo estado de login
-  const { loggedIn } = useContext(AuthContext);
+  // Contexto de autenticação, extraindo estado e set de login
+  const { loggedIn, setLoggedIn } = useContext(AuthContext);
 
   // As funções getNavLinkClass e getNavLinkClassOut são nativas do componente <NavLink>
   // Aceitam um objeto como parâmetro, que possui uma propriedade, isActive, que é
@@ -57,6 +57,9 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
           <button
             className="header__btn"
             type="button"
+            onClick={() => {
+              setLoggedIn(false);
+            }}
             aria-label="Deslogar usuário"
           >
             <p className="header__btn-text">Nome</p>

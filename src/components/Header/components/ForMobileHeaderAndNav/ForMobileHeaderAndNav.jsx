@@ -14,8 +14,8 @@ function ForMobileHeaderAndNav({
   handleOpenPopup,
   handleClosePopup,
 }) {
-  // Contexto de autenticação, extraindo estado de login
-  const { loggedIn } = useContext(AuthContext);
+  // Contexto de autenticação, extraindo estado e set de login
+  const { loggedIn, setLoggedIn } = useContext(AuthContext);
 
   // As funções getNavLinkClass e getNavLinkClassOut são nativas do componente <NavLink>
   // Aceitam um objeto como parâmetro, que possui uma propriedade, isActive, que é
@@ -95,6 +95,9 @@ function ForMobileHeaderAndNav({
               <button
                 className="header-mobile__btn"
                 type="button"
+                onClick={() => {
+                  setLoggedIn(false);
+                }}
                 aria-label="Deslogar usuário"
               >
                 <p className="header-mobile__btn-text">Nome</p>

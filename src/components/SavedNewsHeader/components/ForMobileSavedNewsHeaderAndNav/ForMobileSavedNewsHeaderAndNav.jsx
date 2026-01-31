@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import AuthContext from '../../../../contexts/AuthContext';
 import newsExplorerBlack from '../../../../assets/news-explorer-logo-black.svg';
 import lineHeaderGray from '../../../../assets/line-header-gray.svg';
 import btnOut from '../../../../assets/btn-out.svg';
 import './ForMobileSavedNewsHeaderAndNav.css';
 
 function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
+  // Contexto de autenticação, extraindo set de estado de login
+  const { setLoggedIn } = useContext(AuthContext);
+
   // A função getNavLinkClass é nativa do componente <NavLink>
   // Aceita um objeto como um parâmetro, que possui uma propriedade,
   // isActive, que é verdadeira se o link estiver ativo
@@ -60,6 +65,9 @@ function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
           <button
             className="header-news-mobile__btn"
             type="button"
+            onClick={() => {
+              setLoggedIn(false);
+            }}
             aria-label="Deslogar usuário"
           >
             <p className="header-news-mobile__btn-text">Nome</p>

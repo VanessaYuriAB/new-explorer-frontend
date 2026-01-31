@@ -1,8 +1,13 @@
-import './SavedNewsNavigation.css';
+import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import AuthContext from '../../../../contexts/AuthContext';
 import btnOutBlack from '../../../../assets/btn-out-black.svg';
+import './SavedNewsNavigation.css';
 
 function SavedNewsNavigation() {
+  // Contexto de autenticação, extraindo set de estado de login
+  const { setLoggedIn } = useContext(AuthContext);
+
   // A função getNavLinkClass é nativa do componente <NavLink>
   // Aceita um objeto como um parâmetro, que possui uma propriedade,
   // isActive, que é verdadeira se o link estiver ativo
@@ -23,14 +28,21 @@ function SavedNewsNavigation() {
           Artigos salvos
         </NavLink>
       </div>
-      <Link className="header-news__btn" to="/" aria-label="Deslogar usuário">
+      <button
+        className="header-news__btn"
+        type="button"
+        onClick={() => {
+          setLoggedIn(false);
+        }}
+        aria-label="Deslogar usuário"
+      >
         <p className="header-news__btn-text">Nome</p>
         <img
           className="header-news__btn-out"
           src={btnOutBlack}
           alt="Ícone simbolizando saída/logout."
         />
-      </Link>
+      </button>
     </nav>
   );
 }

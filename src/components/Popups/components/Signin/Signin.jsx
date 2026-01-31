@@ -1,8 +1,13 @@
+import { useContext } from 'react';
+import AuthContext from '../../../../contexts/AuthContext';
 import Signup from '../Signup/Signup';
 import Popups from '../../Popups';
 import './Signin.css';
 
 function Signin({ popup, handleOpenPopup, handleClosePopup }) {
+  // Contexto de autenticação, extraindo set do estado de login
+  const { setLoggedIn } = useContext(AuthContext);
+
   // Objeto para configurar children de Popups: abertura do popup de inscrição (Signup)
   const signupPopup = {
     children: (
@@ -46,7 +51,14 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
       <span className="popup__signin-span">
         Span para msg de erro do input-password
       </span>
-      <button className="popup__signin-btn" type="submit" disabled>
+      <button
+        className="popup__signin-btn"
+        type="submit"
+        onClick={() => {
+          setLoggedIn(true);
+          handleClosePopup();
+        }} /*disabled*/
+      >
         Entrar
       </button>
       <p className="popup__signin-plink">
