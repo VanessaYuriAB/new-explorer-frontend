@@ -19,6 +19,10 @@ function App() {
   // Hook de localização para saber a rota atual
   const location = useLocation();
 
+  /* ------------------------------
+              ESTADOS
+  ------------------------------- */
+
   // Variável de estado: status de login
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -57,6 +61,10 @@ function App() {
     // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
     // savedUserNews é um array de objs e pode ser iterado sem erros
   });
+
+  /* ------------------------------
+              EFEITOS
+  ------------------------------- */
 
   // Efeito para atualizar o localStorage sempre que o estado para notícias pesquisadas
   // (searchedNews) mudar > para persistência dos dados ao recarregar a página
@@ -159,6 +167,10 @@ function App() {
 
     mergeNewsLists();
   }, [loggedIn, searchedNews, savedUserNews]);
+
+  /* ------------------------------
+              HANDLERS
+  ------------------------------- */
 
   // Handler para getNews + adicionar queryString para a tag do card
   const handleGetNews = async (queryToSearch) => {
@@ -263,6 +275,10 @@ function App() {
   const handleClosePopup = () => {
     setPopup(null);
   };
+
+  /* ------------------------------
+                JSX
+  ------------------------------- */
 
   return (
     // Provedor de contexto: compartilha dados de login e do usuário atual
