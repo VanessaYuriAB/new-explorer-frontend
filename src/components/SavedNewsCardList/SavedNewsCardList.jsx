@@ -7,7 +7,8 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
     return (
       <section className="saved-news main__saved-news">
         <div className="saved-news__no-saveds">
-          Você não tem nenhum cartão de notícia salvo, Nome.
+          Você não tem nenhum cartão de notícia salvo,{' '}
+          <span className="saved-news__username">Nome</span>.
         </div>
       </section>
     );
@@ -48,7 +49,10 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
       <section className="saved-news main__saved-news">
         <div className="saved-news__infos">
           <h2 className="saved-news__title">Artigos salvos</h2>
-          <p className="saved-news__info">{`Nome, você tem ${savedUserNews.length} artigos salvos`}</p>
+          <p className="saved-news__info">
+            <span className="saved-news__username">Nome</span>
+            {`, você tem ${savedUserNews.length} artigos salvos`}
+          </p>
           <p className="saved-news__keywords">
             Por palavras-chave: {/* A tag do último e penúlitmo card salvo */}
             <span className="saved-news__keyword">{` ${firstKeyword}`}</span>

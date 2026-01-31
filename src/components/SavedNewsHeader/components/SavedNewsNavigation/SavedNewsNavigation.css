@@ -98,6 +98,9 @@
   background-color: transparent;
   position: relative;
   z-index: 2;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
 }
 
 /* Elemento: ícone ('sair') do botão, quando logado  */
@@ -106,6 +109,9 @@
   height: 16px;
   position: relative;
   z-index: 2;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
 }
 
 /* ------ Responsividade ------ */

@@ -33,7 +33,9 @@
 .header-news__logo-link:hover {
   cursor: url('/images/cursor-lapka.png'), pointer;
   opacity: 0.6;
-  filter: drop-shadow(0 0 0.5em #46a9bbff); /* aplica iluminação azul claro */
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
   transform: scale3d(
     1.1,
     1.1,

@@ -71,7 +71,7 @@
   cursor: url('/images/cursor-lapka.png'), pointer;
   filter: drop-shadow(
     0 0 0.5em rgba(47, 113, 229, 1)
-  ); /* aplica iluminação azul claro */
+  ); /* aplica iluminação azul */
 }
 
 /* Para implementar tooltip de aviso da lixeira, quando o botão estiver em hover */
@@ -157,7 +157,7 @@
   opacity: 0.8;
   filter: drop-shadow(
     0 0 0.2em rgba(47, 113, 229, 1)
-  ); /* aplica iluminação azul claro */
+  ); /* aplica iluminação azul */
 }
 
 .saved-card__title:active {

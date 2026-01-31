@@ -8,6 +8,12 @@
   align-self: center;
 }
 
+.saved-news__username {
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+}
+
 .saved-news__infos {
   padding-top: 40px;
   padding-bottom: 56px;

@@ -21,7 +21,7 @@
   margin: 0 0 0 36px;
   filter: drop-shadow(
     0 0 0.2em rgba(47, 113, 229, 1)
-  ); /* aplica iluminação azul claro */
+  ); /* aplica iluminação azul */
 }
 
 .search__tooltip-text {
