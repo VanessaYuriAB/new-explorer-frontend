@@ -2,6 +2,7 @@ const baseNewsApiUrl = import.meta.env.VITE_BASE_NEWS_API_URL;
 const newsApiKey = import.meta.env.VITE_NEWS_API_KEY;
 
 const baseMainApiUrl = import.meta.env.VITE_BASE_MAIN_API_URL;
+// baseMainApiUrl === undefined se não existir no .env
 
 // Função genérica para enviar requisições HTTP
 const makeApisRequest = async ({
