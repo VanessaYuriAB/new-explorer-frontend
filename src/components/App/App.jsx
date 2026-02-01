@@ -228,7 +228,7 @@ function App() {
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       setSavedUserNews((prev) => {
-        return [...prev, savedCard];
+        return [savedCard, ...prev];
       });
     } catch (error) {
       console.error(`Erro no handleSaveCard: ${error}`);
