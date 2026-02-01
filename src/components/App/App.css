@@ -81,6 +81,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 80px - 80px);
+  /* altura restante: viewport - header - footer */
 }
 
 /* ------ footer ------ */
@@ -133,6 +135,8 @@ input:focus-visible {
 
   .main__saved-news {
     top: 66px;
+    min-height: calc(100vh - 66px - 64px);
+    /* altura restante: viewport - header - footer */
   }
 
   .page__footer {
@@ -175,6 +179,8 @@ input:focus-visible {
 
   .main__saved-news {
     top: 56px;
+    min-height: calc(100vh - 56px - 176px);
+    /* altura restante: viewport - header - footer */
   }
 
   .page__footer {
