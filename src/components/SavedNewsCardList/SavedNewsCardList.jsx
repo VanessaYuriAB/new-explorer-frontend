@@ -16,34 +16,72 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
 
   // Se houver objs de cards salvos, renderiza lista do usuário
   if (savedUserNews.length > 0) {
+    /* ----------------
+        PRIMEIRA KEY
+    -----------------*/
+
     const firstKeyword = savedUserNews[savedUserNews.length - 1].tag;
 
-    const secondKeyword = savedUserNews[savedUserNews.length - 2]
-      ? savedUserNews[savedUserNews.length - 2].tag
-      : '';
+    /* ----------------
+        SEGUNDA KEY
+    -----------------*/
 
-    const secondSpan = () => {
-      // Se houver mais de 2
-      if (savedUserNews[savedUserNews.length - 3]) {
-        return savedUserNews[savedUserNews.length - 2]
-          ? `, ${secondKeyword} `
-          : '';
-      } else if (savedUserNews[savedUserNews.length - 2]) {
-        // Se houverem 2
-        return ` e ${secondKeyword} `;
-      } else {
-        // Se houver apenas 1
-        return '';
+    // Retorna array com tags diferentes da primeira
+    const diferentKey = savedUserNews.filter((card) => {
+      return card.tag !== firstKeyword;
+    });
+
+    // Retorna o valor da segunda palavra-chave, se houver
+    // Se não houver, não quebra a aplicação (?.)
+    const secondKey = diferentKey[diferentKey.length - 1]?.tag;
+
+    // Configura estrutura do texto para a segunda palavra-chave, de acordo com a qtdd
+    const secondKeyword = () => {
+      // Se houver 1 ou mais
+      if (diferentKey.length >= 1) {
+        return `, ${secondKey} `;
       }
+
+      // Se não houver nenhuma
+      return '';
     };
 
-    const anothersKeywords = savedUserNews[savedUserNews.length - 3]
-      ? savedUserNews.length - 2
-      : '';
+    /* ----------------
+       ANOTHERS KEYS
+    -----------------*/
 
-    const anothersSpan = savedUserNews[savedUserNews.length - 3]
-      ? `e ${anothersKeywords} outras`
-      : '';
+    // Array de palavras-chave totais diferentes das tags do primeiro e segundo span,
+    // baseado no vetor resultante para a segunda palavra-chave
+    const totalAnothersKeywords = diferentKey.filter((item) => {
+      return item.tag !== secondKey;
+    });
+
+    // Transforma totalAnothersKeywords em array contendo apenas tags
+    const totalAnothersTags = totalAnothersKeywords.map((item) => {
+      return item.tag;
+    });
+
+    // Contabiliza apenas palavras-chave diferentes uma das outras, a partir de
+    // totalAnothersTags - se a palavra for repetida, não contabiliza
+
+    /*
+    const amountAnothersKeys = [...new Set(totalAnothersTags)].length;
+    */
+
+    // 1. Cria um Set a partir do array (remove duplicatas)
+    // 2. Transforma o Set de volta em array com [...] ou Array.from()
+    // 3. Pega o .length
+
+    const anothersTags = new Set(totalAnothersTags);
+    const anothersTagsInArray = Array.from(anothersTags);
+    const amountAnothersTags = anothersTagsInArray.length;
+
+    // Configura o texto do span de acordo com a qtdd total
+    const amountAnothersKeywords = () => {
+      return amountAnothersTags > 0
+        ? `e ${amountAnothersTags} outras`
+        : `e 0 outras`;
+    };
 
     return (
       <section className="saved-news main__saved-news">
@@ -54,11 +92,13 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
             {`, você tem ${savedUserNews.length} artigo(s) salvo(s)`}
           </p>
           <p className="saved-news__keywords">
-            Por palavras-chave: {/* A tag do último e penúlitmo card salvo */}
+            Por palavras-chave:
+            {/* Primeira key */}
             <span className="saved-news__keyword">{` ${firstKeyword}`}</span>
-            <span className="saved-news__keyword">{`${secondSpan()}`}</span>
-            {/* O total de cards salvos no array, subtraído os dois acima */}
-            <span className="saved-news__keyword">{`${anothersSpan}`}</span>
+            {/* Segunda key */}
+            <span className="saved-news__keyword">{`${secondKeyword()}`}</span>
+            {/* Anothers Key */}
+            <span className="saved-news__keyword">{`${amountAnothersKeywords()}`}</span>
           </p>
         </div>
         <div className="saved-news__list">
