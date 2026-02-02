@@ -294,7 +294,7 @@ _O hover com a mensagem “Faça login para salvar artigos”._
 
 ## 🎥 10. Demonstração
 
-Vídeo demonstrativo no Loom: [clique aqui](https://www.loom.com/share/)
+Vídeo demonstrativo no Loom: [clique aqui](https://www.loom.com/share/b7abb3ad2cc44866975bfcc2a84251f6)
 
 [Voltar ao topo 🔝](#top)
 
@@ -306,9 +306,9 @@ Vídeo demonstrativo no Loom: [clique aqui](https://www.loom.com/share/)
 
 🧩 **Refatoração do Popups**: centralizar a lógica dos formulários em contexto, inclusive objetos para configuração de childrens. Reduzindo duplicação, melhorando a composição e flexibilizando os modais.
 
-📐 **Ajuste no posicionamento do Header**: revisar o comportamento atual para evitar deslocamento artificial do conteúdo. A ideia é reposicionar apenas o Header e eliminar espaçamentos compensatórios (como height: 100vh usado apenas para empurrar elementos).
+📐 **Ajuste no posicionamento do Header**: revisar o comportamento atual para evitar deslocamento artificial do conteúdo. A ideia é reposicionar apenas o Header e eliminar espaçamentos compensatórios (como `height: 100vh` usado apenas para empurrar elementos).
 
-🛈 **Melhoria de acessibilidade no Tooltip**: os tooltips exibidos ao passar o mouse sobre o botão de salvar funciona via CSS. Substituir por um elemento real (como <span> ou <div>) com role="tooltip" para maior acessibilidade e compatibilidade com leitores de tela.
+🛈 **Melhoria de acessibilidade no Tooltip**: os tooltips exibidos ao passar o mouse sobre o botão de salvar funciona via CSS. Substituir por um elemento real (como `<span>` ou `<div>`) com `role="tooltip"` para maior acessibilidade e compatibilidade com leitores de tela.
 
 📦 **Unificação de componentes duplicados**: refatorar componentes que possuem lógica ou estrutura muito semelhante, consolidando-os em versões reutilizáveis posicionadas um nível acima na arquitetura. Reduz redundância, facilita manutenção e deixa o código mais limpo.
 
