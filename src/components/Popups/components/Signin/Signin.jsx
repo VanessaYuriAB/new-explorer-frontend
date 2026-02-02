@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import Signup from '../Signup/Signup';
-import Popups from '../../Popups';
 import './Signin.css';
 
 function Signin({ popup, handleOpenPopup, handleClosePopup }) {
@@ -73,17 +72,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         </button>
       </p>
 
-      {/* Se o popup não for nulo, o componente será renderizado na tela */}
-
-      {popup && (
-        <Popups
-          popup={popup}
-          handleClosePopup={handleClosePopup}
-          type={popup.type}
-        >
-          {popup.children}
-        </Popups>
-      )}
+      {/* Signup será renderizado por Popups em App */}
     </form>
   );
 }

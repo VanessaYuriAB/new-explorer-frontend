@@ -1,11 +1,10 @@
 import Signin from '../Signin/Signin';
 import SignupTooltip from '../SignupTooltip/SignupTooltip';
-import Popups from '../../Popups';
 import './Signup.css';
 
 function Signup({ popup, handleOpenPopup, handleClosePopup }) {
-  // Objeto para configurar children de Popups: abertura do popup de login (Signin)
-  // Obj criado em Navigation, SignupTooltip, ForMobileHeaderAndNav e aqui
+  // Objeto para configurar children de Popups para abertura do popup de login (Signin)
+  // Obj duplicado, este usado aqui e em SignupTooltip
   const signinPopup = {
     children: (
       <Signin
@@ -22,9 +21,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
   const signupTooltip = {
     children: (
       <SignupTooltip
-        popup={popup}
         handleOpenPopup={handleOpenPopup}
-        handleClosePopup={handleClosePopup}
+        signinPopup={signinPopup}
       />
     ),
     type: 'tooltip',
@@ -96,18 +94,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         </button>
       </p>
 
-      {/* Se o popup não for nulo, o componente será renderizado na tela:
-      Signin ou SignupTooltip*/}
-
-      {popup && (
-        <Popups
-          popup={popup}
-          handleClosePopup={handleClosePopup}
-          type={popup.type}
-        >
-          {popup.children}
-        </Popups>
-      )}
+      {/* Signin ou SignupTooltip serão renderizados por Popups em App */}
     </form>
   );
 }

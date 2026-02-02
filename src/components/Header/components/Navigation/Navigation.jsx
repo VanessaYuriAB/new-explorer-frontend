@@ -1,12 +1,10 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import AuthContext from '../../../../contexts/AuthContext';
-import Signin from '../../../Popups/components/Signin/Signin';
-import Popups from '../../../Popups/Popups';
 import btnOut from '../../../../assets/btn-out.svg';
 import './Navigation.css';
 
-function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
+function Navigation({ handleOpenPopup, signinPopup }) {
   // Contexto de autenticação, extraindo estado e set de login
   const { loggedIn, setLoggedIn } = useContext(AuthContext);
 
@@ -22,19 +20,6 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
       'header__link header__link_out' +
       (isActive ? ' header__link_out_active' : '')
     );
-  };
-
-  // Objeto para configurar children de Popups: abertura do popup de login (Signin)
-  // Obj criado em Signup, SignupTooltip, ForMobileHeaderAndNav e aqui
-  const signinPopup = {
-    children: (
-      <Signin
-        popup={popup}
-        handleOpenPopup={handleOpenPopup}
-        handleClosePopup={handleClosePopup}
-      />
-    ),
-    type: 'signin',
   };
 
   return (
@@ -88,17 +73,7 @@ function Navigation({ popup, handleOpenPopup, handleClosePopup }) {
         </>
       )}
 
-      {/* Se o popup não for nulo, o componente será renderizado na tela */}
-
-      {popup && (
-        <Popups
-          popup={popup}
-          handleClosePopup={handleClosePopup}
-          type={popup.type}
-        >
-          {popup.children}
-        </Popups>
-      )}
+      {/* Signin será renderizado por Popups em App */}
     </nav>
   );
 }

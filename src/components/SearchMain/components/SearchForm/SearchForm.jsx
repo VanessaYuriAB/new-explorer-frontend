@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
 import SearchTooltip from '../../../Popups/components/SearchTooltip/SearchTooltip';
-import Popups from '../../../Popups/Popups';
 import './SearchForm.css';
 
 function SearchForm({
-  popup,
   handleOpenPopup,
-  handleClosePopup,
   setIsSearchLoading,
   handleGetNews,
   setSearchedNews,
@@ -78,18 +75,7 @@ function SearchForm({
         Procurar
       </button>
 
-      {/* Se o popup não for nulo, o componente será renderizado na tela:
-      SearchTooltip*/}
-
-      {popup && (
-        <Popups
-          popup={popup}
-          handleClosePopup={handleClosePopup}
-          type={popup.type}
-        >
-          {popup.children}
-        </Popups>
-      )}
+      {/* SearchTooltip será renderizado por Popups em App */}
     </form>
   );
 }

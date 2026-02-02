@@ -8,6 +8,8 @@ import NothingFound from '../NothingFound/NothingFound';
 import About from '../About/About';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
+import Signin from '../Popups/components/Signin/Signin';
+import Popups from '../Popups/Popups';
 import AuthContext from '../../contexts/AuthContext';
 import getNews from '../../utils/NewsApi';
 import { saveNews, unsaveNews /*, getUserNews*/ } from '../../utils/mainApi';
@@ -277,6 +279,23 @@ function App() {
   };
 
   /* ------------------------------
+          OBJ SIGNIN POPUP
+  ------------------------------- */
+
+  // Objeto para configurar children de Popups para abertura do popup de login (Signin)
+  // Obj duplicado, este usado em Navigation e em ForMobileHeaderAndNav
+  const signinPopup = {
+    children: (
+      <Signin
+        popup={popup}
+        handleOpenPopup={handleOpenPopup}
+        handleClosePopup={handleClosePopup}
+      />
+    ),
+    type: 'signin',
+  };
+
+  /* ------------------------------
                 JSX
   ------------------------------- */
 
@@ -298,11 +317,10 @@ function App() {
           <SavedNewsHeader mobile={mobile} setMobile={setMobile} />
         ) : (
           <Header
-            popup={popup}
             handleOpenPopup={handleOpenPopup}
-            handleClosePopup={handleClosePopup}
             mobile={mobile}
             setMobile={setMobile}
+            signinPopup={signinPopup}
           />
         )}
 
@@ -313,9 +331,7 @@ function App() {
               element={
                 <>
                   <SearchMain
-                    popup={popup}
                     handleOpenPopup={handleOpenPopup}
-                    handleClosePopup={handleClosePopup}
                     setIsSearchLoading={setIsSearchLoading}
                     handleGetNews={handleGetNews}
                     setSearchedNews={setSearchedNews}
@@ -367,6 +383,19 @@ function App() {
         </main>
 
         <Footer />
+
+        {/* Se o popup não for nulo, algum dos componentes será renderizado na tela:
+        Signup, Signin, SignupTooltip ou SearchTooltip,  */}
+
+        {popup && (
+          <Popups
+            popup={popup}
+            handleClosePopup={handleClosePopup}
+            type={popup.type}
+          >
+            {popup.children}
+          </Popups>
+        )}
       </div>
     </AuthContext.Provider>
   );

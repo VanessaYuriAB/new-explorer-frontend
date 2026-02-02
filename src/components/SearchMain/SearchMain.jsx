@@ -2,9 +2,7 @@ import SearchForm from './components/SearchForm/SearchForm';
 import './SearchMain.css';
 
 function SearchMain({
-  popup,
   handleOpenPopup,
-  handleClosePopup,
   setIsSearchLoading,
   handleGetNews,
   setSearchedNews,
@@ -18,9 +16,7 @@ function SearchMain({
       </p>
       <div className="search__form-box">
         <SearchForm
-          popup={popup}
           handleOpenPopup={handleOpenPopup}
-          handleClosePopup={handleClosePopup}
           setIsSearchLoading={setIsSearchLoading}
           handleGetNews={handleGetNews}
           setSearchedNews={setSearchedNews}

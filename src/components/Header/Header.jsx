@@ -5,13 +5,7 @@ import ForMobileHeaderAndNav from './components/ForMobileHeaderAndNav/ForMobileH
 import newsExplorer from '../../assets/news-explorer-logo.svg';
 import './Header.css';
 
-function Header({
-  popup,
-  handleOpenPopup,
-  handleClosePopup,
-  mobile,
-  setMobile,
-}) {
+function Header({ handleOpenPopup, mobile, setMobile, signinPopup }) {
   return (
     <header className="header page__header">
       <div className="header__box">
@@ -36,9 +30,8 @@ function Header({
           ></button>
         </div>
         <Navigation
-          popup={popup}
           handleOpenPopup={handleOpenPopup}
-          handleClosePopup={handleClosePopup}
+          signinPopup={signinPopup}
         />
       </div>
       <img
@@ -50,9 +43,8 @@ function Header({
       {mobile && (
         <ForMobileHeaderAndNav
           setMobile={setMobile}
-          popup={popup}
           handleOpenPopup={handleOpenPopup}
-          handleClosePopup={handleClosePopup}
+          signinPopup={signinPopup}
         />
       )}
     </header>
