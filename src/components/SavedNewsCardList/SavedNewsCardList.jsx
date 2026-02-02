@@ -39,7 +39,7 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
     const secondKeyword = () => {
       // Se houver 1 ou mais
       if (diferentKey.length >= 1) {
-        return `, ${secondKey} `;
+        return `, ${secondKey}`;
       }
 
       // Se não houver nenhuma
@@ -79,8 +79,8 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
     // Configura o texto do span de acordo com a qtdd total
     const amountAnothersKeywords = () => {
       return amountAnothersTags > 0
-        ? `e ${amountAnothersTags} outras`
-        : `e 0 outras`;
+        ? ` e ${amountAnothersTags} outras`
+        : ` e 0 outras`;
     };
 
     return (
