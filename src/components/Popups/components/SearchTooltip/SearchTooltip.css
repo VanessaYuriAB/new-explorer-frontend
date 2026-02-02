@@ -1,12 +1,12 @@
 .search__tooltip {
-  width: 430px;
-  height: 182px;
+  width: 380px;
+  height: 122px;
   border-radius: 16px;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 
@@ -16,20 +16,19 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 1;
-  color: rgba(0, 0, 0, 1);
-  text-align: start;
-  margin: 0 0 0 36px;
+  color: rgba(26, 27, 34, 1);
+  margin: 0;
   filter: drop-shadow(
     0 0 0.2em rgba(47, 113, 229, 1)
   ); /* aplica iluminação azul */
 }
 
 .search__tooltip-text {
-  color: rgba(0, 0, 0, 1);
+  color: rgba(26, 27, 34, 1);
   font-size: 20px;
   line-height: 1;
   text-align: start;
-  margin: 0 0 0 36px;
+  margin: 0;
 }
 
 /* ------ Responsividade ------ */
@@ -42,5 +41,10 @@
 
   .search__tooltip-title {
     width: 234px; /* 430/315 - 320/x > x=234,4186046511628  */
+    font-size: 22px;
+  }
+
+  .search__tooltip-text {
+    font-size: 18px;
   }
 }

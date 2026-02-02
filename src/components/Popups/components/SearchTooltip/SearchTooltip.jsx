@@ -1,11 +1,15 @@
+import { useContext } from 'react';
+import AuthContext from '../../../../contexts/AuthContext';
 import './SearchTooltip.css';
 
 function SearchTooltip() {
+  const { loggedIn } = useContext(AuthContext);
+
   return (
     <div className="search__tooltip">
-      <h2 className="search__tooltip-title">Nome,</h2>
+      {loggedIn ? <h2 className="search__tooltip-title">Nome,</h2> : ''}
       <p className="search__tooltip-text">
-        por favor, insira uma palavra-chave.
+        Por favor, insira uma palavra-chave.
       </p>
     </div>
   );
