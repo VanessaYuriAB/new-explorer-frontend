@@ -1,0 +1,62 @@
+.popup__tooltip {
+  width: 430px;
+  height: 182px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 3; /* para sobrepor ao SearchForm */
+}
+
+.popup__tooltip-title {
+  width: 315px;
+  height: 56px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 1);
+  text-align: start;
+  margin: 43px 0 0 36px;
+}
+
+.popup__tooltip-link {
+  width: 228px;
+  height: 18px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1;
+  color: rgba(47, 113, 229, 1);
+  text-decoration: none;
+  text-align: start;
+  margin: 14px 0 0 36px;
+  background-color: rgba(255, 255, 255, 1);
+  border: none;
+  padding: 0;
+}
+
+.popup__tooltip-link:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.popup__tooltip-link:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+/* ------ Responsividade ------ */
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .popup__tooltip {
+    width: 320px;
+  }
+
+  .popup__tooltip-title {
+    width: 234px; /* 430/315 - 320/x > x=234,4186046511628  */
+    margin: 43px 0 0 36px;
+  }
+}

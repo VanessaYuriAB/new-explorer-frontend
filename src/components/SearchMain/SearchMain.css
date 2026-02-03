@@ -1,0 +1,72 @@
+.search {
+  background-image: url('/images/georgia-de-lotz-unsplash.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgba(255, 255, 255, 1);
+  border-width: 1px;
+  padding-top: 160px;
+  padding-bottom: 80px;
+  text-align: start;
+}
+
+.search__title {
+  width: 700.53px;
+  height: 128px;
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-size: 60px;
+  line-height: 1.07;
+  font-weight: 400;
+  margin: 0;
+}
+
+.search__text {
+  width: 608px;
+  height: 48px;
+  font-size: 18px;
+  line-height: 1.33;
+  margin: 32px 0 64px;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .search {
+    padding-top: 104px;
+    padding-bottom: 48px;
+  }
+
+  .search__title {
+    width: 425px;
+    height: 80px;
+    font-size: 36px;
+    line-height: 1.11;
+  }
+
+  .search__text {
+    width: 452px;
+    margin: 16px 0 48px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .search {
+    padding-top: 86px;
+    padding-bottom: 32px;
+  }
+
+  .search__title {
+    width: 285px;
+    height: 120px;
+    font-size: 36px;
+    line-height: 1.11;
+  }
+
+  .search__text {
+    width: 288px;
+    height: 72px;
+    margin: 11.56px auto 86.44px;
+  }
+}

@@ -1,0 +1,101 @@
+.popup {
+  width: 100vw;
+  height: 100%; /* em porcentagem para cobrir a altura da página toda */
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3; /* para sobrepor ao SearchForm */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.popup_signin {
+  padding-top: 207px;
+}
+
+.popup_signup {
+  padding-top: 167px;
+}
+
+.popup_tooltip {
+  padding-top: 339px;
+}
+
+.popup__content {
+  display: contents; /* permite que o conteúdo filho mantenha o layout original > para
+  configuração do fechamento dos popups por clique na tela, fora da caixa do popup em si */
+}
+
+.popup__position-btn {
+  position: relative; /* permite o posicionamento do botão fechar em relação à caixa
+  do popup */
+  height: fit-content; /* garante que a altura da <div> seja apenas o suficiente para conter o conteúdo da caixa do popup, evitando que ela cubra o restante da tela e interfira na função de fechar por clique (fora da caixa do popup */
+}
+
+.popup__close-btn {
+  width: 40px;
+  height: 40px;
+  background-image: url('/images/close-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: -46px; /* a medida do próprio elemento somada à medida do espaçamento */
+  right: -46px;
+  z-index: 3; /* para sobrepor ao SearchForm */
+}
+
+.popup__close-btn:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.popup__close-btn:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+/* ------ Responsividade ------ */
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .popup {
+    align-items: flex-start;
+    margin-top: calc(24px + 16px + 16px);
+  }
+
+  .popup_signin {
+    padding-top: 0;
+  }
+
+  .popup_signup {
+    padding-top: 0;
+  }
+
+  .popup_tooltip {
+    padding-top: 0;
+  }
+
+  .popup_ribbon-btn {
+    width: 100vw;
+    height: calc(24px + 16px + 16px);
+    background-color: rgba(26, 27, 34, 1);
+    position: fixed; /* fixa a faixa no topo da tela e permite o posicionamento do botão */
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .popup__close-btn {
+    width: 24px;
+    height: 24px;
+    position: static;
+    margin-left: 275px; /* visualizado pelo DevTools */
+  }
+}

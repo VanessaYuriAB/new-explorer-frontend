@@ -1,0 +1,321 @@
+.saved-card {
+  max-width: 400px;
+  min-width: 224px;
+  max-height: 576px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  position: relative;
+}
+
+/* Tag implementada apenas para a semântica html */
+.saved-card__article {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tag implementada apenas para a semântica html */
+.saved-card__figure {
+  margin: 0;
+  width: 400px;
+  height: 272px;
+}
+
+.saved-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.saved-card__tag {
+  max-width: 120px;
+  min-width: 83px;
+  min-height: calc(
+    40px - 8px
+  ); /* subtraído o padding / a altura permanece a msm até versão para mobile */
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.71;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1;
+  padding-top: calc((40px - 24px) / 2);
+  padding-right: calc(((40px - 24px) / 2) / 2);
+  padding-left: calc(((40px - 24px) / 2) / 2);
+  vertical-align: text-top;
+}
+
+.saved-card__btn {
+  width: 40px; /* msms dimensões até versão mobile */
+  height: 40px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 1);
+  background-image: url('/images/trash-card.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 1;
+  border: none;
+  padding: 0;
+}
+
+.saved-card__btn:hover {
+  background-image: url('/images/trash-card-hover.svg');
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+}
+
+/* Para implementar tooltip de aviso da lixeira, quando o botão estiver em hover */
+.saved-card__btn:hover::before {
+  content: 'Remover dos salvos';
+  position: absolute;
+  top: 0px;
+  right: 45px; /* medida ajustada por visualização com DevTools, baseado
+  em .saved-card__btn */
+  z-index: 1;
+  width: 159px;
+  height: calc(
+    40px - 14px - 11px
+  ); /* subtraídos os paddings / a altura permanece a msm até versão para mobile */
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: middle;
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 10px 22px 0px rgba(59, 74, 116, 0.1);
+  padding-top: 14px;
+  padding-bottom: 11px;
+}
+
+.saved-card__btn:active {
+  background-image: url('/images/trash-card-hover.svg');
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.saved-card__infos {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: start;
+  min-height: calc(
+    576px - 272px - 24px - 24px
+  ); /* subtraídos os paddings e a altura da imagem */
+}
+
+.saved-card__date {
+  margin: 0;
+  min-width: 197.75px;
+  max-width: 256px;
+  height: 24px;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  color: rgba(182, 188, 191, 1);
+}
+
+.saved-card__title-link {
+  display: contents;
+}
+
+.saved-card__title-link {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+}
+
+.saved-card__title {
+  margin: 0;
+  max-width: 88%; /* 400/100 - 352/x > 400x = 35200 > X = 88 */
+  max-height: 90px;
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: rgba(26, 27, 34, 1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* número máximo de linhas */
+  line-clamp: 3; /* padrão futuro */
+}
+
+.saved-card__title:hover {
+  opacity: 0.8;
+  filter: drop-shadow(
+    0 0 0.2em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+}
+
+.saved-card__title:active {
+  opacity: 0.6;
+}
+
+.saved-card__text {
+  margin: 0;
+  max-width: 88%; /* 400/100 - 352/x > 400x = 35200 > X = 88 */
+  max-height: 88px;
+  min-height: 66px;
+  font-size: 16px;
+  line-height: 1.37;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* número máximo de linhas */
+  line-clamp: 4; /* padrão futuro */
+}
+
+.saved-card__source {
+  margin: 0;
+  max-width: 352px;
+  min-width: 256px;
+  height: 20px;
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(182, 188, 191, 1);
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* número máximo de linhas */
+  line-clamp: 1; /* padrão futuro */
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .saved-card {
+    min-width: 224px;
+    max-height: 420px;
+  }
+
+  .saved-card__figure {
+    width: 224px;
+    height: 150px;
+  }
+
+  .saved-card__tag {
+    top: 8px;
+    left: 8px;
+    padding-top: calc((40px - 24px) / 2);
+    padding-right: calc(((40px - 24px) / 2) / 2);
+    padding-left: calc(((40px - 24px) / 2) / 2);
+  }
+
+  .saved-card__btn {
+    top: 8px;
+    right: 8px;
+  }
+
+  .saved-card__infos {
+    padding-top: 14px;
+    padding-bottom: 16px;
+    margin-left: 16px;
+    min-height: calc(
+      420px - 150px - 14px - 16px
+    ); /* subtraídos os paddings e altura da imagem */
+  }
+
+  .saved-card__date {
+    min-width: 184.9px;
+    max-width: 184.9px;
+  }
+
+  .saved-card__title {
+    max-height: 96px;
+    font-size: 18px;
+    line-height: 1.33;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+
+  .saved-card__text {
+    max-height: 66px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+
+  .saved-card__source {
+    max-width: 192px;
+    min-width: 192px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .saved-card {
+    min-width: 288px;
+    max-height: 440px;
+  }
+
+  .saved-card__figure {
+    width: 288px;
+    height: 196px;
+  }
+
+  .saved-card__tag {
+    top: 16px;
+    left: 16px;
+    padding-top: calc((40px - 24px) / 2);
+    padding-right: calc(((40px - 24px) / 2) / 2);
+    padding-left: calc(((40px - 24px) / 2) / 2);
+  }
+
+  .saved-card__btn {
+    top: 16px;
+    right: 16px;
+  }
+
+  .saved-card__infos {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-left: 16px;
+    min-height: calc(
+      440px - 196px - 16px - 16px
+    ); /* subtraídos os paddings e altura da imagem */
+  }
+
+  .saved-card__date {
+    min-width: 256px;
+    max-width: 256px;
+  }
+
+  .saved-card__title {
+    max-height: 48px;
+    font-size: 22px;
+    line-height: 1.09;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .saved-card__text {
+    max-height: 66px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+
+  .saved-card__source {
+    max-width: 256px;
+    min-width: 256px;
+  }
+}

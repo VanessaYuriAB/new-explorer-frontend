@@ -1,0 +1,139 @@
+.header {
+  background-color: transparent;
+  padding-top: 19px;
+  padding-bottom: 13px;
+}
+
+.header__box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  width: 200px;
+  height: 24px;
+  text-align: start;
+  margin-left: 104px;
+  margin-top: calc(30px - 19px);
+  margin-bottom: calc(26px - 13px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  will-change: filter;
+  transition:
+    filter 300ms,
+    transform 0.5s ease-in-out;
+  transform: scale3d(1, 1, 1);
+}
+
+.header__logo-link:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+  transform: scale3d(
+    1.1,
+    1.1,
+    1.1
+  ); /* altera os 3 eixos juntos, aumentando o logo */
+}
+
+.header__logo-link:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.header__logo-img {
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-self: flex-end; /* alinha o logo com os outros elementos do bloco */
+}
+
+.header__line {
+  width: 100%;
+  max-width: 1440px;
+  height: 80px;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  object-fit: cover;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .header {
+    padding-top: 14px;
+    padding-bottom: 12px;
+  }
+
+  .header__logo-link {
+    height: 24.8px;
+    margin-left: 40px;
+    margin-top: calc(22.73px - 14px);
+    margin-bottom: calc(18.47px - 12px);
+  }
+
+  .header__line {
+    height: 66px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .header__box {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .header__logo-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header__logo-link {
+    width: 117px;
+    height: 24px;
+    margin-left: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .header__logo-menu {
+    border: none;
+    width: 24px;
+    height: 24px;
+    background: url('/images/menu.svg') no-repeat center;
+    z-index: 2;
+    margin-right: 16px;
+    padding: 0;
+  }
+
+  .header__logo-menu:hover {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.8;
+  }
+
+  .header__logo-menu:active {
+    cursor: url('/images/cursor-lapka.png'), pointer;
+    opacity: 0.6;
+  }
+
+  .header__line {
+    height: 56px;
+  }
+}

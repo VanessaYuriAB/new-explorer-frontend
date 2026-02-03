@@ -1,0 +1,176 @@
+.header-news__nav {
+  margin-right: 104px;
+  display: flex;
+}
+
+.header-news__links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 11px 0 13px; /* medidas faltantes para totalizar com paddings top e bottom */
+}
+
+.header-news__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  color: rgba(26, 27, 34, 1);
+  position: relative;
+  z-index: 2;
+  height: 24px;
+}
+
+.header-news__link:first-of-type {
+  width: 45px;
+}
+
+.header-news__link:last-of-type {
+  margin-right: 63px;
+  margin-left: 77px;
+  width: 116px;
+}
+
+/* Para configurar o efeito do hover apenas quando o link não estiver ativo */
+.header-news__link:not(.header__link_active):hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.header-news__link_active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  pointer-events: none; /* quando o link está ativo, não pode ser clicado novamente
+  (o clique não dispara nada) - útil para evitar recarregar a mesma rota no React Router */
+  position: relative;
+}
+
+/* Para implementar linha de link ativo */
+.header-news__link_active::after {
+  content: '';
+  position: absolute; /* baseado em __link_active */
+  top: 23px;
+  left: -13px; /* deslocamento de 13px à esqueda de __link, no caso o primeiro */
+  width: 70px;
+  height: 3px;
+  background: url('/images/line-link-active-black.svg') no-repeat center;
+  margin: 23px auto 0;
+}
+
+/* Para implementar linha de link ativo: notícias salvas */
+.header-news__link_active:last-of-type::after {
+  width: 178px;
+  left: -31px; /* deslocamento de 31px à esqueda de __link, no caso o segundo */
+}
+
+.header-news__btn {
+  text-decoration: none;
+  width: 112px;
+  height: 48px;
+  border-width: 1px;
+  border: 1px solid rgba(26, 27, 34, 1);
+  border-radius: 100px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+
+.header-news__btn:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+.header-news__btn:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.header-news__btn-text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  color: rgba(26, 27, 34, 1);
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+}
+
+/* Elemento: ícone ('sair') do botão, quando logado  */
+.header-news__btn-out {
+  width: 17.41px;
+  height: 16px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .header-news__nav {
+    margin-right: 40px;
+  }
+
+  .header-news__links {
+    margin-top: calc(22px - 11px);
+    margin-bottom: calc(20px - 13px);
+    /* medidas faltantes para totalizar espaçemento vertical com paddings top e bottom */
+  }
+
+  .header-news__link {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .header-news__link:first-of-type {
+    width: 64px;
+  }
+
+  .header-news__link:last-of-type {
+    margin-right: 16px;
+    margin-left: 16px;
+    width: 160px;
+  }
+
+  /* Para implementar linha de link ativo, logado */
+  .header-news__link_active::after {
+    top: 17px;
+    left: 1px; /* deslocamento de 1px à direita de __link, no caso o primeiro */
+    width: 60px;
+    margin-top: 21px; /* ajuste de altura devido margens de __links */
+  }
+
+  .header-news__link_active:last-of-type::after {
+    width: 160px;
+    left: 0px;
+  }
+
+  .header-news__btn {
+    width: 100px;
+    height: 40px;
+  }
+
+  .header-news__btn-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .header-news__nav {
+    display: none; /* o nav para versão mobile possui layout diferente, é renderizado
+    através do componente ForMobileSavedNewsHeaderAndNav */
+  }
+}

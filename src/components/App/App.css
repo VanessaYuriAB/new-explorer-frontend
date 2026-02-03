@@ -1,0 +1,195 @@
+/* ------- page ------- */
+.page {
+  font-family: 'Roboto', 'Roboto Slab', 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  background-color: rgba(255, 255, 255, 1);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 1440px;
+  min-width: 961px;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: 0px;
+  height: 100vh; /* para remover o espaço em branco no final da página, devido o
+  deslocamento dos componentes para ajuste do Header */
+  opacity: 1;
+}
+
+.page__header,
+.page__header-news {
+  width: 100%;
+  height: calc(
+    80px - 19px - 13px
+  ); /* subtraídos paddings: menores espaçamentos verticais, os do botão */
+  display: flex;
+  flex-direction: column;
+}
+
+.page__main {
+  position: relative;
+  top: -80px;
+}
+
+/* ------- main ------- */
+.main__search {
+  width: 100%;
+  height: calc(576px - 160px - 80px);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.main__searched-news {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__preloader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.main__nothing-found {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main__about {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.main__saved-news {
+  position: relative;
+  top: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 80px - 80px);
+  /* altura restante: viewport - header - footer */
+}
+
+/* ------ footer ------ */
+.page__footer {
+  position: relative;
+  top: -80px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page__footer_saved-news {
+  position: relative;
+  top: 0px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  filter: drop-shadow(
+    0 0 0.5em rgba(47, 113, 229, 1)
+  ); /* aplica iluminação azul */
+  outline: 1px solid rgba(47, 113, 229, 0.5);
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .page {
+    max-width: 960px;
+    min-width: 641px;
+  }
+
+  .page__header,
+  .page__header-news {
+    height: calc(
+      66px - 14px - 12px
+    ); /* subtraídos paddings: menores espaçamentos verticais, os do botão */
+  }
+
+  .page__main {
+    top: -66px;
+  }
+
+  .main__search {
+    height: calc(400px - 104px - 48px);
+  }
+
+  .main__saved-news {
+    top: 66px;
+    min-height: calc(100vh - 66px - 64px);
+    /* altura restante: viewport - header - footer */
+  }
+
+  .page__footer {
+    height: 64px;
+    top: -66px;
+  }
+
+  .page__footer_saved-news {
+    top: 0px;
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .page {
+    max-width: 640px;
+    min-width: 320px;
+  }
+
+  .page__header,
+  .page__header-news {
+    height: calc(
+      56px - 16px - 16px
+    ); /* subtraídos paddings: espaçamentos verticais, que são iguais em ambos
+    elementos, logo e nav */
+  }
+
+  .page__main {
+    top: -56px;
+  }
+
+  .main__search {
+    height: calc(536px - 86px - 32px);
+  }
+
+  .main__about {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main__saved-news {
+    top: 56px;
+    min-height: calc(100vh - 56px - 176px);
+    /* altura restante: viewport - header - footer */
+  }
+
+  .page__footer {
+    height: 176px;
+    top: -56px;
+    flex-direction: column-reverse;
+  }
+
+  .page__footer_saved-news {
+    top: 0px;
+  }
+}

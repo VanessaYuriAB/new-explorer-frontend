@@ -1,0 +1,108 @@
+.search__form-news {
+  width: 608px;
+  height: 64px;
+  border-width: 1px;
+  display: flex;
+  position: relative;
+}
+
+.search__form-input {
+  width: calc(608px - 24px - 208px);
+  height: calc(64px - 21px - 21px);
+  border-width: 1px;
+  border-radius: 100px;
+  border: 1px solid rgba(209, 210, 214, 1);
+  padding: 21px 208px 21px 24px;
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.search__form-input::placeholder {
+  width: 376px;
+  height: 22px;
+  font-size: 16px;
+  line-height: 1.37;
+  color: rgba(182, 188, 191, 1);
+}
+
+.search__form-btn {
+  color: rgba(255, 255, 255, 1);
+  width: 168px;
+  height: 64px;
+  border-radius: 100px;
+  background-color: rgba(47, 113, 229, 1);
+  box-shadow: 0px 5px 15px 0px rgba(14, 26, 57, 0.2);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  border: none;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  z-index: 2;
+}
+
+.search__form-btn:hover {
+  background-color: rgba(52, 126, 255, 1);
+  cursor: url('/images/cursor-lapka.png'), pointer;
+}
+
+.search__form-btn:active {
+  background-color: rgba(42, 101, 204, 1);
+  cursor: url('/images/cursor-lapka.png'), pointer;
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .search__form-news {
+    width: 452px;
+    height: 56px;
+  }
+
+  .search__form-input {
+    width: calc(452px - 24px - 196px);
+    height: calc(56px - 17px - 17px);
+    backdrop-filter: blur(100px);
+    padding: 17px 196px 17px 24px;
+  }
+
+  .search__form-input::placeholder {
+    width: 228px;
+  }
+
+  .search__form-btn {
+    width: 160px;
+    height: 56px;
+    box-shadow: 0px 5px 15px 0px rgba(14, 26, 57, 0.2);
+  }
+}
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .search__form-news {
+    width: 288px;
+    height: 128px;
+    flex-direction: column;
+  }
+
+  .search__form-input {
+    width: calc(288px - 16px - 16px);
+    height: calc(56px - 17px - 17px);
+    padding: 17px 16px;
+    backdrop-filter: blur(100px);
+  }
+
+  .search__form-input::placeholder {
+    width: 256px;
+  }
+
+  .search__form-btn {
+    margin-top: 16px;
+    width: 288px;
+    height: 56px;
+    position: initial;
+  }
+}

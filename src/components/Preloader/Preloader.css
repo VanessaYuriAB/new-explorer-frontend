@@ -1,0 +1,66 @@
+.preloader {
+  background-color: rgba(245, 246, 247, 1);
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.preloader__circle {
+  display: block;
+  margin: 0;
+  width: 74px;
+  height: 74px;
+  border: 1px solid #1a1b22;
+  border-right-color: #d1d2d61a;
+  border-bottom-color: #d1d2d65d;
+  border-left-color: #d1d2d6;
+  border-radius: 50%;
+  animation: spin 0.75s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader__text {
+  margin: 24px 0 0;
+  width: 280px;
+  height: 24px;
+  font-size: 18px;
+  line-height: 1.33;
+  color: rgba(182, 188, 191, 1);
+}
+
+/* ------ Responsividade ------ */
+
+/* ------ Tablet ------ */
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  .preloader {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .preloader__circle {
+    width: 64px;
+    height: 64px;
+  }
+}
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .preloader {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .preloader__circle {
+    width: 54px;
+    height: 54px;
+  }
+
+  .preloader__text {
+    margin: 14px 0 0;
+    font-size: 16px;
+    line-height: 1.15;
+  }
+}

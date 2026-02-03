@@ -1,0 +1,176 @@
+.popup__signin {
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: calc(430px - 36px - 36px);
+  padding-top: 34px;
+  padding-bottom: 28px;
+  padding-left: 36px;
+  padding-right: 36px;
+  display: flex;
+  justify-self: center;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+  height: fit-content;
+  z-index: 3; /* para sobrepor ao SearchForm */
+}
+
+.popup__signin-title {
+  width: 358px;
+  height: 32px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(26, 27, 34, 1);
+  margin: 0 0 22px;
+  text-align: start;
+}
+
+.popup__signin-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(47, 113, 229, 1);
+  width: 358px;
+  text-align: start;
+  height: 13px;
+}
+
+.popup__signin-input {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 1);
+  width: 358px;
+  border: none;
+  height: calc(
+    47px - 13px - 1px
+  ); /* subtraídas alturas do label e borda inferior */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0;
+}
+
+.popup__signin-span {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(255, 0, 0, 1);
+  height: 10.99px;
+  margin: 4.01px 0 16px;
+  max-width: 358px;
+  text-align: start;
+}
+
+.popup__signin-span:last-of-type {
+  margin-bottom: 0;
+}
+
+.popup__signin-btn {
+  align-self: center;
+  width: 360px;
+  height: 64px;
+  border-radius: 100px;
+  background-color: rgba(47, 113, 229, 1);
+  box-shadow: 0px 5px 15px 0px rgba(14, 26, 57, 0.2);
+  border: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 1);
+  margin: 24px 0 0 -1px;
+}
+
+.popup__signin-btn:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  background-color: rgba(52, 126, 255, 1);
+}
+
+.popup__signin-btn:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  background-color: rgba(42, 101, 204, 1);
+}
+
+.popup__signin-btn:disabled {
+  background-color: rgba(230, 232, 235, 1);
+  color: rgba(182, 188, 191, 1);
+  box-shadow: none;
+}
+
+.popup__signin-btn:disabled:hover {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.popup__signin-plink {
+  align-self: center;
+  height: 20px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  margin-top: 16px;
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 1);
+}
+
+.popup__signin-link {
+  background-color: rgba(255, 255, 255, 1);
+  border: none;
+  padding: 0;
+  color: rgba(73, 131, 232, 1);
+  line-height: 1;
+}
+
+.popup__signin-link:hover {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.8;
+}
+
+.popup__signin-link:active {
+  cursor: url('/images/cursor-lapka.png'), pointer;
+  opacity: 0.6;
+}
+
+/* ------ Responsividade ------ */
+
+/* ---- Smartphone ---- */
+@media screen and (min-width: 320px) and (max-width: 640px) {
+  .popup__signin {
+    max-width: calc(320px - 16px - 16px);
+    padding: 16px;
+  }
+
+  .popup__signin-title {
+    width: 158px;
+    height: 28px;
+    margin: 0 0 18px 1px;
+  }
+
+  .popup__signin-label {
+    width: 66px;
+    height: 14px;
+  }
+
+  .popup__signin-input {
+    width: 288px;
+    height: calc(
+      46px - 14px - 1px
+    ); /* subtraídas alturas do label e borda inferior */
+  }
+
+  .popup__signin-span {
+    max-width: 288px;
+  }
+
+  .popup__signin-span:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .popup__signin-btn {
+    width: 288px;
+    margin: 23px 0 0;
+  }
+}

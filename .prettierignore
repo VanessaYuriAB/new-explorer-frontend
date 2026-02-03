@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+public
+coverage
+vendor/normalize.css
+package-lock.json
+.env
+.editorconfig
+.npmrc
+eslint.config.js
+.husky/
+*.log
