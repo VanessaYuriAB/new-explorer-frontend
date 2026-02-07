@@ -13,6 +13,9 @@ function SavedNewsCard({ savedCard, memoizedHandleUnsave }) {
   // Reformatação da data (publishedAt) com hook personalizado
   const formattedDateBR = useFormattedDateBR(publishedAt);
 
+  // Apenas a primeira palavra da tag
+  const firstTag = tag.split(' ')[0];
+
   return (
     <li className="saved-card">
       <article className="saved-card__article">
@@ -22,7 +25,7 @@ function SavedNewsCard({ savedCard, memoizedHandleUnsave }) {
             src={urlToImage ? urlToImage : imgIndisponivel}
             alt={`Imagem do artigo: ${title ? title : 'descrição indisponível'}`}
           />
-          <figcaption className="saved-card__tag">{`${tag}`}</figcaption>
+          <figcaption className="saved-card__tag">{`${firstTag}`}</figcaption>
         </figure>
 
         {/* Tooltip de aviso da lixeira implementado via CSS, com :hover::before (usando

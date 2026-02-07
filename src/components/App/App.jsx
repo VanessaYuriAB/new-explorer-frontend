@@ -180,15 +180,12 @@ function App() {
       // GET para a API externa: News Api
       const responseOfNews = await getNews(queryToSearch);
 
-      // Apenas a primeira palavra da queryString
-      const tag = queryToSearch.split(' ')[0];
-
       // Adiciona uma nova propriedade ('tag') no obj de cada cartão, para implementar na
       // tag, se salvo
       const articlesWithTag = responseOfNews.articles.map((card) => {
         return {
           ...card,
-          tag: tag,
+          tag: queryToSearch,
         };
       });
 
