@@ -79,8 +79,8 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
     // Configura o texto do span de acordo com a qtdd total
     const amountAnothersKeywords = () => {
       return amountAnothersTags > 0
-        ? ` e ${amountAnothersTags} outras`
-        : ` e 0 outras`;
+        ? ` e ${amountAnothersTags} outra(s)`
+        : ` e 0 outra(s)`;
     };
 
     return (
