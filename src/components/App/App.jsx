@@ -11,8 +11,9 @@ import Footer from '../Footer/Footer';
 import Signin from '../Popups/components/Signin/Signin';
 import Popups from '../Popups/Popups';
 import AuthContext from '../../contexts/AuthContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import getNews from '../../utils/NewsApi';
-import { saveNews, unsaveNews /*, getUserNews*/ } from '../../utils/mainApi';
+import { saveNews, unsaveNews /* , getUserNews */ } from '../../utils/mainApi';
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
@@ -297,103 +298,105 @@ function App() {
   ------------------------------- */
 
   return (
-    // Provedor de contexto: compartilha dados de login e do usuário atual
+    // Provedores de contexto: compartilha dados de login e do usuário atual
     <AuthContext.Provider
       value={{
         loggedIn, // booleano de estado: status de login
         setLoggedIn,
       }}
     >
-      <div className="page">
-        {/* O Header é renderizado estando deslogado ou logado, em '/' */}
+      <CurrentUserContext.Provider>
+        <div className="page">
+          {/* O Header é renderizado estando deslogado ou logado, em '/' */}
 
-        {/* O SavedNewsHeader precisa ser renderizado caso o usuário esteja logado e
+          {/* O SavedNewsHeader precisa ser renderizado caso o usuário esteja logado e
         acesse '/saved-news' */}
 
-        {loggedIn && location.pathname === '/saved-news' ? (
-          <SavedNewsHeader mobile={mobile} setMobile={setMobile} />
-        ) : (
-          <Header
-            handleOpenPopup={handleOpenPopup}
-            mobile={mobile}
-            setMobile={setMobile}
-            signinPopup={signinPopup}
-          />
-        )}
+          {loggedIn && location.pathname === '/saved-news' ? (
+            <SavedNewsHeader mobile={mobile} setMobile={setMobile} />
+          ) : (
+            <Header
+              handleOpenPopup={handleOpenPopup}
+              mobile={mobile}
+              setMobile={setMobile}
+              signinPopup={signinPopup}
+            />
+          )}
 
-        <main className="main page__main">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <SearchMain
-                    handleOpenPopup={handleOpenPopup}
-                    setIsSearchLoading={setIsSearchLoading}
-                    handleGetNews={handleGetNews}
-                    setSearchedNews={setSearchedNews}
-                  />
+          <main className="main page__main">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <SearchMain
+                      handleOpenPopup={handleOpenPopup}
+                      setIsSearchLoading={setIsSearchLoading}
+                      handleGetNews={handleGetNews}
+                      setSearchedNews={setSearchedNews}
+                    />
 
-                  {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza
+                    {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza
                   o Preloader */}
 
-                  {isSearchLoading && <Preloader />}
+                    {isSearchLoading && <Preloader />}
 
-                  {/* Se não estiver em loading e não houver resultados para a pesquisa
+                    {/* Se não estiver em loading e não houver resultados para a pesquisa
                   realizada, renderiza o NothingFound */}
 
-                  {!isSearchLoading &&
-                    searchedNews.status === 'ok' &&
-                    searchedNews.totalResults === 0 && <NothingFound />}
+                    {!isSearchLoading &&
+                      searchedNews.status === 'ok' &&
+                      searchedNews.totalResults === 0 && <NothingFound />}
 
-                  {/* Se não estiver em loading e houver resultados ou se não estiver em
+                    {/* Se não estiver em loading e houver resultados ou se não estiver em
                   loading e o status for 'error', renderiza o NewsCardList com o devido
                   conteúdo */}
 
-                  {!isSearchLoading &&
-                    (searchedNews.totalResults > 0 ||
-                      searchedNews.status === 'error') && (
-                      <NewsCardList
-                        searchedNews={searchedNews}
-                        handleSaveCard={handleSaveCard}
-                        memoizedHandleUnsave={memoizedHandleUnsave}
-                      />
-                    )}
+                    {!isSearchLoading &&
+                      (searchedNews.totalResults > 0 ||
+                        searchedNews.status === 'error') && (
+                        <NewsCardList
+                          searchedNews={searchedNews}
+                          handleSaveCard={handleSaveCard}
+                          memoizedHandleUnsave={memoizedHandleUnsave}
+                        />
+                      )}
 
-                  <About />
-                </>
-              }
-            />
+                    <About />
+                  </>
+                }
+              />
 
-            <Route
-              path="/saved-news"
-              element={
-                <ProtectedRoute>
-                  <SavedNewsCardList
-                    savedUserNews={savedUserNews}
-                    memoizedHandleUnsave={memoizedHandleUnsave}
-                  />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </main>
+              <Route
+                path="/saved-news"
+                element={
+                  <ProtectedRoute>
+                    <SavedNewsCardList
+                      savedUserNews={savedUserNews}
+                      memoizedHandleUnsave={memoizedHandleUnsave}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </main>
 
-        <Footer />
+          <Footer />
 
-        {/* Se o popup não for nulo, algum dos componentes será renderizado na tela:
+          {/* Se o popup não for nulo, algum dos componentes será renderizado na tela:
         Signup, Signin, SignupTooltip ou SearchTooltip,  */}
 
-        {popup && (
-          <Popups
-            popup={popup}
-            handleClosePopup={handleClosePopup}
-            type={popup.type}
-          >
-            {popup.children}
-          </Popups>
-        )}
-      </div>
+          {popup && (
+            <Popups
+              popup={popup}
+              handleClosePopup={handleClosePopup}
+              type={popup.type}
+            >
+              {popup.children}
+            </Popups>
+          )}
+        </div>
+      </CurrentUserContext.Provider>
     </AuthContext.Provider>
   );
 }
