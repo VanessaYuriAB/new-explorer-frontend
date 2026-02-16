@@ -78,7 +78,7 @@ function App() {
 
   // Efeito para atualizar o localStorage sempre que o estado para notícias salvas do
   // usuário atual (savedUserNews) mudar > para persistência dos dados ao recarregar a página,
-  // configiração para cards salvos ou não salvos
+  // configuração para cards salvos ou não salvos
   useEffect(() => {
     if (savedUserNews) {
       localStorage.setItem('savedUserNewsData', JSON.stringify(savedUserNews));
