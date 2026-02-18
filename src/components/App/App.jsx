@@ -129,8 +129,8 @@ function App() {
   }, [searchedNews]);
 
   // Efeito para atualizar o localStorage sempre que o estado para notícias salvas do
-  // usuário atual (savedUserNews) mudar > para persistência dos dados ao recarregar a página,
-  // configuração para cards salvos ou não salvos
+  // usuário atual (savedUserNews) mudar > para persistência dos dados ao recarregar a
+  // página, configuração para cards salvos ou não salvos
   useEffect(() => {
     if (savedUserNews) {
       localStorage.setItem('savedUserNewsData', JSON.stringify(savedUserNews));
@@ -201,6 +201,9 @@ function App() {
     })();
   }, [tokenJwt, navigate, handleLogout]);
 
+  // Efeito derivado, reagindo apenas aos estados relevantes: para sincronizar estados
+  // derivados (merge de searchedNews com savedUserNews) e adicionar a info 'isSaved' aos
+  // artigos (para o ícone do botão 'salvar', no NewsCard)
   useEffect(() => {
     // Se não estiver logado, não executa
     if (!loggedIn) return;
@@ -455,7 +458,7 @@ function App() {
           {/* O Header é renderizado estando deslogado ou logado, em '/' */}
 
           {/* O SavedNewsHeader precisa ser renderizado caso o usuário esteja logado e
-        acesse '/saved-news' */}
+          acesse '/saved-news' */}
 
           {loggedIn && location.pathname === '/saved-news' ? (
             <SavedNewsHeader mobile={mobile} setMobile={setMobile} />
@@ -482,20 +485,20 @@ function App() {
                     />
 
                     {/* Enquanto a solicitação de pesquisa estiver em loading, renderiza
-                  o Preloader */}
+                    o Preloader */}
 
                     {isSearchLoading && <Preloader />}
 
                     {/* Se não estiver em loading e não houver resultados para a pesquisa
-                  realizada, renderiza o NothingFound */}
+                    realizada, renderiza o NothingFound */}
 
                     {!isSearchLoading &&
                       searchedNews.status === 'ok' &&
                       searchedNews.totalResults === 0 && <NothingFound />}
 
                     {/* Se não estiver em loading e houver resultados ou se não estiver em
-                  loading e o status for 'error', renderiza o NewsCardList com o devido
-                  conteúdo */}
+                    loading e o status for 'error', renderiza o NewsCardList com o devido
+                    conteúdo */}
 
                     {!isSearchLoading &&
                       (searchedNews.totalResults > 0 ||
@@ -529,7 +532,7 @@ function App() {
           <Footer />
 
           {/* Se o popup não for nulo, algum dos componentes será renderizado na tela:
-        Signup, Signin, SignupTooltip ou SearchTooltip,  */}
+          Signup, Signin, SignupTooltip ou SearchTooltip,  */}
 
           {popup && (
             <Popups
