@@ -15,6 +15,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import getNews from '../../utils/NewsApi';
 import { register, login } from '../../utils/authApi';
 import { saveNews, unsaveNews } from '../../utils/mainApi';
+import { getUserNews, getCurrentUser } from '../../utils/mainApi';
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
@@ -74,6 +75,11 @@ function App() {
     // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
     // savedUserNews é um array de objs e pode ser iterado sem erros
   });
+
+  // Variável de estado para verificar autenticação ao montar o app
+  // Está verificando ou não?
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
   /* ------------------------------
               LOGOUT
   ------------------------------- */
@@ -116,33 +122,63 @@ function App() {
     }
   }, [savedUserNews]);
 
-  /*
-  // Efeito 'de montagem' para cards salvos na Api do servidor > apenas com backend ativo
-  // Só roda se estiver logado, se não usa dados do localStorage configurados na
-  // variável de estado
+  // Efeito 'de montagem' e refresh: ciclo de autenticação + carregamento: autenticação, fetch de
+  // dados do usuário, navegação e set dos estados globais
+  // Só roda se estiver com backend ativo (com o token do usuário), se não usa dados do
+  // localStorage configurados na variável de estado
   useEffect(() => {
-    if (!loggedIn) return;
+    // Flag para verificar se o componente está montado:
+    // evita setState após desmontar
+    let isMounted = true;
 
-    async function fetchSavedCards() {
+    // Fetch e set do dados + navegação
+    // Define e executa função assíncrona
+    (async () => {
       try {
+        // Busca infos de perfil do usuário atual
+        const userInfos = await getCurrentUser();
+
         // Busca cards do usuário atual, na Api do banco de dados
         const userSavedCards = await getUserNews();
-        // Seta a variável de estado
+
+        // Verifica se o componente ainda está montado
+        if (!isMounted) return;
+
+        // Permite login para o usuário
+        setLoggedIn(true);
+
+        // Seta variável de estado com dados do backend (user)
+        setCurrentUser({
+          email: userInfos.user.email,
+          name: userInfos.user.name,
+        });
+
+        // Seta a variável de estado com dados do backend (articles)
         setSavedUserNews(userSavedCards);
+
+        // Só redireciona se estiver em outra rota
+        if (window.location.pathname !== '/') {
+          navigate('/', { replace: true });
+        }
       } catch (error) {
         console.error(
-          `Erro no efeito 'de montagem' para cards salvos, fetchSavedCards: ${error}`,
+          `Erro no efeito 'de montagem', busca e set dos dados do usuário logado \n`,
+          error,
         );
+
+        if (!isMounted) return;
+
+        // Se o token for inválido ou ocorrer erro, desloga o usuário
+        handleLogout();
+      } finally {
+        // Se componente estiver montado, finaliza a verificação de autenticação
+        if (isMounted) {
+          setCheckingAuth(false);
+        }
       }
-    }
+    })();
+  }, [navigate, handleLogout]);
 
-    fetchSavedCards();
-  }, [loggedIn]);
-  */
-
-  // Efeito para mergear lista de cards salvos (do usuário) com a lista de cards
-  // retornados da pesquisa > para o ícone do botão 'salvar', no NewsCard
-  // Apenas se estiver logado
   useEffect(() => {
     // Se não estiver logado, não executa
     if (!loggedIn) return;
@@ -365,7 +401,17 @@ function App() {
   /* ------------------------------
                 JSX
   ------------------------------- */
+  // Enquanto estiver verificando o login, não renderiza o app,
+  // renderiza uma tela de carregamento
+  if (checkingAuth) {
+    return (
+      <div className="loading-screen">
+        <p className="loading-text">Carregando...</p>
+      </div>
+    );
+  }
 
+  // Depois que verificar, renderiza o app normalmente
   return (
     // Provedores de contexto: compartilha dados de login e do usuário atual
     <AuthContext.Provider
