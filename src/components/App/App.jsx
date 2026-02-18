@@ -137,8 +137,8 @@ function App() {
     }
   }, [savedUserNews]);
 
-  // Efeito 'de montagem' e refresh: ciclo de autenticação + carregamento: autenticação, fetch de
-  // dados do usuário, navegação e set dos estados globais
+  // Efeito 'de montagem' e refresh: ciclo de autenticação + carregamento: autenticação,
+  // fetch de dados do usuário, navegação e set dos estados globais
   // Só roda se estiver com backend ativo (com o token do usuário), se não usa dados do
   // localStorage configurados na variável de estado
   useEffect(() => {
@@ -236,8 +236,8 @@ function App() {
           // E o efeito só altera o estado quando os articles realmente mudam, por causa
           // do searchedNews nas dependências do efeito e não searchedNews.articles que é
           // o que é realmente utilizado no efeito > recomendado pelo React: não coloque
-          // dependência profunda em efeitos pq o React avalia a dependência antes do effect
-          // e o estado pode estar null em transições
+          // dependência profunda em efeitos pq o React avalia a dependência antes do
+          // effect e o estado pode estar null em transições
 
           // Gerada por I.A. (Copilot)
           const same =
