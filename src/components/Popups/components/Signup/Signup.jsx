@@ -44,7 +44,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
   const { handleSubmit } = useFormSubmit(
     // onSubmit
     () => {
-      // Envia informações do formulário para a API do backend (servidor) e retorna a Promisse
+      // Envia dados de inscrição para a API do backend (servidor) e retorna a Promisse
       return handleRegistration({ email, password, name });
     },
     // onSuccess
@@ -54,7 +54,10 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
     },
     // onError
     (error) => {
-      console.error('Erro ao enviar formulário de inscrição \n', error);
+      console.error(
+        'Erro ao enviar formulário de inscrição do usuário (handleRegistration) \n',
+        error,
+      );
     },
   );
 

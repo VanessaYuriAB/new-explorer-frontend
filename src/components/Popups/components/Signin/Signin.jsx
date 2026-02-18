@@ -37,7 +37,10 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
       handleClosePopup();
     },
     (error) => {
-      console.error('Erro ao enviar formulário de login \n', error);
+      console.error(
+        'Erro ao enviar formulário de login (handleLogin) \n',
+        error,
+      );
     },
   );
 

@@ -267,42 +267,36 @@ function App() {
               HANDLERS
   ------------------------------- */
 
+  // Signup e signin sem try/catch para lançar erro, já será lançado naturalmente pela
+  // função chamada em cada um (register() ou login()), subindo para o useFormSubmit
+  // do seu componente, essencial para o funcionamento de onSuccess e onError
+
   // Handler: signup
   const handleRegistration = async (newUserData) => {
-    try {
-      await register(newUserData);
-    } catch (error) {
-      console.error(
-        'Erro na inscrição do usuário, handleRegistration \n',
-        error,
-      );
-    }
+    await register(newUserData);
   };
 
   // Handler: signin
   const handleLogin = async (userData) => {
-    try {
-      const loggedUser = await login(userData);
+    const loggedUser = await login(userData);
 
-      if (loggedUser.token) {
-        // Antes de logar, limpa dados anteriores de perfil de usuário
-        // Para reforço, pq a limpeza tbm é aplicada no logout
-        setCurrentUser({
-          email: '',
-          name: '',
-        });
-        setSavedUserNews([]);
+    if (loggedUser.token) {
+      // Antes de logar, limpa dados anteriores de perfil de usuário
+      // Para reforço, pq a limpeza tbm é aplicada no logout
+      setCurrentUser({
+        email: '',
+        name: '',
+      });
+      setSavedUserNews([]);
 
-        // Seta token: variável de estado + armazenamento local
-        setAndStorageToken(loggedUser.token, setTokenJwt);
-      }
-
-      // Login apenas ajusta token, focado na autenticação
-      // Dados de perfil apenas no efeito de montagem
-      // A lógica de carregamento de perfil pode ser aplicada tanto no login quanto no refresh da página
-    } catch (error) {
-      console.error('Erro no login, handleLogin \n', error);
+      // Seta token: variável de estado + armazenamento local
+      setAndStorageToken(loggedUser.token, setTokenJwt);
     }
+
+    // Login apenas ajusta token, focado na autenticação
+    // Dados de perfil apenas no efeito de montagem
+    // A lógica de carregamento de perfil pode ser aplicada tanto no login quanto no
+    // refresh da página
   };
 
   // Handler para getNews + adicionar queryString para a tag do card
@@ -320,8 +314,8 @@ function App() {
         };
       });
 
-      // Atualizado todo o objeto de resposta, com a atualização da flag 'tag' em cada card,
-      // no array para artigos
+      // Atualizado todo o objeto de resposta, com a atualização da flag 'tag' em cada
+      // card, no array para artigos
       const responseOfNewsWithTag = {
         ...responseOfNews,
         articles: articlesWithTag,
