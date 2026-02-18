@@ -7,8 +7,8 @@ import btnOut from '../../../../assets/btn-out.svg';
 import './ForMobileSavedNewsHeaderAndNav.css';
 
 function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
-  // Contexto de autenticação, extraindo set de estado de login
-  const { setLoggedIn } = useContext(AuthContext);
+  // Contexto de autenticação, extraindo handle para logout
+  const { handleLogout } = useContext(AuthContext);
 
   // A função getNavLinkClass é nativa do componente <NavLink>
   // Aceita um objeto como um parâmetro, que possui uma propriedade,
@@ -65,9 +65,7 @@ function ForMobileSavedNewsHeaderAndNav({ setMobile }) {
           <button
             className="header-news-mobile__btn"
             type="button"
-            onClick={() => {
-              setLoggedIn(false);
-            }}
+            onClick={handleLogout}
             aria-label="Deslogar usuário"
           >
             <p className="header-news-mobile__btn-text">Nome</p>

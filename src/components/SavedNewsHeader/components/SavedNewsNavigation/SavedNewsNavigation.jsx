@@ -5,8 +5,8 @@ import btnOutBlack from '../../../../assets/btn-out-black.svg';
 import './SavedNewsNavigation.css';
 
 function SavedNewsNavigation() {
-  // Contexto de autenticação, extraindo set de estado de login
-  const { setLoggedIn } = useContext(AuthContext);
+  // Contexto de autenticação, extraindo handle para logout
+  const { handleLogout } = useContext(AuthContext);
 
   // A função getNavLinkClass é nativa do componente <NavLink>
   // Aceita um objeto como um parâmetro, que possui uma propriedade,
@@ -31,9 +31,7 @@ function SavedNewsNavigation() {
       <button
         className="header-news__btn"
         type="button"
-        onClick={() => {
-          setLoggedIn(false);
-        }}
+        onClick={handleLogout}
         aria-label="Deslogar usuário"
       >
         <p className="header-news__btn-text">Nome</p>
