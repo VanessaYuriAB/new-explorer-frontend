@@ -1,14 +1,19 @@
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import SavedNewsCard from './components/SavedNewsCard/SavedNewsCard';
 import './SavedNewsCardList.css';
 
 function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
+  // Contexto do usuário atual: assina o contexto CurrentUserContext
+  const { currentUser } = useContext(CurrentUserContext);
+
   // Se o array do estado para os cards salvos do usuário estiver vazio, renderiza msg
   if (savedUserNews.length === 0) {
     return (
       <section className="saved-news main__saved-news">
         <div className="saved-news__no-saveds">
           Você não tem nenhum cartão de notícia salvo,{' '}
-          <span className="saved-news__username">Nome</span>.
+          <span className="saved-news__username">{currentUser.name}</span>.
         </div>
       </section>
     );
@@ -88,7 +93,7 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
         <div className="saved-news__infos">
           <h2 className="saved-news__title">Artigos salvos</h2>
           <p className="saved-news__info">
-            <span className="saved-news__username">Nome</span>
+            <span className="saved-news__username">{currentUser.name}</span>
             {`, você tem ${savedUserNews.length} artigo(s) salvo(s)`}
           </p>
           <p className="saved-news__keywords">

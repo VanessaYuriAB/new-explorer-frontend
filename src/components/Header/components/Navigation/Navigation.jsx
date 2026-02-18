@@ -1,12 +1,16 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import AuthContext from '../../../../contexts/AuthContext';
+import CurrentUserContext from '../../../../contexts/CurrentUserContext';
 import btnOut from '../../../../assets/btn-out.svg';
 import './Navigation.css';
 
 function Navigation({ handleOpenPopup, signinPopup }) {
   // Contexto de autenticação, extraindo estado de login e handle para logout
   const { loggedIn, handleLogout } = useContext(AuthContext);
+
+  // Contexto do usuário atual: assina o contexto CurrentUserContext
+  const { currentUser } = useContext(CurrentUserContext);
 
   // As funções getNavLinkClass e getNavLinkClassOut são nativas do componente <NavLink>
   // Aceitam um objeto como parâmetro, que possui uma propriedade, isActive, que é
@@ -45,7 +49,7 @@ function Navigation({ handleOpenPopup, signinPopup }) {
             onClick={handleLogout}
             aria-label="Deslogar usuário"
           >
-            <p className="header__btn-text">Nome</p>
+            <p className="header__btn-text">{currentUser.name}</p>
             <img
               className="header__btn-out"
               src={btnOut}

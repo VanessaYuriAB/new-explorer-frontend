@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../../../contexts/AuthContext';
+import CurrentUserContext from '../../../../contexts/CurrentUserContext';
 import newsExplorer from '../../../../assets/news-explorer-logo.svg';
 import lineHeader from '../../../../assets/line-header.svg';
 import btnOut from '../../../../assets/btn-out.svg';
@@ -9,6 +10,9 @@ import './ForMobileHeaderAndNav.css';
 function ForMobileHeaderAndNav({ setMobile, handleOpenPopup, signinPopup }) {
   // Contexto de autenticação, extraindo estado de login e handle para logout
   const { loggedIn, handleLogout } = useContext(AuthContext);
+
+  // Contexto do usuário atual: assina o contexto CurrentUserContext
+  const { currentUser } = useContext(CurrentUserContext);
 
   // As funções getNavLinkClass e getNavLinkClassOut são nativas do componente <NavLink>
   // Aceitam um objeto como parâmetro, que possui uma propriedade, isActive, que é
@@ -78,7 +82,7 @@ function ForMobileHeaderAndNav({ setMobile, handleOpenPopup, signinPopup }) {
                 onClick={handleLogout}
                 aria-label="Deslogar usuário"
               >
-                <p className="header-mobile__btn-text">Nome</p>
+                <p className="header-mobile__btn-text">{currentUser.name}</p>
                 <img
                   className="header-mobile__btn-out"
                   src={btnOut}
