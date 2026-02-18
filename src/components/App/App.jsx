@@ -82,9 +82,9 @@ function App() {
   // Inicia, tbm, com os dados do localStorage, se houver
   const [savedUserNews, setSavedUserNews] = useState(() => {
     const saved = localStorage.getItem('savedUserNewsData');
-    return saved ? JSON.parse(saved) : [];
+    return saved ? JSON.parse(saved) : { userArticles: [] };
     // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
-    // savedUserNews é um array de objs e pode ser iterado sem erros
+    // savedUserNews.userArticles é um array de objs e pode ser iterado sem erros
   });
 
   // Variável de estado para verificar autenticação ao montar o app
@@ -215,14 +215,14 @@ function App() {
 
     async function mergeNewsLists() {
       // Lista de notícias da pesquisa > searchedNews.articles
-      // Lista de notícias salvas do usuário atual > savedUserNews
+      // Lista de notícias salvas do usuário atual > savedUserNews.userArticles
 
       try {
         // Dentro do array searchedNews.articles, existe algum elemento com a propriedade
-        // url igual a algum elemento dentro do array savedUserNews? Se sim, adiciona flag
-        // isSaved como true, se não, como false
+        // url igual a algum elemento dentro do array savedUserNews.userArticles? Se sim,
+        // adiciona flag isSaved como true, se não, como false
         const mergedArticles = searchedNews.articles.map((searchedItem) => {
-          const isSaved = savedUserNews.some((savedItem) => {
+          const isSaved = savedUserNews.userArticles.some((savedItem) => {
             return searchedItem.url === savedItem.url;
           });
 
