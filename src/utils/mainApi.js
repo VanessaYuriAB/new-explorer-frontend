@@ -1,4 +1,5 @@
 import { baseMainApiUrl, makeApisRequest } from './utilsApis';
+import { getToken } from './token';
 
 // Assinatura: fetch(url-to-requested-resource, options-object);
 // É um método assíncrono, retorna uma promisse e method padrão: GET
@@ -11,6 +12,7 @@ const saveNews = async (cardObject) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${getToken()}`,
     },
     reqBody: cardObject, // vem do componente NewsCardList/NewsCard, um obj simple pq a
     // conversão para JSON é aplicada no makeApisRequest
@@ -28,6 +30,7 @@ const unsaveNews = async (cardId) => {
   const unsavedCard = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles/${cardId}`,
     method: 'DELETE',
+    headers: { Authorization: `Bearer ${getToken()}` },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
@@ -42,6 +45,7 @@ const getUserNews = async () => {
   const userNews = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles`,
     method: 'GET',
+    headers: { Authorization: `Bearer ${getToken()}` },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
