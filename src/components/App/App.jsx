@@ -13,7 +13,8 @@ import Popups from '../Popups/Popups';
 import AuthContext from '../../contexts/AuthContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import getNews from '../../utils/NewsApi';
-import { saveNews, unsaveNews /* , getUserNews */ } from '../../utils/mainApi';
+import { register, login } from '../../utils/authApi';
+import { saveNews, unsaveNews } from '../../utils/mainApi';
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
@@ -204,6 +205,41 @@ function App() {
               HANDLERS
   ------------------------------- */
 
+  // Handler: signup
+  const handleRegistration = async (newUserData) => {
+    try {
+      await register(newUserData);
+    } catch (error) {
+      console.error(
+        'Erro na inscrição do usuário, handleRegistration \n',
+        error,
+      );
+    }
+  };
+
+  // Handler: signin
+  const handleLogin = async (userData) => {
+    try {
+      const loggedUser = await login(userData);
+
+      if (loggedUser.token) {
+        // Antes de logar, limpa dados anteriores de perfil de usuário
+        // Para reforço, pq a limpeza tbm é aplicada no logout
+        setCurrentUser({
+          email: '',
+          name: '',
+        });
+        setSavedUserNews([]);
+      }
+
+      // Login apenas ajusta token, focado na autenticação
+      // Dados de perfil apenas no efeito de montagem
+      // A lógica de carregamento de perfil pode ser aplicada tanto no login quanto no refresh da página
+    } catch (error) {
+      console.error('Erro no login, handleLogin \n', error);
+    }
+  };
+
   // Handler para getNews + adicionar queryString para a tag do card
   const handleGetNews = async (queryToSearch) => {
     try {
@@ -332,6 +368,8 @@ function App() {
       value={{
         loggedIn, // booleano de estado: status de login
         setLoggedIn,
+        handleRegistration,
+        handleLogin,
         handleLogout,
       }}
     >
