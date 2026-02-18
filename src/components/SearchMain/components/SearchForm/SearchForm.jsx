@@ -46,9 +46,13 @@ function SearchForm({
       setQueryString('');
     },
     // onError
-    () => {
+    (error) => {
       // Define o final do estado de carregamento da pesquisa
       setIsSearchLoading(false);
+      console.error(
+        'Erro ao enviar formulário de pesquisa para News Api \n',
+        error,
+      );
     },
   );
 
