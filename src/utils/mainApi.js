@@ -55,4 +55,19 @@ const getUserNews = async () => {
   // Try/catch desnecessário aqui tbm
 };
 
-export { saveNews, unsaveNews, getUserNews };
+// GET - /users/me > aplicado no efeito de montagem da aplicação
+const getCurrentUser = async () => {
+  const userInfos = await makeApisRequest({
+    endpoint: `${baseMainApiUrl}/users/me`,
+    method: 'GET',
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+
+  // Se a solicitação for bem-sucedida, retorna os dados
+  return userInfos;
+
+  // Se a solicitação não for bem-sucedida, repassa o erro adiante > efeito de montagem
+  // Try/catch desnecessário aqui tbm
+};
+
+export { saveNews, unsaveNews, getUserNews, getCurrentUser };
