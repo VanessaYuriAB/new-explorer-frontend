@@ -50,7 +50,8 @@ function useFormSubmit(onSubmit, onSuccess, onError) {
       } else {
         // Caso não exista callback de erro, registra no console
         console.error(
-          `Erro no useFormSubmit e o componente não possui callback onError: ${error}`,
+          'Erro no useFormSubmit e o componente não possui callback onError \n',
+          error,
         );
       }
     } finally {

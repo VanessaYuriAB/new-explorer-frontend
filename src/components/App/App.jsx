@@ -193,7 +193,8 @@ function App() {
         });
       } catch (error) {
         console.error(
-          `Erro no efeito de merge das listas de cards, mergeNewsLists: ${error}`,
+          'Erro no efeito de merge das listas de cards, mergeNewsLists \n',
+          error,
         );
       }
     }
@@ -296,7 +297,7 @@ function App() {
         return [savedCard, ...prev];
       });
     } catch (error) {
-      console.error(`Erro no handleSaveCard: ${error}`);
+      console.error('Erro ao salvar artigo, handleSaveCard \n', error);
     }
   };
 
@@ -327,7 +328,10 @@ function App() {
         });
       });
     } catch (error) {
-      console.error(`Erro no memoizedHandleUnsave: ${error}`);
+      console.error(
+        'Erro ao des-salvar artigo, memoizedHandleUnsave \n',
+        error,
+      );
     }
   }, []);
 
