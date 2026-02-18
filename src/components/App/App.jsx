@@ -15,19 +15,28 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import getNews from '../../utils/NewsApi';
 import { saveNews, unsaveNews /* , getUserNews */ } from '../../utils/mainApi';
 import { useState, useEffect, useCallback } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
   // Hook de localização para saber a rota atual
   const location = useLocation();
 
+  // Hook de navegação para redirecionamento de rota
+  const navigate = useNavigate();
+
   /* ------------------------------
               ESTADOS
   ------------------------------- */
 
   // Variável de estado: status de login
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  // Variável de estado: dados do usuário atualmente logado
+  const [currentUser, setCurrentUser] = useState({
+    email: '',
+    name: '',
+  });
 
   // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
   const [popup, setPopup] = useState(null);
@@ -64,6 +73,26 @@ function App() {
     // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
     // savedUserNews é um array de objs e pode ser iterado sem erros
   });
+  /* ------------------------------
+              LOGOUT
+  ------------------------------- */
+
+  // Manipulador para deslogar: configurado antes do efeito de montagem e memorizado em
+  // useCallback para estabilizar e não causar re-render
+  const handleLogout = useCallback(() => {
+    // Para evitar execução dupla, pq o efeito de montagem tbm chama o logoff
+    if (!loggedIn) return;
+
+    // Desabilita o login
+    setLoggedIn(false);
+
+    // Limpa estados: perfil + artigos
+    setCurrentUser({ email: '', name: '' });
+    setSavedUserNews([]);
+
+    // Redireciona para página de início
+    navigate('/', { replace: true });
+  }, [loggedIn, navigate]);
 
   /* ------------------------------
               EFEITOS
@@ -303,9 +332,12 @@ function App() {
       value={{
         loggedIn, // booleano de estado: status de login
         setLoggedIn,
+        handleLogout,
       }}
     >
-      <CurrentUserContext.Provider>
+      <CurrentUserContext.Provider
+        value={{ currentUser }} // obj de estado: dados do usuário atual
+      >
         <div className="page">
           {/* O Header é renderizado estando deslogado ou logado, em '/' */}
 
