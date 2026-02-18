@@ -14,8 +14,13 @@ import AuthContext from '../../contexts/AuthContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import getNews from '../../utils/NewsApi';
 import { register, login } from '../../utils/authApi';
-import { saveNews, unsaveNews } from '../../utils/mainApi';
-import { getUserNews, getCurrentUser } from '../../utils/mainApi';
+import { setAndStorageToken, getToken, removeToken } from '../../utils/token';
+import {
+  saveNews,
+  unsaveNews,
+  getUserNews,
+  getCurrentUser,
+} from '../../utils/mainApi';
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
@@ -42,6 +47,12 @@ function App() {
 
   // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
   const [popup, setPopup] = useState(null);
+
+  // Variável de estado: token JWT
+  const [tokenJwt, setTokenJwt] = useState(() => {
+    const jwt = getToken();
+    return jwt ? jwt : '';
+  });
 
   // Variável de estado: controle do header e nav para mobile
   const [mobile, setMobile] = useState(false);
@@ -97,6 +108,10 @@ function App() {
     setCurrentUser({ email: '', name: '' });
     setSavedUserNews([]);
 
+    // Limpa infos do token com função utilitária (armazenamento local + variável de
+    // estado)
+    removeToken(setTokenJwt);
+
     // Redireciona para página de início
     navigate('/', { replace: true });
   }, [loggedIn, navigate]);
@@ -134,6 +149,13 @@ function App() {
     // Fetch e set do dados + navegação
     // Define e executa função assíncrona
     (async () => {
+      // Verifica se há um JWT no armazenamento local, pela variável state
+      // Se não houver, sai da função do efeito
+      if (!tokenJwt) {
+        setCheckingAuth(false); // sem token, login falso
+        return;
+      }
+
       try {
         // Busca infos de perfil do usuário atual
         const userInfos = await getCurrentUser();
@@ -177,7 +199,7 @@ function App() {
         }
       }
     })();
-  }, [navigate, handleLogout]);
+  }, [tokenJwt, navigate, handleLogout]);
 
   useEffect(() => {
     // Se não estiver logado, não executa
@@ -267,6 +289,9 @@ function App() {
           name: '',
         });
         setSavedUserNews([]);
+
+        // Seta token: variável de estado + armazenamento local
+        setAndStorageToken(loggedUser.token, setTokenJwt);
       }
 
       // Login apenas ajusta token, focado na autenticação
