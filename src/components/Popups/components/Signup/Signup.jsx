@@ -87,6 +87,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         type="password"
         placeholder="Insira a senha"
         id="password"
+        pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"
+        /* title="Mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)." */
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
@@ -105,6 +107,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         type="text"
         placeholder="Insira seu nome de usuário"
         id="name"
+        pattern="^[^<>]+$" /* bloqueia os caracteres < e > para evitar inserção de tags
+        HTML diretamente: barreira simples contra injeção de HTML no campo */
         value={name}
         onChange={(e) => {
           setName(e.target.value);

@@ -70,6 +70,8 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         type="password"
         placeholder="Insira a senha"
         id="password"
+        pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"
+        /* title="Mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)." */
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
