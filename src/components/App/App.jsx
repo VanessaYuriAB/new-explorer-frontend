@@ -343,17 +343,32 @@ function App() {
       let savedCard;
 
       try {
+        const normalizeCard = (card) => ({
+          tag: card.tag,
+          title: card.title,
+          description: card.description,
+          publishedAt: card.publishedAt,
+          source: card.source?.name || null, // para ajustar formato da
+          // propriedade source, como esperado no backend, e não retornar
+          // 400, devido validação do celebrate/joi
+          url: card.url,
+          urlToImage: card.urlToImage,
+        });
+
         // POST para o banco de dados
-        savedCard = await saveNews(searchedNewsCard);
+        savedCard = await saveNews(normalizeCard(searchedNewsCard));
       } catch {
         // Backend offline → usa fallback local
         savedCard = searchedNewsCard;
       }
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
-      setSavedUserNews((prev) => {
-        return [savedCard, ...prev];
-      });
+      // Atualiza o array (userArticles) dentro do objeto da variável (savedUserNews),
+      // definindo nova lista de objetos de artigos do usuário com a inclusão do novo
+      // card no começo do array
+      setSavedUserNews((prev) => ({
+        userArticles: [savedCard, ...prev.userArticles],
+      }));
     } catch (error) {
       console.error('Erro ao salvar artigo, handleSaveCard \n', error);
     }
