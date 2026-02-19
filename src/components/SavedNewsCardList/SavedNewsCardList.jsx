@@ -8,7 +8,7 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
   const { currentUser } = useContext(CurrentUserContext);
 
   // Se o array do estado para os cards salvos do usuário estiver vazio, renderiza msg
-  if (savedUserNews.length === 0) {
+  if (savedUserNews.userArticles.length === 0) {
     return (
       <section className="saved-news main__saved-news">
         <div className="saved-news__no-saveds">
@@ -20,25 +20,26 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
   }
 
   // Se houver objs de cards salvos, renderiza lista do usuário
-  if (savedUserNews.length > 0) {
+  if (savedUserNews.userArticles.length > 0) {
     /* ----------------
         PRIMEIRA KEY
     -----------------*/
 
-    const firstKeyword = savedUserNews[savedUserNews.length - 1].tag;
+    const firstKeyword =
+      savedUserNews.userArticles[savedUserNews.userArticles.length - 1].keyword;
 
     /* ----------------
         SEGUNDA KEY
     -----------------*/
 
     // Retorna array com tags diferentes da primeira
-    const diferentKey = savedUserNews.filter((card) => {
-      return card.tag !== firstKeyword;
+    const diferentKey = savedUserNews.userArticles.filter((card) => {
+      return card.keyword !== firstKeyword;
     });
 
     // Retorna o valor da segunda palavra-chave, se houver
     // Se não houver, não quebra a aplicação (?.)
-    const secondKey = diferentKey[diferentKey.length - 1]?.tag;
+    const secondKey = diferentKey[diferentKey.length - 1]?.keyword;
 
     // Configura estrutura do texto para a segunda palavra-chave, de acordo com a qtdd
     const secondKeyword = () => {
@@ -58,12 +59,12 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
     // Array de palavras-chave totais diferentes das tags do primeiro e segundo span,
     // baseado no vetor resultante para a segunda palavra-chave
     const totalAnothersKeywords = diferentKey.filter((item) => {
-      return item.tag !== secondKey;
+      return item.keyword !== secondKey;
     });
 
     // Transforma totalAnothersKeywords em array contendo apenas tags
     const totalAnothersTags = totalAnothersKeywords.map((item) => {
-      return item.tag;
+      return item.keyword;
     });
 
     // Contabiliza apenas palavras-chave diferentes uma das outras, a partir de
@@ -88,13 +89,17 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
         : ` e 0 outra(s)`;
     };
 
+    /* ----------------
+           JSX
+    -----------------*/
+
     return (
       <section className="saved-news main__saved-news">
         <div className="saved-news__infos">
           <h2 className="saved-news__title">Artigos salvos</h2>
           <p className="saved-news__info">
             <span className="saved-news__username">{currentUser.name}</span>
-            {`, você tem ${savedUserNews.length} artigo(s) salvo(s)`}
+            {`, você tem ${savedUserNews.userArticles.length} artigo(s) salvo(s)`}
           </p>
           <p className="saved-news__keywords">
             Por palavras-chave:
@@ -111,13 +116,13 @@ function SavedNewsCardList({ savedUserNews, memoizedHandleUnsave }) {
         usuário na API do servidor */}
 
           <ul className="saved-news__cards">
-            {savedUserNews.map((savedCard) => {
+            {savedUserNews.userArticles.map((savedCard) => {
               // A lista de cards salvos possui a propriedade _id em cada elemento, pois
-              // é o servidor do banco de dados (Mongo DB), mas, para simplificar renderização
-              // com backend inativo, é usado a url de cada notícia como 'key'
+              // é o servidor do banco de dados (Mongo DB) > mas, para simplificar
+              // renderização, com backend inativo, usar a url de cada notícia como 'key'
               return (
                 <SavedNewsCard
-                  key={savedCard.url}
+                  key={savedCard._id}
                   savedCard={savedCard}
                   memoizedHandleUnsave={memoizedHandleUnsave}
                 />
