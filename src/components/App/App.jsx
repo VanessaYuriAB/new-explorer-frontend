@@ -339,7 +339,7 @@ function App() {
 
       try {
         const normalizeCard = (card) => ({
-          tag: card.tag,
+          tag: card.tag, // propriedade adicionada em handleGetNews
           title: card.title,
           description: card.description,
           publishedAt: card.publishedAt,
