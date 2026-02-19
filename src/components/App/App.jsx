@@ -503,14 +503,14 @@ function App() {
 
                     {!isSearchLoading &&
                       searchedNews.status === 'ok' &&
-                      searchedNews.totalResults === 0 && <NothingFound />}
+                      searchedNews.articles.length === 0 && <NothingFound />}
 
                     {/* Se não estiver em loading e houver resultados ou se não estiver em
                     loading e o status for 'error', renderiza o NewsCardList com o devido
                     conteúdo */}
 
                     {!isSearchLoading &&
-                      (searchedNews.totalResults > 0 ||
+                      (searchedNews.articles.length > 0 ||
                         searchedNews.status === 'error') && (
                         <NewsCardList
                           searchedNews={searchedNews}
