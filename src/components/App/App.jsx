@@ -177,11 +177,6 @@ function App() {
 
         // Seta a variável de estado com dados do backend (articles)
         setSavedUserNews(userSavedCards);
-
-        // Só redireciona se estiver em outra rota
-        if (window.location.pathname !== '/') {
-          navigate('/', { replace: true });
-        }
       } catch (error) {
         console.error(
           `Erro no efeito 'de montagem', busca e set dos dados do usuário logado \n`,
@@ -199,7 +194,7 @@ function App() {
         }
       }
     })();
-  }, [tokenJwt, navigate, handleLogout]);
+  }, [tokenJwt, handleLogout]);
 
   // Efeito derivado, reagindo apenas aos estados relevantes: para sincronizar estados
   // derivados (merge de searchedNews com savedUserNews) e adicionar a info 'isSaved' aos
