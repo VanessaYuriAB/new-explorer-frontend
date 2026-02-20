@@ -362,7 +362,7 @@ function App() {
       // DELETE para o banco de dados
       // Passa o _id do card como parâmetro (_id gerado automaticamente pelo Mongo DB ao
       // salvar o artigo na coleção do banco de dados)
-      const unsavedCard = await unsaveNews(cardId);
+      await unsaveNews(cardId);
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       // .filter(): cria um novo vetor baseado no original, filtrando elementos e
@@ -372,7 +372,7 @@ function App() {
       setSavedUserNews((prev) => {
         return {
           userArticles: prev.userArticles.filter((userCard) => {
-            return userCard._id !== unsavedCard._id;
+            return userCard._id !== cardId;
           }),
         };
       });
