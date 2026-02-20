@@ -35,7 +35,7 @@ function SavedNewsCard({ savedCard, memoizedHandleUnsave }) {
         <button
           type="button"
           className="saved-card__btn"
-          onClick={() => memoizedHandleUnsave(savedCard)}
+          onClick={() => memoizedHandleUnsave(savedCard._id)}
           aria-label="Remover dos salvos"
         ></button>
 

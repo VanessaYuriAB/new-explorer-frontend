@@ -3,7 +3,12 @@ import AuthContext from '../../contexts/AuthContext';
 import { useContext, useCallback, useState } from 'react';
 import './NewsCardList.css';
 
-function NewsCardList({ searchedNews, handleSaveCard, memoizedHandleUnsave }) {
+function NewsCardList({
+  searchedNews,
+  handleSaveCard,
+  memoizedHandleUnsave,
+  savedUserNews,
+}) {
   // Contexto de autenticação, extraindo estado de login
   const { loggedIn } = useContext(AuthContext);
 
@@ -65,6 +70,7 @@ function NewsCardList({ searchedNews, handleSaveCard, memoizedHandleUnsave }) {
                   searchedNewsCard={searchedNewsCard}
                   handleSaveCard={memoizedHandleSave} // valor memorizado
                   memoizedHandleUnsave={memoizedHandleUnsave}
+                  savedUserNews={savedUserNews}
                 />
               ))}
           </ul>

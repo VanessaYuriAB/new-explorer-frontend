@@ -357,12 +357,12 @@ function App() {
   // useCallback: para memorizar a função e não recriar a cada render > NewsCard
   // e SavedNewsCard
   // Em conjunto com React.memo() e useMemo() para os dados
-  const memoizedHandleUnsave = useCallback(async (card) => {
+  const memoizedHandleUnsave = useCallback(async (cardId) => {
     try {
       // DELETE para o banco de dados
       // Passa o _id do card como parâmetro (_id gerado automaticamente pelo Mongo DB ao
       // salvar o artigo na coleção do banco de dados)
-      const unsavedCard = await unsaveNews(card._id);
+      const unsavedCard = await unsaveNews(cardId);
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       // .filter(): cria um novo vetor baseado no original, filtrando elementos e
@@ -492,6 +492,7 @@ function App() {
                           searchedNews={searchedNews}
                           handleSaveCard={handleSaveCard}
                           memoizedHandleUnsave={memoizedHandleUnsave}
+                          savedUserNews={savedUserNews}
                         />
                       )}
 

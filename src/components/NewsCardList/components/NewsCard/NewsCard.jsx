@@ -4,7 +4,12 @@ import useFormattedDateBR from '../../../../hooks/useformattedDateBR';
 import imgIndisponivel from '../../../../assets/img-indisponivel.jpg';
 import './NewsCard.css';
 
-function NewsCard({ searchedNewsCard, handleSaveCard, memoizedHandleUnsave }) {
+function NewsCard({
+  searchedNewsCard,
+  handleSaveCard,
+  memoizedHandleUnsave,
+  savedUserNews,
+}) {
   // Desestruturação de propriedades do obj para cada notícia, dentro do array de
   // artigos da resposta bem-sucedida da NewsApi
   // Os nomes das propriedades são definidas pela News Api
@@ -48,10 +53,26 @@ function NewsCard({ searchedNewsCard, handleSaveCard, memoizedHandleUnsave }) {
                 isSaved === true ? 'Remover dos salvos' : 'Salvar notícia'
               }
               onClick={() => {
+                // Condiciona salvar e des-salvar
+                // Salva passando o obj completo do artigo
+                // Des-salva passando apenas o ID
                 if (isSaved === false) {
                   handleSaveCard(searchedNewsCard);
                 } else {
-                  memoizedHandleUnsave(searchedNewsCard);
+                  // Busca o card em questão pelo link da url
+                  // .link na coleção do banco de dados e .url na lista vinda da NewsApi
+                  const cardToUnsave = savedUserNews.userArticles.filter(
+                    (card) => {
+                      return card.link === searchedNewsCard.url;
+                    },
+                  );
+                  // Busca o _id do card a ser deletado
+                  // Pq o obj vindo da NewsApi não possui a propriedade
+                  // Apenas o salvo no Mongo DB
+                  // cardToUnsave é um array com um objeto
+                  const cardId = cardToUnsave[0]._id;
+                  // Passa o ID do card a ser removido
+                  memoizedHandleUnsave(cardId);
                 }
               }}
             ></button>
