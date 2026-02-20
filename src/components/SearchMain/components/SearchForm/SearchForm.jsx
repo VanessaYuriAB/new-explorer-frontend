@@ -20,7 +20,10 @@ function SearchForm({
   };
 
   // Envio do formulário com hook personalizado (inclui preventDefault,
-  // loading, onSubmit, onSuccess e onError)
+  // onSubmit, onSuccess e onError)
+  // Configuração para o loading do hook não é utilizada, é configurado manualmente,
+  // devido ordem das funcionalidades por causa da validação para envio da pesquisa
+  // sem palavra-chave
   const { handleSubmit } = useFormSubmit(
     // onSubmit
     () => {
@@ -33,7 +36,13 @@ function SearchForm({
         setIsSearchLoading(true);
         // Reset do estado de notícias pesquisadas para 'null' antes da nova pesquisa, pois
         // havendo ou não resultados para a busca, o obj é retornado
-        setSearchedNews(null);
+        setSearchedNews({
+          status: null,
+          totalResults: 0,
+          articles: [],
+          code: null,
+          message: null,
+        });
         // E envia a solicitação de pesquisa do usuário
         return handleGetNews(queryString); // retorna a Promisse, é aqui que será aguardado (vide hook)
       }
@@ -50,7 +59,7 @@ function SearchForm({
       // Define o final do estado de carregamento da pesquisa
       setIsSearchLoading(false);
       console.error(
-        'Erro ao enviar formulário de pesquisa para News Api \n',
+        'Erro ao enviar formulário de pesquisa para News Api (handleGetNews) \n',
         error,
       );
     },
