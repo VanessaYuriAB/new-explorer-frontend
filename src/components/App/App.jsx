@@ -249,38 +249,6 @@ function App() {
               HANDLERS
   ------------------------------- */
 
-  // Signup e signin sem try/catch para lançar erro, já será lançado naturalmente pela
-  // função chamada em cada um (register() ou login()), subindo para o useFormSubmit
-  // do seu componente, essencial para o funcionamento de onSuccess e onError
-
-  // Handler: signup
-  const handleRegistration = async (newUserData) => {
-    await register(newUserData);
-  };
-
-  // Handler: signin
-  const handleLogin = async (userData) => {
-    const loggedUser = await login(userData);
-
-    if (loggedUser.token) {
-      // Antes de logar, limpa dados anteriores de perfil de usuário
-      // Para reforço, pq a limpeza tbm é aplicada no logout
-      setCurrentUser({
-        email: '',
-        name: '',
-      });
-      setSavedUserNews([]);
-
-      // Seta token: variável de estado + armazenamento local
-      setAndStorageToken(loggedUser.token, setTokenJwt);
-    }
-
-    // Login apenas ajusta token, focado na autenticação
-    // Dados de perfil apenas no efeito de montagem
-    // A lógica de carregamento de perfil pode ser aplicada tanto no login quanto no
-    // refresh da página
-  };
-
   // Handler para getNews + adicionar queryString para a tag do card
   const handleGetNews = async (queryToSearch) => {
     try {
@@ -316,7 +284,40 @@ function App() {
         totalResults: 0,
         articles: [],
       }); // status 'error' > para renderização da msg de erro em NewsCardList
+      throw responseOfError; // repassa o erro para o componente SearchForm
     }
+  };
+
+  // Signup e signin sem try/catch para lançar erro, já será lançado naturalmente pela
+  // função chamada em cada um (register() ou login()), subindo para o useFormSubmit
+  // do seu componente, essencial para o funcionamento de onSuccess e onError
+
+  // Handler: signup
+  const handleRegistration = async (newUserData) => {
+    await register(newUserData);
+  };
+
+  // Handler: signin
+  const handleLogin = async (userData) => {
+    const loggedUser = await login(userData);
+
+    if (loggedUser.token) {
+      // Antes de logar, limpa dados anteriores de perfil de usuário
+      // Para reforço, pq a limpeza tbm é aplicada no logout
+      setCurrentUser({
+        email: '',
+        name: '',
+      });
+      setSavedUserNews([]);
+
+      // Seta token: variável de estado + armazenamento local
+      setAndStorageToken(loggedUser.token, setTokenJwt);
+    }
+
+    // Login apenas ajusta token, focado na autenticação
+    // Dados de perfil apenas no efeito de montagem
+    // A lógica de carregamento de perfil pode ser aplicada tanto no login quanto no
+    // refresh da página
   };
 
   // Salvar e des-salvar artigos: com o backend ativo, sem armazenamento local
