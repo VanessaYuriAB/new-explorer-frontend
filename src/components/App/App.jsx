@@ -62,6 +62,9 @@ function App() {
 
   // Variável de estado: controle do resultado de notícias pesquisadas
   // Inicia com os dados do localStorage, se houver
+  // Definição do obj para evitar verificações e erros, não podendo ser null, articles
+  // é um array e pode ser iterado sem erros
+  // Propriedades do obj de retorno de erro da Api inclusas no mesmo objeto definido
   const [searchedNews, setSearchedNews] = useState(() => {
     const searched = localStorage.getItem('searchedNewsData');
     return searched
@@ -73,19 +76,12 @@ function App() {
           code: null,
           message: null,
         };
-    // Definição do obj para evitar verificações e erros, não podendo ser null, articles
-    // é um array e pode ser iterado sem erros
-    // Propriedades do obj de retorno de erro da Api inclusas no mesmo objeto definido
   });
 
   // Variável de estado: controle da lista de cartões salvos do usuário atual
-  // Inicia, tbm, com os dados do localStorage, se houver
-  const [savedUserNews, setSavedUserNews] = useState(() => {
-    const saved = localStorage.getItem('savedUserNewsData');
-    return saved ? JSON.parse(saved) : { userArticles: [] };
-    // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
-    // savedUserNews.userArticles é um array de objs e pode ser iterado sem erros
-  });
+  // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
+  // savedUserNews.userArticles é um array de objs e pode ser iterado sem erros
+  const [savedUserNews, setSavedUserNews] = useState({ userArticles: [] });
 
   // Variável de estado para verificar autenticação ao montar o app
   // Está verificando ou não?
@@ -121,26 +117,17 @@ function App() {
   ------------------------------- */
 
   // Efeito para atualizar o localStorage sempre que o estado para notícias pesquisadas
-  // (searchedNews) mudar > para persistência dos dados ao recarregar a página
+  // (searchedNews) mudar > pq a pesquisa pode ser feita deslogado, para persistência dos
+  // dados ao recarregar a página e pq o backend não tem nada relacionado à pesquisa
   useEffect(() => {
     if (searchedNews) {
       localStorage.setItem('searchedNewsData', JSON.stringify(searchedNews));
     }
   }, [searchedNews]);
 
-  // Efeito para atualizar o localStorage sempre que o estado para notícias salvas do
-  // usuário atual (savedUserNews) mudar > para persistência dos dados ao recarregar a
-  // página, configuração para cards salvos ou não salvos
-  useEffect(() => {
-    if (savedUserNews) {
-      localStorage.setItem('savedUserNewsData', JSON.stringify(savedUserNews));
-    }
-  }, [savedUserNews]);
-
   // Efeito 'de montagem' e refresh: ciclo de autenticação + carregamento: autenticação,
   // fetch de dados do usuário, navegação e set dos estados globais
-  // Só roda se estiver com backend ativo (com o token do usuário), se não usa dados do
-  // localStorage configurados na variável de estado
+  // Só roda se estiver com backend ativo (com o token do usuário)
   useEffect(() => {
     // Flag para verificar se o componente está montado:
     // evita setState após desmontar
@@ -332,30 +319,26 @@ function App() {
     }
   };
 
+  // Salvar e des-salvar artigos: com o backend ativo, sem armazenamento local
+  // Os cards são salvos todos na Api, de onde vêm os dados para cada usuário
+
   // Handler: salvar cards
   const handleSaveCard = async (searchedNewsCard) => {
     try {
-      let savedCard;
+      const normalizeCard = (card) => ({
+        tag: card.tag, // propriedade adicionada em handleGetNews
+        title: card.title,
+        description: card.description,
+        publishedAt: card.publishedAt,
+        source: card.source?.name || null, // para ajustar formato da
+        // propriedade source, como esperado no backend, e não retornar
+        // 400, devido validação do celebrate/joi
+        url: card.url,
+        urlToImage: card.urlToImage,
+      });
 
-      try {
-        const normalizeCard = (card) => ({
-          tag: card.tag, // propriedade adicionada em handleGetNews
-          title: card.title,
-          description: card.description,
-          publishedAt: card.publishedAt,
-          source: card.source?.name || null, // para ajustar formato da
-          // propriedade source, como esperado no backend, e não retornar
-          // 400, devido validação do celebrate/joi
-          url: card.url,
-          urlToImage: card.urlToImage,
-        });
-
-        // POST para o banco de dados
-        savedCard = await saveNews(normalizeCard(searchedNewsCard));
-      } catch {
-        // Backend offline → usa fallback local
-        savedCard = searchedNewsCard;
-      }
+      // POST para o banco de dados
+      const savedCard = await saveNews(normalizeCard(searchedNewsCard));
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       // Atualiza o array (userArticles) dentro do objeto da variável (savedUserNews),
@@ -376,24 +359,22 @@ function App() {
   // Em conjunto com React.memo() e useMemo() para os dados
   const memoizedHandleUnsave = useCallback(async (card) => {
     try {
-      let unsavedCard;
-
-      try {
-        // DELETE para o banco de dados
-        unsavedCard = await unsaveNews(card);
-      } catch {
-        // backend offline → fallback local
-        unsavedCard = card;
-      }
+      // DELETE para o banco de dados
+      // Passa o _id do card como parâmetro (_id gerado automaticamente pelo Mongo DB ao
+      // salvar o artigo na coleção do banco de dados)
+      const unsavedCard = await unsaveNews(card._id);
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
+      // .filter(): cria um novo vetor baseado no original, filtrando elementos e
+      // retornando apenas os que estão de acordo com a verificação fornecida
+      // Filtra um novo vetor com apenas os cards que não possuem o msm _id do card a ser
+      // deletado
       setSavedUserNews((prev) => {
-        // .filter(): cria um novo vetor baseado no original, filtrando elementos e
-        // retornando apenas os que estão de acordo com a verificação fornecida
-        return prev.filter((userCard) => {
-          return userCard.url !== unsavedCard.url; // verificação feita pela .url pq a
-          // NewsApi não utiliza o _id no obj do elemento
-        });
+        return {
+          userArticles: prev.userArticles.filter((userCard) => {
+            return userCard._id !== unsavedCard._id;
+          }),
+        };
       });
     } catch (error) {
       console.error(
