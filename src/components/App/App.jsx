@@ -205,7 +205,7 @@ function App() {
         // adiciona flag isSaved como true, se não, como false
         const mergedArticles = searchedNews.articles.map((searchedItem) => {
           const isSaved = savedUserNews.userArticles.some((savedItem) => {
-            return searchedItem.url === savedItem.url;
+            return searchedItem.url === savedItem.link;
           });
 
           return { ...searchedItem, isSaved };
