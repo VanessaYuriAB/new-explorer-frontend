@@ -28,7 +28,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
 
   // Envio do formulário com hook personalizado (inclui preventDefault,
   // loading, onSubmit, onSuccess e onError)
-  const { handleSubmit } = useFormSubmit(
+  const { handleSubmit, isLoading } = useFormSubmit(
     // onSubmit
     () => {
       // Envia dados de login e retorna a Promisse
@@ -91,12 +91,8 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         required
       ></input>
       <span className="popup__signin-span password-span"></span>
-      <button
-        className="popup__signin-btn"
-        type="submit"
-        /*disabled*/
-      >
-        Entrar
+      <button className="popup__signin-btn" type="submit" disabled={isLoading}>
+        {isLoading ? 'Entrando...' : 'Entrar'}
       </button>
       <p className="popup__signin-plink">
         {/* O espaço depois do texto é proposital para o espaçamento da frase inteira */}

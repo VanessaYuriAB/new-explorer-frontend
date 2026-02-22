@@ -43,7 +43,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
 
   // Envio do formulário com hook personalizado (inclui preventDefault,
   // loading, onSubmit, onSuccess e onError)
-  const { handleSubmit } = useFormSubmit(
+  const { handleSubmit, isLoading } = useFormSubmit(
     // onSubmit
     () => {
       // Envia dados de inscrição para a API do backend (servidor) e retorna a Promisse
@@ -128,12 +128,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
       ></input>
       <span className="popup__signup-span name-span"></span>
       <span className="popup__signup-span">Span para msg de Server-Error</span>
-      <button
-        className="popup__signup-btn"
-        type="submit"
-        /*disabled*/
-      >
-        Inscrever-se
+      <button className="popup__signup-btn" type="submit" disabled={isLoading}>
+        {isLoading ? 'Inscrevendo-se...' : 'Inscrever-se'}
       </button>
       <p className="popup__signup-plink">
         {/* O espaço depois do texto é proposital para o espaçamento da frase inteira */}
