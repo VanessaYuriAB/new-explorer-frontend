@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
+import resetValidation from '../../../../utils/formsResetValidation';
+import { signupConfig } from '../../../../utils/validationConfigs';
 import Signin from '../Signin/Signin';
 import SignupTooltip from '../SignupTooltip/SignupTooltip';
 import './Signup.css';
@@ -49,6 +51,12 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
     },
     // onSuccess
     () => {
+      // Limpa inputs (campos)
+      setEmail('');
+      setPassword('');
+      setName('');
+      // Reseta a validação do formulário
+      resetValidation(signupConfig);
       // Abre o tooltip para msg de sucesso, que tbm é renderizado por Popup
       handleOpenPopup(signupTooltip);
     },

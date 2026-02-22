@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
+import resetValidation from '../../../../utils/formsResetValidation';
+import { signinConfig } from '../../../../utils/validationConfigs';
 import Signup from '../Signup/Signup';
 import './Signin.css';
 
@@ -34,6 +36,12 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
     },
     // onSuccess
     () => {
+      // Limpa inputs (campos)
+      setEmail('');
+      setPassword('');
+      // Reseta a validação do formulário
+      resetValidation(signinConfig);
+      // Fecha o popup
       handleClosePopup();
     },
     (error) => {
