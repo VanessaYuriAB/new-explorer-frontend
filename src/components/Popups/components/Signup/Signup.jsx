@@ -72,6 +72,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         type="email"
         placeholder="Insira e-mail"
         id="email"
+        pattern="^[a-zA-Z0-9_.\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+        title="E-mail válido, contento apenas letras, números, sublinhados, pontos ou hífens."
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
@@ -79,9 +81,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         aria-label="Inserir e-mail para cadastro"
         required
       ></input>
-      <span className="popup__signup-span">
-        Span para msg de erro do input-email
-      </span>
+      <span className="popup__signup-span email-span"></span>
       <label className="popup__signup-label" htmlFor="password">
         Senha
       </label>
@@ -91,7 +91,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         placeholder="Insira a senha"
         id="password"
         pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"
-        /* title="Mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)." */
+        title="Senha: mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)."
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
@@ -99,9 +99,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         aria-label="Inserir senha para cadastro"
         required
       ></input>
-      <span className="popup__signup-span">
-        Span para msg de erro do input-password
-      </span>
+      <span className="popup__signup-span password-span"></span>
       <label className="popup__signup-label" htmlFor="name">
         Nome de usuário
       </label>
@@ -112,6 +110,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         id="name"
         pattern="^[^<>]+$" /* bloqueia os caracteres < e > para evitar inserção de tags
         HTML diretamente: barreira simples contra injeção de HTML no campo */
+        title="Não permitidos: '<' e '>', por qiuestão de segurança."
         value={name}
         onChange={(e) => {
           setName(e.target.value);
@@ -119,9 +118,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         aria-label="Inserir seu nome de usuário"
         required
       ></input>
-      <span className="popup__signup-span">
-        Span para msg de erro do input-name
-      </span>
+      <span className="popup__signup-span name-span"></span>
       <span className="popup__signup-span">Span para msg de Server-Error</span>
       <button
         className="popup__signup-btn"

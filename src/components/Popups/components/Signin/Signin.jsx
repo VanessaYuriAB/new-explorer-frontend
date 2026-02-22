@@ -55,6 +55,8 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         type="email"
         placeholder="Insira e-mail"
         id="email"
+        pattern="^[a-zA-Z0-9_.\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+        title="E-mail válido, contento apenas letras, números, sublinhados, pontos ou hífens."
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
@@ -62,9 +64,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         aria-label="Inserir e-mail cadastrado"
         required
       ></input>
-      <span className="popup__signin-span">
-        Span para msg de erro do input-email
-      </span>
+      <span className="popup__signin-span email-span"></span>
       <label className="popup__signin-label" htmlFor="password">
         Senha
       </label>
@@ -74,7 +74,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         placeholder="Insira a senha"
         id="password"
         pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"
-        /* title="Mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)." */
+        title="Senha: mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)."
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
@@ -82,9 +82,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         aria-label="Inserir senha cadastrada"
         required
       ></input>
-      <span className="popup__signin-span">
-        Span para msg de erro do input-password
-      </span>
+      <span className="popup__signin-span password-span"></span>
       <button
         className="popup__signin-btn"
         type="submit"
