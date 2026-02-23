@@ -66,13 +66,14 @@ function SearchForm({
   );
 
   return (
-    <form className="search__form-news" onSubmit={handleSubmit} noValidate>
+    <form className="search__form-news" onSubmit={handleSubmit}>
       <input
         className="search__form-input"
         type="text"
-        placeholder="Inserir tema"
+        placeholder='Tema: "<" e ">" não são permitidos.'
         name="search-news"
-        pattern="^[^<>]+$" /* bloqueia os caracteres < e > para evitar inserção de tags
+        pattern="^[^<>]*$"
+        /* bloqueia os caracteres < e > para evitar inserção de tags
         HTML diretamente > barreira simples contra injeção de HTML no campo */
         value={queryString}
         onChange={(e) => {
