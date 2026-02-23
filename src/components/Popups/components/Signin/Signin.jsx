@@ -1,15 +1,15 @@
 import { useContext, useState, useEffect } from 'react';
+import { useFormAndValidationWithReset } from '../../../../hooks/useFormAndValidationWithReset';
 import AuthContext from '../../../../contexts/AuthContext';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
-import resetValidation from '../../../../utils/formsResetValidation';
-import { signinConfig } from '../../../../utils/validationConfigs';
 import Signup from '../Signup/Signup';
 import './Signin.css';
 
 function Signin({ popup, handleOpenPopup, handleClosePopup }) {
-  // Variáveis de estado: controle dos inputs do formulário
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // Desestruturação para extração do retorno do hook para controle do formulário com
+  // validação e reset da validação
+  const { values, handleChange, errors, isFormValid, resetForm } =
+    useFormAndValidationWithReset();
 
   // Variável de estado: controle do span para msg de erro de login
   const [serverError, setServerError] = useState('');
@@ -48,15 +48,12 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
     // onSubmit
     () => {
       // Envia dados de login e retorna a Promisse
-      return handleLogin({ email, password });
+      return handleLogin({ email: values.email, password: values.password });
     },
     // onSuccess
     () => {
-      // Limpa inputs (campos)
-      setEmail('');
-      setPassword('');
-      // Reseta a validação do formulário
-      resetValidation(signinConfig);
+      // Limpa inputs (campos), erros e status da validação
+      resetForm();
       // Fecha o popup
       handleClosePopup();
     },
@@ -79,38 +76,38 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         E-mail
       </label>
       <input
-        className="popup__signin-input"
-        type="email"
-        placeholder="Insira e-mail"
         id="email"
+        name="email"
+        type="email"
+        className={`popup__signin-input ${errors.email ? 'popup__signin-input_type_error' : ''}`}
+        placeholder="Insira e-mail"
         pattern="^[a-zA-Z0-9_.\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
-        title="E-mail válido, contento apenas letras, números, sublinhados, pontos ou hífens."
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
+        title="E-mail válido: contento apenas letras, números, sublinhados, pontos ou hífens."
+        value={values.email}
+        onChange={handleChange}
         aria-label="Inserir e-mail cadastrado"
         required
       ></input>
-      <span className="popup__signin-span email-span"></span>
+      <span className="popup__signin-span email-span">{errors.email}</span>
       <label className="popup__signin-label" htmlFor="password">
         Senha
       </label>
       <input
-        className="popup__signin-input"
-        type="password"
-        placeholder="Insira a senha"
         id="password"
+        name="password"
+        type="password"
+        className={`popup__signin-input ${errors.password ? 'popup__signin-input_type_error' : ''}`}
+        placeholder="Insira a senha"
         pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"
         title="Senha: mínimo 8 caracteres - pelo menos, uma letra minúscula e um número (maiúsculas tbm são permitidas)."
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
+        value={values.password}
+        onChange={handleChange}
         aria-label="Inserir senha cadastrada"
         required
       ></input>
-      <span className="popup__signin-span password-span"></span>
+      <span className="popup__signin-span password-span">
+        {errors.password}
+      </span>
       <span
         className={`popup__signin-span ${serverError ? 'popup__signin-span_active' : ''}`}
         role="alert" /* atributo de acessibilidade (ARIA) usado para avisar tecnologias
@@ -122,7 +119,13 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
       >
         {serverError}
       </span>
-      <button className="popup__signin-btn" type="submit" disabled={isLoading}>
+      <button
+        className={`popup__signin-btn ${isFormValid ? '' : 'popup__signin-btn_disabled'}`}
+        type="submit"
+        disabled={!isFormValid}
+        /* Se o formulário não estiver válido (false), botão desativo */
+        /* Se o formulário estiver válido (true), botão ativado */
+      >
         {isLoading ? 'Entrando...' : 'Entrar'}
       </button>
       <p className="popup__signin-plink">
