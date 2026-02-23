@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../../../contexts/AuthContext';
 import useFormSubmit from '../../../../hooks/useFormSubmit';
 import resetValidation from '../../../../utils/formsResetValidation';
@@ -12,6 +12,22 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+
+  // Variável de estado: controle do span para msg de erro de inscrição
+  const [serverError, setServerError] = useState('');
+
+  // Efeito para reset do span de erro de incrição, usando a função de limpeza (ao
+  // desmontar componente)
+  // React recomenda evitar efeitos de inicialização que apenas setam estado, ao invés
+  // disso, usar o cleanup para resetar
+  // Isso é aceito sem warnings porque: não dispara renderização no mount, só acontece
+  // no unmount e é o padrão recomendado para limpar estados em componentes de formulário
+  // exibidos dentro de modais/popups
+  useEffect(() => {
+    return () => {
+      setServerError('');
+    };
+  }, []);
 
   // Contexto de autenticação, extraindo set do estado de login
   const { handleRegistration } = useContext(AuthContext);
@@ -66,6 +82,10 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         'Erro ao enviar formulário de inscrição do usuário (handleRegistration) \n',
         error,
       );
+      // Renderiza a msg de erro de inscrição no popup, no span acima do botão
+      // Erro de usuário já cadastrado (409 Conflict) ou erro interno no servidor
+      // (500 Internal Server) - ambos retornados pela Api do backend
+      setServerError(error.message);
     },
   );
 
@@ -127,7 +147,17 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         required
       ></input>
       <span className="popup__signup-span name-span"></span>
-      <span className="popup__signup-span">Span para msg de Server-Error</span>
+      <span
+        className={`popup__signup-span ${serverError ? 'popup__signup-span_active' : ''}`}
+        role="alert" /* atributo de acessibilidade (ARIA) usado para avisar tecnologias
+        assistivas — como leitores de tela — que um conteúdo importante mudou na página
+        e precisa ser anunciado imediatamente: leitores de tela interrompem o que estavam
+        falando e anunciam a nova mensagem imediatamente, sem que o usuário precise focar
+        ou navegar até o elemento; essencial para usuários com deficiência visual ou pessoas
+        que utilizam navegação assistida */
+      >
+        {serverError}
+      </span>
       <button className="popup__signup-btn" type="submit" disabled={isLoading}>
         {isLoading ? 'Inscrevendo-se...' : 'Inscrever-se'}
       </button>
