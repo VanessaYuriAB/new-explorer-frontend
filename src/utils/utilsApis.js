@@ -27,7 +27,20 @@ const makeApisRequest = async ({
     body: reqBody ? JSON.stringify(reqBody) : undefined,
   };
 
-  const response = await fetch(url, options);
+  let response;
+
+  try {
+    response = await fetch(url, options);
+  } catch {
+    // Padroniza erros de servidor caiu, sem internet, DNS... e mostra mensagem amigável
+    // quando não é erro HTTP
+    // Não lança um erro antes de existir response, evita que o código 'pule' tudo e caia
+    // no catch de quem chamou, com um erro “TypeError: Failed to fetch”
+    const error = new Error('Falha de rede ou servidor indisponível');
+    error.status = 0; // status 0 = erro de rede (convenção)
+    error.name = 'NetworkError';
+    throw error;
+  }
 
   // O método fetch retorna o objeto de resposta no formato JSON
   // O método res.json() converte o obj para JavaScript
@@ -62,11 +75,9 @@ const makeApisRequest = async ({
 
   // Se a solicitação não for bem-sucedida, repassa o erro adiante
 
-  // Try/catch desnecessário aqui
-
-  // Esse bloco captura falhas do fetch (erros de rede, DNS, servidor offline) ou erros
-  // inesperados no código; erros HTTP (status não OK) são tratados antes, lançando o
-  // objeto original da API
+  // Falhas do fetch (erros de rede, DNS, servidor offline) ou erros inesperados no
+  // código e erros HTTP (status não OK) são tratados antes de serem lançados, enviando
+  // o objeto de erro com configurações personalizadas e/ou originais da API
 };
 
 // Função para data from > reqParams, em getNews
