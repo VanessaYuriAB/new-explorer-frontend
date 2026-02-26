@@ -23,7 +23,13 @@ import {
 } from '../../utils/mainApi';
 import useApiError from '../../hooks/useApiError';
 import { useState, useEffect, useCallback } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Navigate,
+} from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -568,6 +574,10 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              {/* Para qlqr outra rota que não exista no app, redireciona para página principal */}
+
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
 
