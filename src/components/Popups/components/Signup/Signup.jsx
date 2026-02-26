@@ -82,8 +82,9 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
         error,
       );
       // Renderiza a msg de erro de inscrição no popup, no span acima do botão
-      // Erro de usuário já cadastrado (409 Conflict) ou erro interno no servidor
-      // (500 Internal Server) - ambos retornados pela Api do backend
+      // Erro de usuário já cadastrado (409 Conflict), erro de Rate Limit (429)
+      // ou erro interno no servidor (500 Internal Server) - tds retornados pela
+      // Api do backend
       setServerError(error.message);
     },
   );

@@ -63,8 +63,9 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
         error,
       );
       // Renderiza a msg de erro de login no popup, no span acima do botão
-      // Erro de autorização (401 Unauthorized) ou erro interno no servidor
-      // (500 Internal Server) - ambos retornados pela Api do backend
+      // Erro de autorização (401 Unauthorized), erro de Rate Limit (429)
+      // ou erro interno no servidor (500 Internal Server) - tds retornados
+      // pela Api do backend
       setServerError(error.message);
     },
   );
