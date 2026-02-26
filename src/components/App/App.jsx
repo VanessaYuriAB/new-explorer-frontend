@@ -27,6 +27,10 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
+  /* ------------------------------
+          HOOKS DE ROUTER
+  ------------------------------- */
+
   // Hook de localização para saber a rota atual
   const location = useLocation();
 
@@ -85,8 +89,40 @@ function App() {
   const [savedUserNews, setSavedUserNews] = useState({ userArticles: [] });
 
   // Variável de estado para verificar autenticação ao montar o app
-  // Está verificando ou não?
+  // Está verificando ou não está verificando?
   const [checkingAuth, setCheckingAuth] = useState(true);
+
+  // Variável de estado para indicar sucesso ou falha na montagem do app
+  // Para efeito não rodar em loop
+  const [bootstrapFailed, setBootstrapFailed] = useState(false);
+
+  /* ------------------------------
+           HANDLERS PUROS
+  ------------------------------- */
+
+  // Open e Close: genéricos
+  // Para abrir Popups, que renderiza cinco children diferentes
+
+  // Handler: abre Popups
+  const handleOpenPopup = (popup) => {
+    setPopup(popup);
+  };
+
+  // Handler: fecha Popups
+  const handleClosePopup = () => {
+    setPopup(null);
+  };
+
+  /* ------------------------------
+            HOOK DERIVADO
+  ------------------------------- */
+
+  // Função para chamar o hook que renderiza popup de msgs de erros da Api do servidor
+  // Chamado ao salvar/des-salvar artigos e no efeito de montagem e refresh, após get para
+  // dados do usuário logado
+  // É configurado por uma função externa pq o hook não pode ser chamada dentro dos
+  // handlers
+  const showApiError = useApiError(handleOpenPopup);
 
   /* ------------------------------
               LOGOUT
@@ -130,6 +166,10 @@ function App() {
   // fetch de dados do usuário, navegação e set dos estados globais
   // Só roda se estiver com backend ativo (com o token do usuário)
   useEffect(() => {
+    // Para efeito não rodar em loop (em efeitos de bootstrap, erro ≠ sucesso parcial)
+    // Impede o retry automático
+    if (bootstrapFailed) return;
+
     // Flag para verificar se o componente está montado:
     // evita setState após desmontar
     let isMounted = true;
@@ -173,8 +213,21 @@ function App() {
 
         if (!isMounted) return;
 
-        // Se o token for inválido ou ocorrer erro, desloga o usuário
-        handleLogout();
+        // Se ocorrer erro de autorização (token inválido), desloga o usuário
+        if (error.status === 401) {
+          handleLogout();
+          return;
+        }
+
+        // Para 429, 500, etc: mostra msg de erro em popup tooltip
+        // Usa o mesmo hook implementado nos handlers para salvar e des-salvar artigos
+        showApiError(error);
+        // Evita loop de montagem, travando o efeito ao definir status Failed para bootstrap
+        // Se usado apenas o return: interrompe apenas a tentativa atual, permitindo o loop
+        // Com o bootstrap, impede tds as próximas tentativas, controla o ciclo de vida da aplicação
+        // e quebra definitivamente o loop
+        // O return controla uma execução e o bootstrapFailed controla o comportamento futuro do app
+        setBootstrapFailed(true);
       } finally {
         // Se componente estiver montado, finaliza a verificação de autenticação
         if (isMounted) {
@@ -182,7 +235,7 @@ function App() {
         }
       }
     })();
-  }, [tokenJwt, handleLogout]);
+  }, [tokenJwt, handleLogout, showApiError, bootstrapFailed]);
 
   // Efeito derivado, reagindo apenas aos estados relevantes: para sincronizar estados
   // derivados (merge de searchedNews com savedUserNews) e adicionar a info 'isSaved' aos
@@ -249,19 +302,6 @@ function App() {
   /* ------------------------------
               HANDLERS
   ------------------------------- */
-
-  // Open e Close: genéricos
-  // Para abrir Popups, que renderiza cinco children diferentes
-
-  // Handler: abre Popups
-  const handleOpenPopup = (popup) => {
-    setPopup(popup);
-  };
-
-  // Handler: fecha Popups
-  const handleClosePopup = () => {
-    setPopup(null);
-  };
 
   // Handler para getNews + adicionar queryString para a tag do card
   const handleGetNews = async (queryToSearch) => {
@@ -336,12 +376,6 @@ function App() {
 
   // Salvar e des-salvar artigos: com o backend ativo, sem armazenamento local
   // Os cards são salvos todos na Api, de onde vêm os dados para cada usuário
-
-  // Função para chamar o hook que renderiza popup de msgs de erros ao salvar
-  // e des-salvar artigos
-  // É configurado por uma função externa, pq o hook não pode ser chamada dentro
-  // dos handlers
-  const showApiError = useApiError(handleOpenPopup);
 
   // Handler: salvar cards
   const handleSaveCard = async (searchedNewsCard) => {
