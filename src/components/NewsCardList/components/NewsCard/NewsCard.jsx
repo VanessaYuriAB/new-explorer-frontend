@@ -9,6 +9,8 @@ function NewsCard({
   handleSaveCard,
   memoizedHandleUnsave,
   savedUserNews,
+  handleOpenPopup,
+  signupPopup,
 }) {
   // Desestruturação de propriedades do obj para cada notícia, dentro do array de
   // artigos da resposta bem-sucedida da NewsApi
@@ -84,6 +86,9 @@ function NewsCard({
               className="new-card__btn new-card__btn_out"
               type="button"
               aria-label="Logar para poder salvar"
+              onClick={() => {
+                handleOpenPopup(signupPopup);
+              }}
             ></button>
           </>
         )}

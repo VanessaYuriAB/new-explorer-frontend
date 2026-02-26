@@ -9,6 +9,7 @@ import About from '../About/About';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import Signin from '../Popups/components/Signin/Signin';
+import Signup from '../Popups/components/Signup/Signup';
 import Popups from '../Popups/Popups';
 import AuthContext from '../../contexts/AuthContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -474,6 +475,23 @@ function App() {
   };
 
   /* ------------------------------
+          OBJ SIGNUP POPUP
+  ------------------------------- */
+
+  // Objeto para configurar children de Popups: abertura do popup de inscrição (Signup)
+  // Obj duplicado, este usado em NewsCard
+  const signupPopup = {
+    children: (
+      <Signup
+        popup={popup}
+        handleOpenPopup={handleOpenPopup}
+        handleClosePopup={handleClosePopup}
+      />
+    ),
+    type: 'signup',
+  };
+
+  /* ------------------------------
                 JSX
   ------------------------------- */
   // Enquanto estiver verificando o login, não renderiza o app,
@@ -555,6 +573,8 @@ function App() {
                           handleSaveCard={handleSaveCard}
                           memoizedHandleUnsave={memoizedHandleUnsave}
                           savedUserNews={savedUserNews}
+                          handleOpenPopup={handleOpenPopup}
+                          signupPopup={signupPopup}
                         />
                       )}
 

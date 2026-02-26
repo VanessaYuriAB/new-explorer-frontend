@@ -31,6 +31,7 @@ function Signin({ popup, handleOpenPopup, handleClosePopup }) {
   const { handleLogin } = useContext(AuthContext);
 
   // Objeto para configurar children de Popups: abertura do popup de inscrição (Signup)
+  // Obj duplicado, outro declarado em App para NewsCard
   const signupPopup = {
     children: (
       <Signup
