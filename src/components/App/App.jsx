@@ -21,6 +21,7 @@ import {
   getUserNews,
   getCurrentUser,
 } from '../../utils/mainApi';
+import useApiError from '../../hooks/useApiError';
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
@@ -249,6 +250,19 @@ function App() {
               HANDLERS
   ------------------------------- */
 
+  // Open e Close: genéricos
+  // Para abrir Popups, que renderiza cinco children diferentes
+
+  // Handler: abre Popups
+  const handleOpenPopup = (popup) => {
+    setPopup(popup);
+  };
+
+  // Handler: fecha Popups
+  const handleClosePopup = () => {
+    setPopup(null);
+  };
+
   // Handler para getNews + adicionar queryString para a tag do card
   const handleGetNews = async (queryToSearch) => {
     try {
@@ -323,6 +337,12 @@ function App() {
   // Salvar e des-salvar artigos: com o backend ativo, sem armazenamento local
   // Os cards são salvos todos na Api, de onde vêm os dados para cada usuário
 
+  // Função para chamar o hook que renderiza popup de msgs de erros ao salvar
+  // e des-salvar artigos
+  // É configurado por uma função externa, pq o hook não pode ser chamada dentro
+  // dos handlers
+  const showApiError = useApiError(handleOpenPopup);
+
   // Handler: salvar cards
   const handleSaveCard = async (searchedNewsCard) => {
     try {
@@ -349,6 +369,10 @@ function App() {
         userArticles: [savedCard, ...prev.userArticles],
       }));
     } catch (error) {
+      // Exibe popup com msg do erro ao usuário
+      // Abre o tooltip, renderizado por Popup
+      showApiError(error);
+
       console.error('Erro ao salvar artigo, handleSaveCard \n', error);
     }
   };
@@ -358,42 +382,39 @@ function App() {
   // useCallback: para memorizar a função e não recriar a cada render > NewsCard
   // e SavedNewsCard
   // Em conjunto com React.memo() e useMemo() para os dados
-  const memoizedHandleUnsave = useCallback(async (cardId) => {
-    try {
-      // DELETE para o banco de dados
-      // Passa o _id do card como parâmetro (_id gerado automaticamente pelo Mongo DB ao
-      // salvar o artigo na coleção do banco de dados)
-      await unsaveNews(cardId);
+  const memoizedHandleUnsave = useCallback(
+    async (cardId) => {
+      try {
+        // DELETE para o banco de dados
+        // Passa o _id do card como parâmetro (_id gerado automaticamente pelo Mongo DB ao
+        // salvar o artigo na coleção do banco de dados)
+        await unsaveNews(cardId);
 
-      // Set do estado para cartões salvos do usuário (savedUserNews)
-      // .filter(): cria um novo vetor baseado no original, filtrando elementos e
-      // retornando apenas os que estão de acordo com a verificação fornecida
-      // Filtra um novo vetor com apenas os cards que não possuem o msm _id do card a ser
-      // deletado
-      setSavedUserNews((prev) => {
-        return {
-          userArticles: prev.userArticles.filter((userCard) => {
-            return userCard._id !== cardId;
-          }),
-        };
-      });
-    } catch (error) {
-      console.error(
-        'Erro ao des-salvar artigo, memoizedHandleUnsave \n',
-        error,
-      );
-    }
-  }, []);
+        // Set do estado para cartões salvos do usuário (savedUserNews)
+        // .filter(): cria um novo vetor baseado no original, filtrando elementos e
+        // retornando apenas os que estão de acordo com a verificação fornecida
+        // Filtra um novo vetor com apenas os cards que não possuem o msm _id do card a ser
+        // deletado
+        setSavedUserNews((prev) => {
+          return {
+            userArticles: prev.userArticles.filter((userCard) => {
+              return userCard._id !== cardId;
+            }),
+          };
+        });
+      } catch (error) {
+        // Exibe popup com msg do erro ao usuário
+        // Abre o tooltip, renderizado por Popup
+        showApiError(error);
 
-  // Handler: abre popup
-  const handleOpenPopup = (popup) => {
-    setPopup(popup);
-  };
-
-  // Handler: fecha popup
-  const handleClosePopup = () => {
-    setPopup(null);
-  };
+        console.error(
+          'Erro ao des-salvar artigo, memoizedHandleUnsave \n',
+          error,
+        );
+      }
+    },
+    [showApiError],
+  );
 
   /* ------------------------------
           OBJ SIGNIN POPUP
@@ -519,7 +540,7 @@ function App() {
           <Footer />
 
           {/* Se o popup não for nulo, algum dos componentes será renderizado na tela:
-          Signup, Signin, SignupTooltip ou SearchTooltip,  */}
+          Signup, Signin, SignupTooltip, SearchTooltip ou ApiErrorTooltip */}
 
           {popup && (
             <Popups
