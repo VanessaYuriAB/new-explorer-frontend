@@ -3,12 +3,20 @@
 // usuários não autorizados não podem acessá-la
 // ----------------------------------------------
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import AuthContext from '../../contexts/AuthContext';
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, handleOpenPopup, signinPopup }) {
   const { loggedIn } = useContext(AuthContext);
+
+  // Efeito colaral: se não estiver logado, além de redirecionar para '/', abre
+  // popup de login
+  useEffect(() => {
+    if (!loggedIn) {
+      handleOpenPopup(signinPopup);
+    }
+  }, [handleOpenPopup, signinPopup, loggedIn]);
 
   // Se o usuário não estiver logado, redireciona para a página de login
   if (!loggedIn) {

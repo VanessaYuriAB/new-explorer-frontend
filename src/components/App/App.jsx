@@ -104,16 +104,21 @@ function App() {
   const [bootstrapFailed, setBootstrapFailed] = useState(false);
 
   /* ------------------------------
-           HANDLERS PUROS
+           HANDLERS POPUP
   ------------------------------- */
 
   // Open e Close: genéricos
   // Para abrir Popups, que renderiza cinco children diferentes
 
   // Handler: abre Popups
-  // Memoizada para não gerar loop no efeito de montagem
+  // Memoizada para não gerar loop no efeito de montagem e efeito do ProtectedRoute
+  // Com verificação de type, tbm para evitar loop, no efeito para proteção de rota
+  // Se o tipo de popup for o mesmo do anteriormente aberto, não altera, não re-renderiza
+  // Verificação de prev pq state inicializa como null
   const handleOpenPopup = useCallback((popup) => {
-    setPopup(popup);
+    setPopup((prev) => {
+      return prev?.type === popup.type ? prev : popup;
+    });
   }, []);
 
   // Handler: fecha Popups
@@ -588,7 +593,10 @@ function App() {
               <Route
                 path="/saved-news"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute
+                    handleOpenPopup={handleOpenPopup}
+                    signinPopup={signinPopup}
+                  >
                     <SavedNewsCardList
                       savedUserNews={savedUserNews}
                       memoizedHandleUnsave={memoizedHandleUnsave}
