@@ -191,10 +191,10 @@ function App() {
     (async () => {
       try {
         // Busca infos de perfil do usuário atual
-        const userInfos = await getCurrentUser();
+        const userInfos = await getCurrentUser(tokenJwt);
 
         // Busca cards do usuário atual, na Api do banco de dados
-        const userSavedCards = await getUserNews();
+        const userSavedCards = await getUserNews(tokenJwt);
 
         // Verifica se o componente ainda está montado
         if (!isMounted) return;
@@ -398,7 +398,10 @@ function App() {
       });
 
       // POST para o banco de dados
-      const savedCard = await saveNews(normalizeCard(searchedNewsCard));
+      const savedCard = await saveNews(
+        normalizeCard(searchedNewsCard),
+        tokenJwt,
+      );
 
       // Set do estado para cartões salvos do usuário (savedUserNews)
       // Atualiza o array (userArticles) dentro do objeto da variável (savedUserNews),
@@ -427,7 +430,7 @@ function App() {
         // DELETE para o banco de dados
         // Passa o _id do card como parâmetro (_id gerado automaticamente pelo Mongo DB ao
         // salvar o artigo na coleção do banco de dados)
-        await unsaveNews(cardId);
+        await unsaveNews(cardId, tokenJwt);
 
         // Set do estado para cartões salvos do usuário (savedUserNews)
         // .filter(): cria um novo vetor baseado no original, filtrando elementos e
@@ -452,7 +455,7 @@ function App() {
         );
       }
     },
-    [showApiError],
+    [showApiError, tokenJwt],
   );
 
   /* ------------------------------

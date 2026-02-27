@@ -1,18 +1,17 @@
 import { baseMainApiUrl, makeApisRequest } from './utilsApis';
-import { getToken } from './token';
 
 // Assinatura: fetch(url-to-requested-resource, options-object);
 // É um método assíncrono, retorna uma promisse e method padrão: GET
 
 // POST - /articles > aplicado no botão 'salvar/des-salvar' do card
-const saveNews = async (cardObject) => {
+const saveNews = async (cardObject, tokenJwt) => {
   const savedCard = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles`,
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getToken()}`,
+      Authorization: `Bearer ${tokenJwt}`,
     },
     reqBody: cardObject, // vem do componente NewsCardList/NewsCard, um obj simple pq a
     // conversão para JSON é aplicada no makeApisRequest
@@ -26,11 +25,11 @@ const saveNews = async (cardObject) => {
 };
 
 // DELETE - /articles/:id > aplicado, tbm, no botão 'salvar/des-salvar' do card
-const unsaveNews = async (cardId) => {
+const unsaveNews = async (cardId, tokenJwt) => {
   const unsavedCard = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles/${cardId}`,
     method: 'DELETE',
-    headers: { Authorization: `Bearer ${getToken()}` },
+    headers: { Authorization: `Bearer ${tokenJwt}` },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
@@ -41,11 +40,11 @@ const unsaveNews = async (cardId) => {
 };
 
 // GET - /articles > aplicado na inicialização do app, no efeito para merge
-const getUserNews = async () => {
+const getUserNews = async (tokenJwt) => {
   const userNews = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles`,
     method: 'GET',
-    headers: { Authorization: `Bearer ${getToken()}` },
+    headers: { Authorization: `Bearer ${tokenJwt}` },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
@@ -56,11 +55,11 @@ const getUserNews = async () => {
 };
 
 // GET - /users/me > aplicado no efeito de montagem da aplicação
-const getCurrentUser = async () => {
+const getCurrentUser = async (tokenJwt) => {
   const userInfos = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/users/me`,
     method: 'GET',
-    headers: { Authorization: `Bearer ${getToken()}` },
+    headers: { Authorization: `Bearer ${tokenJwt}` },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
