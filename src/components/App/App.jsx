@@ -51,24 +51,6 @@ function App() {
   // Variável de estado: status de login
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // Variável de estado: dados do usuário atualmente logado
-  const [currentUser, setCurrentUser] = useState({
-    email: '',
-    name: '',
-  });
-
-  // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
-  const [popup, setPopup] = useState(null);
-
-  // Variável de estado: token JWT
-  const [tokenJwt, setTokenJwt] = useState(() => {
-    const jwt = getToken();
-    return jwt ? jwt : '';
-  });
-
-  // Variável de estado: controle do header e nav para mobile
-  const [mobile, setMobile] = useState(false);
-
   // Variável de estado: controle do Preloader
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
@@ -90,10 +72,28 @@ function App() {
         };
   });
 
+  // Variável de estado: token JWT
+  const [tokenJwt, setTokenJwt] = useState(() => {
+    const jwt = getToken();
+    return jwt ? jwt : '';
+  });
+
+  // Variável de estado: dados do usuário atualmente logado
+  const [currentUser, setCurrentUser] = useState({
+    email: '',
+    name: '',
+  });
+
   // Variável de estado: controle da lista de cartões salvos do usuário atual
   // Definição de vetor vazio para evitar verificações e erros, não podendo ser null,
   // savedUserNews.userArticles é um array de objs e pode ser iterado sem erros
   const [savedUserNews, setSavedUserNews] = useState({ userArticles: [] });
+
+  // Variável de estado: controle dos popups (Signin, Signup e Tooltip)
+  const [popup, setPopup] = useState(null);
+
+  // Variável de estado: controle do header e nav para mobile
+  const [mobile, setMobile] = useState(false);
 
   // Variável de estado para verificar autenticação ao montar o app
   // Está verificando ou não está verificando?
@@ -111,9 +111,10 @@ function App() {
   // Para abrir Popups, que renderiza cinco children diferentes
 
   // Handler: abre Popups
-  const handleOpenPopup = (popup) => {
+  // Memoizada para não gerar loop no efeito de montagem
+  const handleOpenPopup = useCallback((popup) => {
     setPopup(popup);
-  };
+  }, []);
 
   // Handler: fecha Popups
   const handleClosePopup = () => {
@@ -138,12 +139,6 @@ function App() {
   // Manipulador para deslogar: configurado antes do efeito de montagem e memorizado em
   // useCallback para estabilizar e não causar re-render
   const handleLogout = useCallback(() => {
-    // Para evitar execução dupla, pq o efeito de montagem tbm chama o logoff
-    if (!loggedIn) return;
-
-    // Desabilita o login
-    setLoggedIn(false);
-
     // Limpa estados: perfil + artigos
     setCurrentUser({ email: '', name: '' });
     setSavedUserNews([]);
@@ -152,9 +147,12 @@ function App() {
     // estado)
     removeToken(setTokenJwt);
 
+    // Desabilita o login
+    setLoggedIn(false);
+
     // Redireciona para página de início
     navigate('/', { replace: true });
-  }, [loggedIn, navigate]);
+  }, [navigate]);
 
   /* ------------------------------
               EFEITOS
@@ -181,16 +179,16 @@ function App() {
     // evita setState após desmontar
     let isMounted = true;
 
+    // Verifica se há um JWT no armazenamento local, pela variável state
+    // Se não houver, sai da função do efeito
+    if (!tokenJwt) {
+      setCheckingAuth(false); // sem token, login falso
+      return;
+    }
+
     // Fetch e set do dados + navegação
     // Define e executa função assíncrona
     (async () => {
-      // Verifica se há um JWT no armazenamento local, pela variável state
-      // Se não houver, sai da função do efeito
-      if (!tokenJwt) {
-        setCheckingAuth(false); // sem token, login falso
-        return;
-      }
-
       try {
         // Busca infos de perfil do usuário atual
         const userInfos = await getCurrentUser();
@@ -494,6 +492,7 @@ function App() {
   /* ------------------------------
                 JSX
   ------------------------------- */
+
   // Enquanto estiver verificando o login, não renderiza o app,
   // renderiza uma tela de carregamento
   if (checkingAuth) {
