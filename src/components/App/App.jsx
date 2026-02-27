@@ -115,9 +115,18 @@ function App() {
   // Com verificação de type, tbm para evitar loop, no efeito para proteção de rota
   // Se o tipo de popup for o mesmo do anteriormente aberto, não altera, não re-renderiza
   // Verificação de prev pq state inicializa como null
-  const handleOpenPopup = useCallback((popup) => {
+  // Verificação, tbm, do tipo de tooltip, já que existem três popups deste tipo
+  const handleOpenPopup = useCallback((nextPopup) => {
     setPopup((prev) => {
-      return prev?.type === popup.type ? prev : popup;
+      if (prev?.type === nextPopup.type) {
+        if (nextPopup.type === 'tooltip') {
+          return prev.tooltipType === nextPopup.tooltipType ? prev : nextPopup;
+        }
+
+        return prev;
+      }
+
+      return nextPopup;
     });
   }, []);
 

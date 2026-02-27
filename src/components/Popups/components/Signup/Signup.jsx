@@ -44,8 +44,8 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
     type: 'signin',
   };
 
-  // Objeto para configurar children de Popups: abertura do popup tooltip
-  // (SignupTooltip)
+  // Objeto para configurar children de Popups: abertura do popup tooltip (SignupTooltip)
+  // tooltipType para verificação no handleOpenPopup
   const signupTooltip = {
     children: (
       <SignupTooltip
@@ -54,6 +54,7 @@ function Signup({ popup, handleOpenPopup, handleClosePopup }) {
       />
     ),
     type: 'tooltip',
+    tooltipType: 'signupSuccess',
   };
 
   // Envio do formulário com hook personalizado (inclui preventDefault,

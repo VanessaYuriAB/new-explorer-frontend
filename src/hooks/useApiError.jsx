@@ -28,9 +28,11 @@ function useApiError(handleOpen) {
 
       // Objeto para configurar children de Popups: abertura do popup para msg de erro da
       // Api do backend (servidor), passando msg como props
+      // tooltipType para verificação no handleOpenPopup
       const apiErrorTooltip = {
         children: <ApiErrorTooltip message={message} />,
         type: 'tooltip',
+        tooltipType: 'apiError',
       };
 
       // Chama o handle de abertura de Popups

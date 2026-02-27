@@ -12,11 +12,12 @@ function SearchForm({
   // Variável de estado: controle do input do formulário
   const [queryString, setQueryString] = useState('');
 
-  // Objeto para configurar children de Popups: abertura do search tooltip
-  // (SearchTooltip)
+  // Objeto para configurar children de Popups: abertura do search tooltip (SearchTooltip)
+  // tooltipType para verificação no handleOpenPopup
   const searchTooltip = {
     children: <SearchTooltip />,
     type: 'tooltip',
+    tooltipType: 'search',
   };
 
   // Envio do formulário com hook personalizado (inclui preventDefault,
