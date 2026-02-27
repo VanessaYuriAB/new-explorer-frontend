@@ -141,7 +141,7 @@ function App() {
   const handleLogout = useCallback(() => {
     // Limpa estados: perfil + artigos
     setCurrentUser({ email: '', name: '' });
-    setSavedUserNews([]);
+    setSavedUserNews({ userArticles: [] });
 
     // Limpa infos do token com função utilitária (armazenamento local + variável de
     // estado)
@@ -367,7 +367,7 @@ function App() {
         email: '',
         name: '',
       });
-      setSavedUserNews([]);
+      setSavedUserNews({ userArticles: [] });
 
       // Seta token: variável de estado + armazenamento local
       setAndStorageToken(loggedUser.token, setTokenJwt);
