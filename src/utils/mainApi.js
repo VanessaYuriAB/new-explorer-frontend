@@ -3,6 +3,8 @@ import { baseMainApiUrl, makeApisRequest } from './utilsApis';
 // Assinatura: fetch(url-to-requested-resource, options-object);
 // É um método assíncrono, retorna uma promisse e method padrão: GET
 
+// O spread (...) aplica a verificação injetando propriedade, os parênteses garantem que o ternário seja avaliado primeiro e só depois o resultado (objeto) seja espalhado > para evitar erros de token Bearer null em Authorization > retornando 401 ou 403 ao invés de 400 com Validation failed
+
 // POST - /articles > aplicado no botão 'salvar/des-salvar' do card
 const saveNews = async (cardObject, tokenJwt) => {
   const savedCard = await makeApisRequest({
@@ -11,7 +13,7 @@ const saveNews = async (cardObject, tokenJwt) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenJwt}`,
+      ...(tokenJwt !== '' ? { Authorization: `Bearer ${tokenJwt}` } : {}),
     },
     reqBody: cardObject, // vem do componente NewsCardList/NewsCard, um obj simple pq a
     // conversão para JSON é aplicada no makeApisRequest
@@ -29,7 +31,9 @@ const unsaveNews = async (cardId, tokenJwt) => {
   const unsavedCard = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles/${cardId}`,
     method: 'DELETE',
-    headers: { Authorization: `Bearer ${tokenJwt}` },
+    headers: {
+      ...(tokenJwt !== '' ? { Authorization: `Bearer ${tokenJwt}` } : {}),
+    },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
@@ -44,7 +48,9 @@ const getUserNews = async (tokenJwt) => {
   const userNews = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/articles`,
     method: 'GET',
-    headers: { Authorization: `Bearer ${tokenJwt}` },
+    headers: {
+      ...(tokenJwt !== '' ? { Authorization: `Bearer ${tokenJwt}` } : {}),
+    },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
@@ -59,7 +65,9 @@ const getCurrentUser = async (tokenJwt) => {
   const userInfos = await makeApisRequest({
     endpoint: `${baseMainApiUrl}/users/me`,
     method: 'GET',
-    headers: { Authorization: `Bearer ${tokenJwt}` },
+    headers: {
+      ...(tokenJwt !== '' ? { Authorization: `Bearer ${tokenJwt}` } : {}),
+    },
   });
 
   // Se a solicitação for bem-sucedida, retorna os dados
