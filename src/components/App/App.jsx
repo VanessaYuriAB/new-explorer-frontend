@@ -23,7 +23,7 @@ import {
   getCurrentUser,
 } from '../../utils/mainApi';
 import useApiError from '../../hooks/useApiError';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Routes,
   Route,
@@ -99,9 +99,13 @@ function App() {
   // Está verificando ou não está verificando?
   const [checkingAuth, setCheckingAuth] = useState(true);
 
-  // Variável de estado para indicar sucesso ou falha na montagem do app
+  /* ------------------------------
+                REF
+  ------------------------------- */
+
+  // Ref para indicar sucesso ou falha na montagem do app
   // Para efeito não rodar em loop
-  const [bootstrapFailed, setBootstrapFailed] = useState(false);
+  const bootstrapFailedRef = useRef(false);
 
   /* ------------------------------
            HANDLERS POPUP
@@ -187,7 +191,7 @@ function App() {
   useEffect(() => {
     // Para efeito não rodar em loop (em efeitos de bootstrap, erro ≠ sucesso parcial)
     // Impede o retry automático
-    if (bootstrapFailed) return;
+    if (bootstrapFailedRef.current) return;
 
     // Flag para verificar se o componente está montado:
     // evita setState após desmontar
@@ -245,12 +249,13 @@ function App() {
         // Para 429, 500, etc: mostra msg de erro em popup tooltip
         // Usa o mesmo hook implementado nos handlers para salvar e des-salvar artigos
         showApiError(error);
-        // Evita loop de montagem, travando o efeito ao definir status Failed para bootstrap
+        // Evita loop de montagem, travando a ref ao defini-la como true para indicar
+        // falha no bootstrap - impede tds as próximas tentativas, controla o ciclo de
+        // vida da aplicação, quebrando definitivamente o loop
         // Se usado apenas o return: interrompe apenas a tentativa atual, permitindo o loop
-        // Com o bootstrap, impede tds as próximas tentativas, controla o ciclo de vida da aplicação
-        // e quebra definitivamente o loop
-        // O return controla uma execução e o bootstrapFailed controla o comportamento futuro do app
-        setBootstrapFailed(true);
+        // O return controla uma execução e o bootstrapFailedRef controla o comportamento
+        // futuro do app
+        bootstrapFailedRef.current = true;
       } finally {
         // Se componente estiver montado, finaliza a verificação de autenticação
         if (isMounted) {
@@ -263,7 +268,7 @@ function App() {
     return () => {
       isMounted = false;
     };
-  }, [tokenJwt, handleLogout, showApiError, bootstrapFailed]);
+  }, [tokenJwt, handleLogout, showApiError]);
 
   // Efeito derivado, reagindo apenas aos estados relevantes: para sincronizar estados
   // derivados (merge de searchedNews com savedUserNews) e adicionar a info 'isSaved' aos
