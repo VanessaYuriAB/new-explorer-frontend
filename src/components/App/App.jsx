@@ -197,7 +197,11 @@ function App() {
     // Se não houver, sai da função do efeito
     if (!tokenJwt) {
       setCheckingAuth(false); // sem token, login falso
-      return;
+
+      // Cleanup
+      return () => {
+        isMounted = false;
+      };
     }
 
     // Fetch e set do dados + navegação
@@ -254,6 +258,11 @@ function App() {
         }
       }
     })();
+
+    // Cleanup
+    return () => {
+      isMounted = false;
+    };
   }, [tokenJwt, handleLogout, showApiError, bootstrapFailed]);
 
   // Efeito derivado, reagindo apenas aos estados relevantes: para sincronizar estados
