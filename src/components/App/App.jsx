@@ -540,7 +540,6 @@ function App() {
     <AuthContext.Provider
       value={{
         loggedIn, // booleano de estado: status de login
-        setLoggedIn,
         handleRegistration,
         handleLogin,
         handleLogout,
