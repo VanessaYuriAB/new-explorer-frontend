@@ -268,7 +268,7 @@ function App() {
     // realmente mudam
     if (!searchedNews || !Array.isArray(searchedNews.articles)) return;
 
-    async function mergeNewsLists() {
+    function mergeNewsLists() {
       // Lista de notícias da pesquisa > searchedNews.articles
       // Lista de notícias salvas do usuário atual > savedUserNews.userArticles
 
