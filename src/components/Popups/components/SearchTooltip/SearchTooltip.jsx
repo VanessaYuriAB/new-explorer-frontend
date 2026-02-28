@@ -8,12 +8,13 @@ function SearchTooltip() {
   const { loggedIn } = useContext(AuthContext);
   const { currentUser } = useContext(CurrentUserContext);
 
+  // Em React, o padrão é retornar null (ou nem renderizar) > verificação com &&
+  // para renderizar apenas caso true
+
   return (
     <div className="search__tooltip">
-      {loggedIn ? (
+      {loggedIn && (
         <h2 className="search__tooltip-title">{currentUser.name},</h2>
-      ) : (
-        ''
       )}
       <p className="search__tooltip-text">
         Por favor, insira uma palavra-chave.
