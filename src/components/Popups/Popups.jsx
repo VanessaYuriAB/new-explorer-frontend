@@ -13,10 +13,11 @@ function Popups(props) {
   // Fechamento do popup pela tecla 'Esc', ativado sempre que o popup for aberto
   useEffect(() => {
     const handleEscClose = (evt) => {
-      const keyIsEsc = evt.code === 'Escape'; // escape: esc
+      // Só renderiza <Popups /> qdo popup && (...), então não é preciso verificar popup
+      // Se o popup estiver aberto e a tecla pressionada for a esc, o popup fecha
+      // escape: esc
 
-      if (popup && keyIsEsc) handleClosePopup(); // se o popup estiver aberto e a tecla pressionada
-      // for a esc, o popup fecha
+      if (evt.code === 'Escape') handleClosePopup();
     };
 
     document.addEventListener('keydown', handleEscClose); // adiciona o evento em document >
